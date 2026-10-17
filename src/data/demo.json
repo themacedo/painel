@@ -96,7 +96,162 @@
         "entra": 3100,
         "status": "previsto"
       }
-    ]
+    ],
+    "detalhe": {
+      "mes": "2026-10",
+      "ate": "2026-10-17",
+      "anteriorAte": "2026-09-17",
+      "resumo": {
+        "receitas": 5200,
+        "despesas": 3180.4,
+        "despesasAnteriorMesmoPeriodo": 3620.1,
+        "despesasAnteriorMesCheio": 6890.5
+      },
+      "categorias": [
+        {
+          "nome": "Moradia",
+          "atual": 1200,
+          "anterior": 1200
+        },
+        {
+          "nome": "Alimentação",
+          "atual": 610.3,
+          "anterior": 780.9
+        },
+        {
+          "nome": "Assinaturas",
+          "atual": 389.2,
+          "anterior": 371.5
+        },
+        {
+          "nome": "Transporte",
+          "atual": 344.6,
+          "anterior": 512.0
+        },
+        {
+          "nome": "Estudo/Cert",
+          "atual": 320,
+          "anterior": 320
+        },
+        {
+          "nome": "Lazer",
+          "atual": 180.5,
+          "anterior": 290.2
+        },
+        {
+          "nome": "Saúde",
+          "atual": 95.8,
+          "anterior": 145.5
+        },
+        {
+          "nome": "Compras",
+          "atual": 40,
+          "anterior": 0
+        }
+      ],
+      "fixos": [
+        {
+          "nome": "Aluguel",
+          "valor": 1200,
+          "dia": 5,
+          "pago": true
+        },
+        {
+          "nome": "Faculdade",
+          "valor": 320,
+          "dia": 5,
+          "pago": true
+        },
+        {
+          "nome": "Academia",
+          "valor": 120,
+          "dia": 9,
+          "pago": true
+        },
+        {
+          "nome": "Streaming",
+          "valor": 44.9,
+          "dia": 12,
+          "pago": true
+        },
+        {
+          "nome": "Internet",
+          "valor": 119.9,
+          "dia": 20,
+          "pago": false
+        },
+        {
+          "nome": "Telefone",
+          "valor": 65,
+          "dia": 28,
+          "pago": false
+        },
+        {
+          "nome": "DAS do MEI",
+          "valor": 80.9,
+          "dia": 20,
+          "pago": false
+        }
+      ],
+      "parcelas": [
+        {
+          "mes": "2026-11",
+          "valor": 640.3
+        },
+        {
+          "mes": "2026-12",
+          "valor": 640.3
+        },
+        {
+          "mes": "2027-01",
+          "valor": 420.1
+        },
+        {
+          "mes": "2027-02",
+          "valor": 420.1
+        },
+        {
+          "mes": "2027-03",
+          "valor": 210
+        },
+        {
+          "mes": "2027-04",
+          "valor": 210
+        },
+        {
+          "mes": "2027-05",
+          "valor": 0
+        },
+        {
+          "mes": "2027-06",
+          "valor": 0
+        },
+        {
+          "mes": "2027-07",
+          "valor": 0
+        },
+        {
+          "mes": "2027-08",
+          "valor": 0
+        },
+        {
+          "mes": "2027-09",
+          "valor": 0
+        },
+        {
+          "mes": "2027-10",
+          "valor": 0
+        }
+      ],
+      "pj": {
+        "faturamento": 5200,
+        "retiradas": 3100,
+        "custos": {
+          "Contabilidade PJ": 200,
+          "Impostos/DAS": 80.9
+        }
+      }
+    }
   },
   "desempenho": {
     "semanas": [

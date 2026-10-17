@@ -6,7 +6,7 @@ export type Tela = "visao" | "financas" | "desempenho" | "plano";
 export const telas: { id: Tela; nome: string; href: string; icone: typeof LayoutGrid; pronta: boolean }[] = [
   { id: "visao", nome: "Visão geral", href: "/", icone: LayoutGrid, pronta: true },
   { id: "desempenho", nome: "Desempenho", href: "/desempenho", icone: Activity, pronta: true },
-  { id: "financas", nome: "Finanças", href: "/financas", icone: Wallet, pronta: false },
+  { id: "financas", nome: "Finanças", href: "/financas", icone: Wallet, pronta: true },
   { id: "plano", nome: "Plano", href: "/plano", icone: CalendarDays, pronta: false },
 ];
 

@@ -8,7 +8,10 @@ Next.js 15 (App Router), Tailwind 4 e Recharts. Tema claro e escuro, layout de c
 | Tela | O que mostra |
 |---|---|
 | Visão geral | saldo, próximo marco do plano, meta, dia a dia do mês, semana atual e plano do mês |
+| Finanças | gasto do mês contra os mesmos dias do mês anterior, por categoria; contas fixas pagas e pendentes; parcelas dos próximos 12 meses; faturamento e custos da PJ |
 | Desempenho | média de 4 semanas por empresa (com variação), histórico de commits com marcos, entregas e PRs, % fora do expediente (média móvel) e a avaliação da semana por área |
+
+![Finanças](docs/financas.png)
 
 ![Desempenho](docs/desempenho.png)
 

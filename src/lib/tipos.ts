@@ -23,6 +23,7 @@ export type Painel = {
     meta: { titulo: string; alvo: number; acumulado: number; proximo: { data: string; valor: number } | null };
     diaADia: { orcamento: number; gasto: number; ate: string };
     plano: { data: string; descricao: string; entra?: number; sai?: number; status: Status }[];
+    detalhe?: Detalhe;
   };
   desempenho: {
     semanas: { rotulo: string; commitsClt: number; commitsPj: number; entregasPj: number; prsClt: number }[];
@@ -43,4 +44,14 @@ export type Semana = {
   aprov1Clt: number | null; aprov1Pj: number | null;
   constClt: number | null; constPj: number | null;
   cicloClt: number | null; cicloPj: number | null;
+};
+
+// Detalhe da tela Finanças: o mês até hoje contra os mesmos dias do mês anterior.
+export type Detalhe = {
+  mes: string; ate: string; anteriorAte: string;
+  resumo: { receitas: number; despesas: number; despesasAnteriorMesmoPeriodo: number; despesasAnteriorMesCheio: number };
+  categorias: { nome: string; atual: number; anterior: number }[];
+  fixos: { nome: string; valor: number; dia: number; pago: boolean }[];
+  parcelas: { mes: string; valor: number }[];
+  pj: { faturamento: number; retiradas: number; custos: Record<string, number> };
 };
