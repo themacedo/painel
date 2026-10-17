@@ -7,7 +7,7 @@ export const telas: { id: Tela; nome: string; href: string; icone: typeof Layout
   { id: "visao", nome: "Visão geral", href: "/", icone: LayoutGrid, pronta: true },
   { id: "desempenho", nome: "Desempenho", href: "/desempenho", icone: Activity, pronta: true },
   { id: "financas", nome: "Finanças", href: "/financas", icone: Wallet, pronta: true },
-  { id: "plano", nome: "Plano", href: "/plano", icone: CalendarDays, pronta: false },
+  { id: "plano", nome: "Plano", href: "/plano", icone: CalendarDays, pronta: true },
 ];
 
 export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {

@@ -30,9 +30,9 @@
     "marco": {
       "titulo": "Pagar o cartão",
       "data": "2026-10-24",
-      "disponivel": 5210.0,
-      "pagar": 4500.0,
-      "sobra": 310.0,
+      "disponivel": 5076.75,
+      "pagar": 3200,
+      "sobra": 1811.75,
       "sobraAte": "2026-11-05",
       "dependeDe": [
         "Restituição até 20/10",
@@ -46,7 +46,24 @@
       "proximo": {
         "data": "2026-11-15",
         "valor": 2000
-      }
+      },
+      "depositos": [
+        {
+          "data": "2026-10-05",
+          "valor": 1500,
+          "feito": true
+        },
+        {
+          "data": "2026-11-15",
+          "valor": 2000,
+          "feito": false
+        },
+        {
+          "data": "2026-12-05",
+          "valor": 2500,
+          "feito": false
+        }
+      ]
     },
     "diaADia": {
       "orcamento": 400,
@@ -68,6 +85,12 @@
       },
       {
         "data": "2026-10-20",
+        "descricao": "Restituição do IR",
+        "entra": 1100,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-10-20",
         "descricao": "Adiantamento CLT",
         "entra": 2100,
         "status": "previsto"
@@ -81,7 +104,7 @@
       {
         "data": "2026-10-24",
         "descricao": "Fatura do cartão",
-        "sai": 4500,
+        "sai": 3200,
         "status": "atencao"
       },
       {
@@ -94,6 +117,48 @@
         "data": "2026-11-05",
         "descricao": "Salário CLT",
         "entra": 3100,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-05",
+        "descricao": "Aluguel",
+        "sai": 1200,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-15",
+        "descricao": "Recebimento PJ",
+        "entra": 5200,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-15",
+        "descricao": "Depósito na reserva",
+        "sai": 2000,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-21",
+        "descricao": "Parcela da viagem",
+        "sai": 1200,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-24",
+        "descricao": "Fatura do cartão",
+        "sai": 1500,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-12-05",
+        "descricao": "Salário CLT",
+        "entra": 3100,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-12-05",
+        "descricao": "Depósito na reserva",
+        "sai": 2500,
         "status": "previsto"
       }
     ],
@@ -251,7 +316,27 @@
           "Impostos/DAS": 80.9
         }
       }
-    }
+    },
+    "compromissos": [
+      {
+        "descricao": "Parcela da viagem",
+        "mensal": 1200,
+        "de": "2026-08",
+        "ate": "2026-12"
+      },
+      {
+        "descricao": "Notebook (10x)",
+        "mensal": 420.1,
+        "de": "2026-05",
+        "ate": "2027-02"
+      },
+      {
+        "descricao": "Curso de inglês",
+        "mensal": 210,
+        "de": "2026-01",
+        "ate": "2027-04"
+      }
+    ]
   },
   "desempenho": {
     "semanas": [

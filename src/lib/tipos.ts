@@ -20,7 +20,11 @@ export type Painel = {
       sobraAte: string;
       dependeDe: string[];
     };
-    meta: { titulo: string; alvo: number; acumulado: number; proximo: { data: string; valor: number } | null };
+    meta: {
+      titulo: string; alvo: number; acumulado: number; proximo: { data: string; valor: number } | null;
+      depositos?: { data: string; valor: number; feito: boolean }[];
+    };
+    compromissos?: { descricao: string; mensal: number; de: string; ate: string }[]; // de/ate: AAAA-MM
     diaADia: { orcamento: number; gasto: number; ate: string };
     plano: { data: string; descricao: string; entra?: number; sai?: number; status: Status }[];
     detalhe?: Detalhe;

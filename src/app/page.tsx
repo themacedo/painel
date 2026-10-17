@@ -76,9 +76,9 @@ export default async function Pagina() {
         </div>
 
         <div className="mt-3">
-          <Cartao titulo="Plano do mês" extra={
+          <Cartao titulo={`Plano até ${diaMes(f.marco.sobraAte)}`} extra={
             <p className="text-xs text-texto-2">Depende de: {f.marco.dependeDe.join(" · ")}</p>}>
-            <TabelaPlano plano={f.plano} />
+            <TabelaPlano plano={f.plano.filter((i) => i.data <= f.marco.sobraAte)} />
           </Cartao>
         </div>
     </Moldura>
