@@ -1,26 +1,14 @@
 import { CalendarClock, Landmark, PiggyBank, ShoppingBasket } from "lucide-react";
-import { Lateral } from "@/components/Lateral";
+import { Cartao, Moldura } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoSemanas } from "@/components/GraficoSemanas";
 import { TabelaPlano } from "@/components/TabelaPlano";
 import { Marca } from "@/components/Marca";
 import { corClt, corPj } from "@/lib/empresas";
 import { carregarPainel, modo } from "@/lib/dados";
-import { dataHora, diaMes, diasAte, reais, reaisCurto } from "@/lib/formato";
+import { diaMes, diasAte, reais, reaisCurto } from "@/lib/formato";
 
 export const dynamic = "force-dynamic";
-
-function Cartao({ titulo, extra, children }: { titulo: string; extra?: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <section className="rounded-xl border border-borda bg-superficie p-4 sm:p-5">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h2 className="text-sm font-semibold">{titulo}</h2>
-        {extra}
-      </div>
-      {children}
-    </section>
-  );
-}
 
 export default async function Pagina() {
   const p = await carregarPainel();
@@ -33,18 +21,7 @@ export default async function Pagina() {
   const penultima = d.semanas.at(-2);
 
   return (
-    <div className="flex min-h-screen">
-      <Lateral modo={modo} />
-      <main className="min-w-0 flex-1 px-4 py-5 sm:px-6 lg:px-8">
-        <header className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h1 className="text-lg font-semibold">Visão geral</h1>
-            <p className="text-xs text-texto-2">Olá, {p.dono.split(" ")[0]}. Última atualização: {dataHora(p.atualizadoEm)}</p>
-          </div>
-          {modo === "demo" && (
-            <span className="rounded-lg bg-alerta-suave px-2.5 py-1 text-xs font-medium text-alerta">Dados fictícios</span>
-          )}
-        </header>
+    <Moldura ativa="visao" titulo="Visão geral" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <Kpi titulo="Saldo nas contas" valor={reais(saldo)} icone={Landmark} cor="bg-primaria"
@@ -104,7 +81,6 @@ export default async function Pagina() {
             <TabelaPlano plano={f.plano} />
           </Cartao>
         </div>
-      </main>
-    </div>
+    </Moldura>
   );
 }

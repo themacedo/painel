@@ -5,6 +5,13 @@ Next.js 15 (App Router), Tailwind 4 e Recharts. Tema claro e escuro, layout de c
 
 ![Visão geral](docs/visao-geral.png)
 
+| Tela | O que mostra |
+|---|---|
+| Visão geral | saldo, próximo marco do plano, meta, dia a dia do mês, semana atual e plano do mês |
+| Desempenho | média de 4 semanas por empresa (com variação), histórico de commits com marcos, entregas e PRs, % fora do expediente (média móvel) e a avaliação da semana por área |
+
+![Desempenho](docs/desempenho.png)
+
 ## Dois modos, um código
 
 | Modo | Dados | Acesso |
