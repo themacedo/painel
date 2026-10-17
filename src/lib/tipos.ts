@@ -33,7 +33,7 @@ export type Painel = {
     semanas: { rotulo: string; commitsClt: number; commitsPj: number; entregasPj: number; prsClt: number }[];
     historico: Semana[];
     marcos: { data: string; rotulo: string }[];
-    notas: { inicio: string; geral: number; areas: Record<string, number>; destaque: string }[];
+    notas: { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string }[];
     atual: { nota: number | null; foraDoExpedientePct: number; destaque: string };
   };
 };
@@ -48,6 +48,10 @@ export type Semana = {
   aprov1Clt: number | null; aprov1Pj: number | null;
   constClt: number | null; constPj: number | null;
   cicloClt: number | null; cicloPj: number | null;
+  cyclePrClt?: number | null; // dias do 1º commit ao merge (mediana da semana)
+  leadPj?: number | null; // dias da criação do card à entrega (mediana)
+  regressoesClt?: number | null; // bugs causados por entregas minhas
+  pendenciasPj?: number | null; // itens comigo em andamento
 };
 
 // Detalhe da tela Finanças: o mês até hoje contra os mesmos dias do mês anterior.

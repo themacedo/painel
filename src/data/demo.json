@@ -419,7 +419,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-04-11",
@@ -437,7 +441,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-04-18",
@@ -455,7 +463,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-04-25",
@@ -473,7 +485,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-05-02",
@@ -491,7 +507,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-05-09",
@@ -509,7 +529,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-05-16",
@@ -527,7 +551,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-05-23",
@@ -545,7 +573,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-05-30",
@@ -563,7 +595,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-06-06",
@@ -581,7 +617,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-06-13",
@@ -599,7 +639,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-06-20",
@@ -617,7 +661,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-06-27",
@@ -635,7 +683,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-07-04",
@@ -653,7 +705,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-07-11",
@@ -671,7 +727,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-07-18",
@@ -689,7 +749,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-07-25",
@@ -707,7 +771,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-08-01",
@@ -725,7 +793,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-08-08",
@@ -743,7 +815,11 @@
         "constClt": null,
         "constPj": null,
         "cicloClt": null,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": null,
+        "leadPj": null,
+        "regressoesClt": null,
+        "pendenciasPj": null
       },
       {
         "inicio": "2026-08-15",
@@ -761,7 +837,11 @@
         "constClt": 60,
         "constPj": 50,
         "cicloClt": 12,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.8,
+        "leadPj": 9,
+        "regressoesClt": 1,
+        "pendenciasPj": 5
       },
       {
         "inicio": "2026-08-22",
@@ -779,7 +859,11 @@
         "constClt": 60,
         "constPj": 50,
         "cicloClt": 9,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.5,
+        "leadPj": 7,
+        "regressoesClt": 0,
+        "pendenciasPj": 4
       },
       {
         "inicio": "2026-08-29",
@@ -797,7 +881,11 @@
         "constClt": 75,
         "constPj": 62,
         "cicloClt": 8,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.2,
+        "leadPj": 8,
+        "regressoesClt": 0,
+        "pendenciasPj": 4
       },
       {
         "inicio": "2026-09-05",
@@ -815,7 +903,11 @@
         "constClt": 75,
         "constPj": 62,
         "cicloClt": 10,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.4,
+        "leadPj": 6,
+        "regressoesClt": 1,
+        "pendenciasPj": 3
       },
       {
         "inicio": "2026-09-12",
@@ -833,7 +925,11 @@
         "constClt": 88,
         "constPj": 75,
         "cicloClt": 7,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.1,
+        "leadPj": 5,
+        "regressoesClt": 0,
+        "pendenciasPj": 3
       },
       {
         "inicio": "2026-09-19",
@@ -851,7 +947,11 @@
         "constClt": 88,
         "constPj": 75,
         "cicloClt": 6,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 0.9,
+        "leadPj": 6,
+        "regressoesClt": 0,
+        "pendenciasPj": 4
       },
       {
         "inicio": "2026-09-26",
@@ -869,7 +969,11 @@
         "constClt": 100,
         "constPj": 88,
         "cicloClt": 9,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.0,
+        "leadPj": 4,
+        "regressoesClt": 0,
+        "pendenciasPj": 3
       },
       {
         "inicio": "2026-10-03",
@@ -887,7 +991,11 @@
         "constClt": 100,
         "constPj": 88,
         "cicloClt": 8,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.3,
+        "leadPj": 5,
+        "regressoesClt": 1,
+        "pendenciasPj": 2
       },
       {
         "inicio": "2026-10-10",
@@ -905,7 +1013,11 @@
         "constClt": 100,
         "constPj": 88,
         "cicloClt": 7,
-        "cicloPj": null
+        "cicloPj": null,
+        "cyclePrClt": 1.6,
+        "leadPj": 4,
+        "regressoesClt": 0,
+        "pendenciasPj": 3
       }
     ],
     "marcos": [
@@ -948,11 +1060,12 @@
           "Entrega Cliente PJ": 9,
           "Entrega Empresa CLT": 7,
           "Foco": 8,
-          "Energia e sono": 6,
+          "Energia e sono": 5,
           "Visibilidade": 8,
           "Finanças": 7
         },
-        "destaque": "Recorde de entregas na PJ; fase de bugs da CLT encerrada."
+        "destaque": "Recorde de entregas na PJ; fase de bugs da CLT encerrada.",
+        "acao": "Horário de parada fixo e no máximo duas frentes em paralelo."
       }
     ]
   }

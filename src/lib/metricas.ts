@@ -1,6 +1,6 @@
 import type { Semana } from "./tipos";
 
-type Chave = { [K in keyof Semana]: Semana[K] extends number | null ? K : never }[keyof Semana];
+export type Chave = { [K in keyof Semana]-?: NonNullable<Semana[K]> extends number ? K : never }[keyof Semana];
 
 // Média ignorando semanas não medidas (null). Sem nenhum valor: null.
 export function media(semanas: Semana[], chave: Chave): number | null {
@@ -24,4 +24,20 @@ export function mediaMovel(hist: Semana[], chave: Chave, n = 4): (number | null)
 // Semana (rótulo) que contém a data do marco.
 export function semanaDe(hist: Semana[], data: string): string | undefined {
   return [...hist].reverse().find((s) => s.inicio <= data)?.rotulo;
+}
+
+// Retrabalho: regressões ÷ PRs nas últimas n semanas, só nas semanas em que as regressões foram registradas.
+export function retrabalho(hist: Semana[], n = 4) {
+  const sem = hist.slice(-n).filter((s) => s.regressoesClt != null);
+  const regr = sem.reduce((a, s) => a + (s.regressoesClt ?? 0), 0);
+  const prs = sem.reduce((a, s) => a + s.prsClt, 0);
+  return sem.length && prs ? { pct: (100 * regr) / prs, regr, prs } : null;
+}
+
+// Alerta de sobrecarga: fora do expediente alto (média de 4 semanas) e energia/sono baixos na última avaliação.
+export function sobrecarga(hist: Semana[], energia: number | undefined) {
+  const clt = media(hist.slice(-4), "foraClt");
+  const pj = media(hist.slice(-4), "foraPj");
+  const alto = (clt ?? 0) > 30 || (pj ?? 0) > 25;
+  return alto && energia != null && energia <= 6 ? { clt, pj, energia } : null;
 }

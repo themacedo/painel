@@ -6,12 +6,13 @@ import { Variacao } from "@/components/Variacao";
 import { carregarPainel, modo } from "@/lib/dados";
 import { corClt, corPj } from "@/lib/empresas";
 import { diaMes } from "@/lib/formato";
-import { comparar, mediaMovel, semanaDe } from "@/lib/metricas";
+import { comparar, mediaMovel, retrabalho, semanaDe, sobrecarga, type Chave } from "@/lib/metricas";
+import { TriangleAlert } from "lucide-react";
 import type { Empresa, Semana } from "@/lib/tipos";
 
 export const dynamic = "force-dynamic";
 
-type Metrica = { nome: string; chave: Parameters<typeof comparar>[1]; casas?: number; sufixo?: string; melhorSobe?: boolean };
+type Metrica = { nome: string; chave: Chave; casas?: number; sufixo?: string; melhorSobe?: boolean; sub?: React.ReactNode };
 
 function CartaoEmpresa({ empresa, hist, metricas }: { empresa: Empresa; hist: Semana[]; metricas: Metrica[] }) {
   return (
@@ -31,6 +32,7 @@ function CartaoEmpresa({ empresa, hist, metricas }: { empresa: Empresa; hist: Se
                 <span className="text-lg font-semibold">{atual == null ? "—" : <Contador valor={atual} casas={m.casas ?? 0} formato={m.sufixo === "%" ? "pct" : "num"} />}</span>
                 <Variacao atual={atual} antes={antes} melhorSobe={m.melhorSobe} />
               </dd>
+              {m.sub && <p className="mt-1 text-xs text-texto-2">{m.sub}</p>}
             </div>
           );
         })}
@@ -49,24 +51,41 @@ export default async function Desempenho() {
   const mmClt = mediaMovel(hist, "foraClt");
   const mmPj = mediaMovel(hist, "foraPj");
   const fora = hist.map((s, i) => ({ rotulo: s.rotulo, clt: mmClt[i], pj: mmPj[i] }));
+  const retr = retrabalho(hist);
+  const alerta = sobrecarga(hist, ultima?.areas["Energia e sono"]);
+  const pct = (v: number | null) => (v == null ? "—" : `${Math.round(v)}%`);
 
   return (
     <Moldura ativa="desempenho" titulo="Desempenho" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
+      {alerta && (
+        <div role="status" className="entrar mb-3 flex gap-3 rounded-xl border border-alerta/40 bg-alerta-suave p-4 text-sm">
+          <TriangleAlert size={18} className="mt-0.5 shrink-0 text-alerta" />
+          <div>
+            <p className="font-medium text-alerta">Risco de sobrecarga</p>
+            <p className="mt-0.5">
+              Fora do expediente em {pct(alerta.clt)} ({e.clt.nome}) e {pct(alerta.pj)} ({e.pj.nome}) na média de 4 semanas,
+              com energia e sono em {alerta.energia}/10.
+            </p>
+            <p className="mt-1 text-texto-2">Ação da semana: {ultima?.acao ?? "horário de parada fixo e menos frentes em paralelo."}</p>
+          </div>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <CartaoEmpresa empresa={e.clt} hist={hist} metricas={[
-          { nome: "Commits por semana", chave: "commitsClt", casas: 1 },
           { nome: "PRs por semana", chave: "prsClt", casas: 1 },
-          { nome: "Bugs resolvidos", chave: "bugsClt", casas: 1 },
-          { nome: "Aprovação de primeira", chave: "aprov1Clt", sufixo: "%" },
+          { nome: "Cycle time do PR (dias)", chave: "cyclePrClt", casas: 1, melhorSobe: false },
+          { nome: "Aprovação de 1ª", chave: "aprov1Clt", sufixo: "%",
+            sub: retr ? <>Retrabalho: {retr.pct.toLocaleString("pt-BR", { maximumFractionDigits: 0 })}% ({retr.regr} de {retr.prs} PRs)</> : "Retrabalho: sem registro" },
+          { nome: "Bugs resolvidos (sustentação)", chave: "bugsClt", casas: 1 },
           { nome: "Bug na fila (dias)", chave: "cicloClt", casas: 1, melhorSobe: false },
           { nome: "Fora do expediente", chave: "foraClt", sufixo: "%", melhorSobe: false },
         ]} />
         <CartaoEmpresa empresa={e.pj} hist={hist} metricas={[
-          { nome: "Commits por semana", chave: "commitsPj", casas: 1 },
           { nome: "Entregas por semana", chave: "entregasPj", casas: 1 },
-          { nome: "Cards movidos", chave: "cartoesPj", casas: 1 },
-          { nome: "Aprovação de primeira", chave: "aprov1Pj", sufixo: "%" },
+          { nome: "Lead time do card (dias)", chave: "leadPj", casas: 1, melhorSobe: false },
+          { nome: "Aprovação de 1ª", chave: "aprov1Pj", sufixo: "%" },
           { nome: "Constância (8 semanas)", chave: "constPj", sufixo: "%" },
+          { nome: "Pendências comigo", chave: "pendenciasPj", casas: 1, melhorSobe: false },
           { nome: "Fora do expediente", chave: "foraPj", sufixo: "%", melhorSobe: false },
         ]} />
       </div>
