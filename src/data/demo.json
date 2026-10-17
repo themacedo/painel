@@ -1,0 +1,166 @@
+{
+  "atualizadoEm": "2026-10-17T18:31:00-03:00",
+  "dono": "João Souza",
+  "empresas": {
+    "clt": {
+      "nome": "Empresa CLT"
+    },
+    "pj": {
+      "nome": "Cliente PJ"
+    }
+  },
+  "financas": {
+    "contas": [
+      {
+        "nome": "Conta PJ",
+        "tipo": "PJ",
+        "saldo": 2840.1
+      },
+      {
+        "nome": "Banco A",
+        "tipo": "PF",
+        "saldo": 412.35
+      },
+      {
+        "nome": "Banco B",
+        "tipo": "PF",
+        "saldo": 58.9
+      }
+    ],
+    "marco": {
+      "titulo": "Pagar o cartão",
+      "data": "2026-10-24",
+      "disponivel": 5210.0,
+      "pagar": 4500.0,
+      "sobra": 310.0,
+      "sobraAte": "2026-11-05",
+      "dependeDe": [
+        "Restituição até 20/10",
+        "Adiantamento em 20/10"
+      ]
+    },
+    "meta": {
+      "titulo": "Reserva da viagem",
+      "alvo": 6000,
+      "acumulado": 1500,
+      "proximo": {
+        "data": "2026-11-15",
+        "valor": 2000
+      }
+    },
+    "diaADia": {
+      "orcamento": 400,
+      "gasto": 165.4,
+      "ate": "2026-10-31"
+    },
+    "plano": [
+      {
+        "data": "2026-10-15",
+        "descricao": "Recebimento PJ",
+        "entra": 5200,
+        "status": "feito"
+      },
+      {
+        "data": "2026-10-16",
+        "descricao": "Contador e DAS",
+        "sai": 320,
+        "status": "feito"
+      },
+      {
+        "data": "2026-10-20",
+        "descricao": "Adiantamento CLT",
+        "entra": 2100,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-10-21",
+        "descricao": "Parcela da viagem",
+        "sai": 1200,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-10-24",
+        "descricao": "Fatura do cartão",
+        "sai": 4500,
+        "status": "atencao"
+      },
+      {
+        "data": "2026-10-28",
+        "descricao": "Telefone",
+        "sai": 65,
+        "status": "previsto"
+      },
+      {
+        "data": "2026-11-05",
+        "descricao": "Salário CLT",
+        "entra": 3100,
+        "status": "previsto"
+      }
+    ]
+  },
+  "desempenho": {
+    "semanas": [
+      {
+        "rotulo": "22/08",
+        "commitsClt": 9,
+        "commitsPj": 3,
+        "entregasPj": 1,
+        "prsClt": 4
+      },
+      {
+        "rotulo": "29/08",
+        "commitsClt": 12,
+        "commitsPj": 2,
+        "entregasPj": 1,
+        "prsClt": 5
+      },
+      {
+        "rotulo": "05/09",
+        "commitsClt": 8,
+        "commitsPj": 4,
+        "entregasPj": 2,
+        "prsClt": 3
+      },
+      {
+        "rotulo": "12/09",
+        "commitsClt": 15,
+        "commitsPj": 5,
+        "entregasPj": 2,
+        "prsClt": 7
+      },
+      {
+        "rotulo": "19/09",
+        "commitsClt": 31,
+        "commitsPj": 8,
+        "entregasPj": 3,
+        "prsClt": 12
+      },
+      {
+        "rotulo": "26/09",
+        "commitsClt": 38,
+        "commitsPj": 9,
+        "entregasPj": 4,
+        "prsClt": 15
+      },
+      {
+        "rotulo": "03/10",
+        "commitsClt": 34,
+        "commitsPj": 12,
+        "entregasPj": 4,
+        "prsClt": 18
+      },
+      {
+        "rotulo": "10/10",
+        "commitsClt": 17,
+        "commitsPj": 14,
+        "entregasPj": 6,
+        "prsClt": 8
+      }
+    ],
+    "atual": {
+      "nota": 7.5,
+      "foraDoExpedientePct": 41,
+      "destaque": "Recorde de entregas na PJ; fase de bugs da CLT encerrada."
+    }
+  }
+}
