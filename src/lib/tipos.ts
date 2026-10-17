@@ -52,6 +52,7 @@ export type Semana = {
   leadPj?: number | null; // dias da criação do card à entrega (mediana)
   regressoesClt?: number | null; // bugs causados por entregas minhas
   pendenciasPj?: number | null; // itens comigo em andamento
+  atendClt?: number | null; // dias do 1º commit no bug até a resolução (mediana)
 };
 
 // Detalhe da tela Finanças: o mês até hoje contra os mesmos dias do mês anterior.

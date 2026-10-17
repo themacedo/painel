@@ -52,6 +52,7 @@ export default async function Desempenho() {
   const mmPj = mediaMovel(hist, "foraPj");
   const fora = hist.map((s, i) => ({ rotulo: s.rotulo, clt: mmClt[i], pj: mmPj[i] }));
   const retr = retrabalho(hist);
+  const desdeCriacao = comparar(hist, "cicloClt").atual; // inclui o tempo parado no backlog antes de chegar a mim
   const alerta = sobrecarga(hist, ultima?.areas["Energia e sono"]);
   const pct = (v: number | null) => (v == null ? "—" : `${Math.round(v)}%`);
 
@@ -77,7 +78,8 @@ export default async function Desempenho() {
           { nome: "Aprovação de 1ª", chave: "aprov1Clt", sufixo: "%",
             sub: retr ? <>Retrabalho: {retr.pct.toLocaleString("pt-BR", { maximumFractionDigits: 0 })}% ({retr.regr} de {retr.prs} PRs)</> : "Retrabalho: sem registro" },
           { nome: "Bugs resolvidos (sustentação)", chave: "bugsClt", casas: 1 },
-          { nome: "Bug na fila (dias)", chave: "cicloClt", casas: 1, melhorSobe: false },
+          { nome: "Tempo de atendimento (dias)", chave: "atendClt", casas: 1, melhorSobe: false,
+            sub: desdeCriacao == null ? undefined : <>Desde a abertura do bug: {desdeCriacao.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} dias</> },
           { nome: "Fora do expediente", chave: "foraClt", sufixo: "%", melhorSobe: false },
         ]} />
         <CartaoEmpresa empresa={e.pj} hist={hist} metricas={[

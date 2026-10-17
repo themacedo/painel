@@ -423,7 +423,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-04-11",
@@ -445,7 +446,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-04-18",
@@ -467,7 +469,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-04-25",
@@ -489,7 +492,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-05-02",
@@ -511,7 +515,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-05-09",
@@ -533,7 +538,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-05-16",
@@ -555,7 +561,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-05-23",
@@ -577,7 +584,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-05-30",
@@ -599,7 +607,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-06-06",
@@ -621,7 +630,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-06-13",
@@ -643,7 +653,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-06-20",
@@ -665,7 +676,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-06-27",
@@ -687,7 +699,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-07-04",
@@ -709,7 +722,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-07-11",
@@ -731,7 +745,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-07-18",
@@ -753,7 +768,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-07-25",
@@ -775,7 +791,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-08-01",
@@ -797,7 +814,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-08-08",
@@ -819,7 +837,8 @@
         "cyclePrClt": null,
         "leadPj": null,
         "regressoesClt": null,
-        "pendenciasPj": null
+        "pendenciasPj": null,
+        "atendClt": null
       },
       {
         "inicio": "2026-08-15",
@@ -841,7 +860,8 @@
         "cyclePrClt": 1.8,
         "leadPj": 9,
         "regressoesClt": 1,
-        "pendenciasPj": 5
+        "pendenciasPj": 5,
+        "atendClt": 3
       },
       {
         "inicio": "2026-08-22",
@@ -863,7 +883,8 @@
         "cyclePrClt": 1.5,
         "leadPj": 7,
         "regressoesClt": 0,
-        "pendenciasPj": 4
+        "pendenciasPj": 4,
+        "atendClt": 2
       },
       {
         "inicio": "2026-08-29",
@@ -885,7 +906,8 @@
         "cyclePrClt": 1.2,
         "leadPj": 8,
         "regressoesClt": 0,
-        "pendenciasPj": 4
+        "pendenciasPj": 4,
+        "atendClt": 2
       },
       {
         "inicio": "2026-09-05",
@@ -907,7 +929,8 @@
         "cyclePrClt": 1.4,
         "leadPj": 6,
         "regressoesClt": 1,
-        "pendenciasPj": 3
+        "pendenciasPj": 3,
+        "atendClt": 4
       },
       {
         "inicio": "2026-09-12",
@@ -929,7 +952,8 @@
         "cyclePrClt": 1.1,
         "leadPj": 5,
         "regressoesClt": 0,
-        "pendenciasPj": 3
+        "pendenciasPj": 3,
+        "atendClt": 1
       },
       {
         "inicio": "2026-09-19",
@@ -951,7 +975,8 @@
         "cyclePrClt": 0.9,
         "leadPj": 6,
         "regressoesClt": 0,
-        "pendenciasPj": 4
+        "pendenciasPj": 4,
+        "atendClt": 2
       },
       {
         "inicio": "2026-09-26",
@@ -973,7 +998,8 @@
         "cyclePrClt": 1.0,
         "leadPj": 4,
         "regressoesClt": 0,
-        "pendenciasPj": 3
+        "pendenciasPj": 3,
+        "atendClt": 1
       },
       {
         "inicio": "2026-10-03",
@@ -995,7 +1021,8 @@
         "cyclePrClt": 1.3,
         "leadPj": 5,
         "regressoesClt": 1,
-        "pendenciasPj": 2
+        "pendenciasPj": 2,
+        "atendClt": 2
       },
       {
         "inicio": "2026-10-10",
@@ -1017,7 +1044,8 @@
         "cyclePrClt": 1.6,
         "leadPj": 4,
         "regressoesClt": 0,
-        "pendenciasPj": 3
+        "pendenciasPj": 3,
+        "atendClt": 2
       }
     ],
     "marcos": [
