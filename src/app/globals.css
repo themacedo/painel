@@ -58,3 +58,19 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "tnum";
 }
+
+/* Movimento: cartões entram em sequência, barras enchem da esquerda. Desligado com "reduzir movimento". */
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes encher { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.entrar { animation: entrar 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.encher { transform-origin: left; animation: encher 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: 0.15s; }
+
+main > :nth-child(2) .entrar, main > .entrar:nth-child(2) { animation-delay: 0s; }
+.grid > .entrar:nth-child(2), .grid > :nth-child(2) > .entrar { animation-delay: 60ms; }
+.grid > .entrar:nth-child(3), .grid > :nth-child(3) > .entrar { animation-delay: 120ms; }
+.grid > .entrar:nth-child(4), .grid > :nth-child(4) > .entrar { animation-delay: 180ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .entrar, .encher { animation: none; }
+}

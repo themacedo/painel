@@ -1,5 +1,6 @@
 "use client";
 
+import { useMovimento } from "@/lib/movimento";
 import {
   Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
@@ -28,6 +29,7 @@ type Serie = { chave: string; nome: string; cor: string };
 type Linha = { rotulo: string } & Record<string, string | number | null>;
 
 export function HistoricoCommits({ hist, series, marco }: { hist: Semana[]; series: Serie[]; marco?: { rotulo: string; texto: string } }) {
+  const mov = useMovimento();
   return (
     <div className="h-72 w-full">
       <ResponsiveContainer>
@@ -37,7 +39,7 @@ export function HistoricoCommits({ hist, series, marco }: { hist: Semana[]; seri
           <YAxis {...eixo} allowDecimals={false} />
           <Tooltip content={<Dica />} cursor={{ fill: "var(--primaria-suave)", opacity: 0.6 }} />
           {series.map((s, i) => (
-            <Bar key={s.chave} dataKey={s.chave} name={s.nome} stackId="c" fill={s.cor} isAnimationActive={false}
+            <Bar key={s.chave} dataKey={s.chave} name={s.nome} stackId="c" fill={s.cor} isAnimationActive={mov} animationDuration={900} animationEasing="ease-out"
               radius={i === series.length - 1 ? [4, 4, 0, 0] : undefined} />
           ))}
           {marco && (
@@ -53,6 +55,7 @@ export function HistoricoCommits({ hist, series, marco }: { hist: Semana[]; seri
 export function Linhas({ hist, series, unidade = "", dominio }: {
   hist: Semana[] | Linha[]; series: Serie[]; unidade?: string; dominio?: [number, number];
 }) {
+  const mov = useMovimento();
   return (
     <div className="h-56 w-full">
       <ResponsiveContainer>
@@ -63,7 +66,7 @@ export function Linhas({ hist, series, unidade = "", dominio }: {
           <Tooltip content={<Dica unidade={unidade} />} />
           {series.map((s) => (
             <Line key={s.chave} dataKey={s.chave} name={s.nome} stroke={s.cor} strokeWidth={2} dot={false}
-              connectNulls isAnimationActive={false} />
+              connectNulls isAnimationActive={mov} animationDuration={900} animationEasing="ease-out" />
           ))}
         </LineChart>
       </ResponsiveContainer>

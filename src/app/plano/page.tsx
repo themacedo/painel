@@ -1,6 +1,7 @@
 import { CalendarClock, Hourglass, PiggyBank, Wallet } from "lucide-react";
 import { Cartao, Moldura } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
+import { Contador } from "@/components/Contador";
 import { carregarPainel, modo } from "@/lib/dados";
 import { diaMes, reais, reaisCurto } from "@/lib/formato";
 import type { Status } from "@/lib/tipos";
@@ -46,15 +47,15 @@ export default async function Plano() {
   return (
     <Moldura ativa="plano" titulo="Plano" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Kpi titulo={f.meta.titulo} valor={`${reaisCurto(f.meta.acumulado)} de ${reaisCurto(f.meta.alvo)}`} icone={PiggyBank} cor="bg-ok"
+        <Kpi titulo={f.meta.titulo} valor={<><Contador valor={f.meta.acumulado} formato="brlCurto" /> de {reaisCurto(f.meta.alvo)}</>} icone={PiggyBank} cor="bg-ok"
           detalhe={<>{feitos} de {depositos.length} depósitos feitos</>}>
           <Barra pct={(f.meta.acumulado / Math.max(1, f.meta.alvo)) * 100} cor="bg-ok" />
         </Kpi>
-        <Kpi titulo="Próximo depósito" valor={f.meta.proximo ? reais(f.meta.proximo.valor) : "—"} icone={CalendarClock} cor="bg-primaria"
+        <Kpi titulo="Próximo depósito" valor={f.meta.proximo ? <Contador valor={f.meta.proximo.valor} formato="brl" /> : "—"} icone={CalendarClock} cor="bg-primaria"
           detalhe={f.meta.proximo ? <>Em {diaMes(f.meta.proximo.data)}</> : <>Meta concluída</>} />
-        <Kpi titulo="Menor saldo previsto" valor={reais(menor)} icone={Wallet} cor={menor < 0 ? "bg-perigo" : "bg-alerta"}
+        <Kpi titulo="Menor saldo previsto" valor={<Contador valor={menor} formato="brl" />} icone={Wallet} cor={menor < 0 ? "bg-perigo" : "bg-alerta"}
           detalhe={menor < 0 ? <>O plano fica negativo em algum momento</> : <>O plano não fica negativo até {diaMes(linhas.at(-1)?.data ?? "")}</>} />
-        <Kpi titulo="Compromissos por mês" valor={reais(mensalAtivo)} icone={Hourglass} cor="bg-[#8b5cf6]"
+        <Kpi titulo="Compromissos por mês" valor={<Contador valor={mensalAtivo} formato="brl" />} icone={Hourglass} cor="bg-[#8b5cf6]"
           detalhe={<>{compromissos.filter((c) => c.ate >= hoje).length} com data para acabar</>} />
       </div>
 

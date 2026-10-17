@@ -2,7 +2,7 @@ import type { LucideIcon } from "lucide-react";
 
 type Props = {
   titulo: string;
-  valor: string;
+  valor: React.ReactNode;
   detalhe: React.ReactNode;
   icone: LucideIcon;
   cor: string; // classe de fundo do ícone
@@ -11,7 +11,7 @@ type Props = {
 
 export function Kpi({ titulo, valor, detalhe, icone: Icone, cor, children }: Props) {
   return (
-    <div className="rounded-xl border border-borda bg-superficie p-4">
+    <div className="entrar rounded-xl border border-borda bg-superficie p-4">
       <div className="flex items-center justify-between">
         <p className="text-[13px] text-texto-2">{titulo}</p>
         <span className={`grid size-7 place-items-center rounded-lg text-white ${cor}`}>
@@ -28,7 +28,7 @@ export function Kpi({ titulo, valor, detalhe, icone: Icone, cor, children }: Pro
 export function Barra({ pct, cor = "bg-primaria" }: { pct: number; cor?: string }) {
   return (
     <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-primaria-suave">
-      <div className={`h-full rounded-full ${cor}`} style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
+      <div className={`encher h-full rounded-full ${cor}`} style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
     </div>
   );
 }

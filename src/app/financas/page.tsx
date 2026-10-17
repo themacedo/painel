@@ -3,6 +3,7 @@ import { Cartao, Moldura } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoParcelas } from "@/components/GraficoParcelas";
 import { Marca } from "@/components/Marca";
+import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
 import { carregarPainel, modo } from "@/lib/dados";
 import { diaMes, reais, reaisCurto } from "@/lib/formato";
@@ -34,16 +35,16 @@ export default async function Financas() {
   return (
     <Moldura {...moldura}>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Kpi titulo={`Gasto em ${mesCurto(d.mes)} até ${diaMes(d.ate)}`} valor={reais(r.despesas)} icone={TrendingDown} cor="bg-primaria"
+        <Kpi titulo={`Gasto em ${mesCurto(d.mes)} até ${diaMes(d.ate)}`} valor={<Contador valor={r.despesas} formato="brl" />} icone={TrendingDown} cor="bg-primaria"
           detalhe={<>Mesmo período do mês anterior: {reaisCurto(r.despesasAnteriorMesmoPeriodo)}{" "}
             <Variacao atual={r.despesas} antes={r.despesasAnteriorMesmoPeriodo} melhorSobe={false} /></>} />
-        <Kpi titulo="Entrou no mês" valor={reais(r.receitas)} icone={Landmark} cor="bg-ok"
+        <Kpi titulo="Entrou no mês" valor={<Contador valor={r.receitas} formato="brl" />} icone={Landmark} cor="bg-ok"
           detalhe={<>Saldo do mês até agora: {reaisCurto(r.receitas - r.despesas)}</>} />
-        <Kpi titulo="Contas fixas" valor={`${pagos.length} de ${d.fixos.length} pagas`} icone={Receipt} cor="bg-alerta"
+        <Kpi titulo="Contas fixas" valor={<><Contador valor={pagos.length} /> de {d.fixos.length} pagas</>} icone={Receipt} cor="bg-alerta"
           detalhe={<>Faltam {reaisCurto(pendente)} de {reaisCurto(totalFixos)}</>}>
           <Barra pct={(pagos.length / Math.max(1, d.fixos.length)) * 100} cor="bg-alerta" />
         </Kpi>
-        <Kpi titulo="Parcelas nos próximos 12 meses" valor={reais(parcelas12)} icone={CreditCard} cor="bg-[#8b5cf6]"
+        <Kpi titulo="Parcelas nos próximos 12 meses" valor={<Contador valor={parcelas12} formato="brl" />} icone={CreditCard} cor="bg-[#8b5cf6]"
           detalhe={livre ? <>Livre de parcelas a partir de {mesCurto(livre)}</> : <>Parcelas em todos os 12 meses</>} />
       </div>
 
@@ -65,8 +66,8 @@ export default async function Financas() {
                     </span>
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <div className="h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
-                    <div className="h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />
+                    <div className="encher h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
+                    <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />
                   </div>
                 </li>
               ))}

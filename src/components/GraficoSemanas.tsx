@@ -1,5 +1,6 @@
 "use client";
 
+import { useMovimento } from "@/lib/movimento";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { Painel } from "@/lib/tipos";
 import { corClt, corPj } from "@/lib/empresas";
@@ -22,6 +23,7 @@ function Dica({ active, payload, label, empresas }: {
 }
 
 export function GraficoSemanas({ semanas, empresas }: { semanas: Semana[]; empresas: Empresas }) {
+  const mov = useMovimento();
   return (
     <div className="h-64 w-full">
       <ResponsiveContainer>
@@ -30,8 +32,8 @@ export function GraficoSemanas({ semanas, empresas }: { semanas: Semana[]; empre
           <XAxis dataKey="rotulo" tickLine={false} axisLine={false} tick={{ fill: "var(--texto-2)", fontSize: 12 }} />
           <YAxis tickLine={false} axisLine={false} tick={{ fill: "var(--texto-2)", fontSize: 12 }} allowDecimals={false} />
           <Tooltip content={<Dica empresas={empresas} />} cursor={{ fill: "var(--primaria-suave)", opacity: 0.6 }} />
-          <Bar dataKey="commitsClt" stackId="c" fill={corClt(empresas)} isAnimationActive={false} />
-          <Bar dataKey="commitsPj" stackId="c" fill={corPj(empresas)} radius={[6, 6, 0, 0]} isAnimationActive={false} />
+          <Bar dataKey="commitsClt" stackId="c" fill={corClt(empresas)} isAnimationActive={mov} animationDuration={900} animationEasing="ease-out" />
+          <Bar dataKey="commitsPj" stackId="c" fill={corPj(empresas)} radius={[6, 6, 0, 0]} isAnimationActive={mov} animationDuration={900} animationEasing="ease-out" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -4,9 +4,10 @@ import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoSemanas } from "@/components/GraficoSemanas";
 import { TabelaPlano } from "@/components/TabelaPlano";
 import { Marca } from "@/components/Marca";
+import { Contador } from "@/components/Contador";
 import { corClt, corPj } from "@/lib/empresas";
 import { carregarPainel, modo } from "@/lib/dados";
-import { diaMes, diasAte, reais, reaisCurto } from "@/lib/formato";
+import { diaMes, diasAte, reaisCurto } from "@/lib/formato";
 
 export const dynamic = "force-dynamic";
 
@@ -24,15 +25,15 @@ export default async function Pagina() {
     <Moldura ativa="visao" titulo="Visão geral" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <Kpi titulo="Saldo nas contas" valor={reais(saldo)} icone={Landmark} cor="bg-primaria"
+          <Kpi titulo="Saldo nas contas" valor={<Contador valor={saldo} formato="brl" />} icone={Landmark} cor="bg-primaria"
             detalhe={<>PJ {reaisCurto(saldoPj)} · PF {reaisCurto(saldo - saldoPj)}</>} />
-          <Kpi titulo={f.marco.titulo} valor={reais(f.marco.pagar)} icone={CalendarClock} cor="bg-alerta"
+          <Kpi titulo={f.marco.titulo} valor={<Contador valor={f.marco.pagar} formato="brl" />} icone={CalendarClock} cor="bg-alerta"
             detalhe={<>Em {diaMes(f.marco.data)} ({faltam > 0 ? `faltam ${faltam} dias` : "hoje"}) · sobra {reaisCurto(f.marco.sobra)} até {diaMes(f.marco.sobraAte)}</>} />
-          <Kpi titulo={f.meta.titulo} valor={reais(f.meta.acumulado)} icone={PiggyBank} cor="bg-ok"
+          <Kpi titulo={f.meta.titulo} valor={<Contador valor={f.meta.acumulado} formato="brl" />} icone={PiggyBank} cor="bg-ok"
             detalhe={f.meta.proximo ? <>Meta {reaisCurto(f.meta.alvo)} · próximo depósito {reaisCurto(f.meta.proximo.valor)} em {diaMes(f.meta.proximo.data)}</> : <>Meta {reaisCurto(f.meta.alvo)}</>}>
             <Barra pct={(f.meta.acumulado / f.meta.alvo) * 100} cor="bg-ok" />
           </Kpi>
-          <Kpi titulo="Dia a dia do mês" valor={reais(restante)} icone={ShoppingBasket} cor="bg-[#8b5cf6]"
+          <Kpi titulo="Dia a dia do mês" valor={<Contador valor={restante} formato="brl" />} icone={ShoppingBasket} cor="bg-[#8b5cf6]"
             detalhe={<>Livre de {reaisCurto(f.diaADia.orcamento)} até {diaMes(f.diaADia.ate)} · já gasto {reaisCurto(f.diaADia.gasto)}</>}>
             <Barra pct={(f.diaADia.gasto / f.diaADia.orcamento) * 100} cor={restante < 0 ? "bg-perigo" : "bg-[#8b5cf6]"} />
           </Kpi>
@@ -50,7 +51,7 @@ export default async function Pagina() {
           </div>
           <Cartao titulo="Semana atual">
             <div className="flex items-end gap-2">
-              <p className="text-4xl font-semibold tracking-tight">{d.atual.nota == null ? "—" : d.atual.nota.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</p>
+              <p className="text-4xl font-semibold tracking-tight">{d.atual.nota == null ? "—" : <Contador valor={d.atual.nota} casas={1} />}</p>
               <p className="pb-1 text-sm text-texto-2">/ 10</p>
             </div>
             <p className="mt-3 text-sm">{d.atual.destaque}</p>
@@ -68,7 +69,7 @@ export default async function Pagina() {
                 </div>
                 <div className="col-span-2 rounded-lg bg-fundo p-3">
                   <dt className="text-xs text-texto-2">Commits fora do expediente</dt>
-                  <dd className="text-lg font-semibold">{d.atual.foraDoExpedientePct}%</dd>
+                  <dd className="text-lg font-semibold"><Contador valor={d.atual.foraDoExpedientePct} formato="pct" /></dd>
                 </div>
               </dl>
             )}

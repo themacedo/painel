@@ -1,6 +1,7 @@
 import { Cartao, Moldura } from "@/components/Moldura";
 import { HistoricoCommits, Linhas } from "@/components/GraficosDesempenho";
 import { Marca } from "@/components/Marca";
+import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
 import { carregarPainel, modo } from "@/lib/dados";
 import { corClt, corPj } from "@/lib/empresas";
@@ -10,14 +11,11 @@ import type { Empresa, Semana } from "@/lib/tipos";
 
 export const dynamic = "force-dynamic";
 
-const num = (v: number | null, casas = 0, sufixo = "") =>
-  v == null ? "—" : `${v.toLocaleString("pt-BR", { maximumFractionDigits: casas })}${sufixo}`;
-
 type Metrica = { nome: string; chave: Parameters<typeof comparar>[1]; casas?: number; sufixo?: string; melhorSobe?: boolean };
 
 function CartaoEmpresa({ empresa, hist, metricas }: { empresa: Empresa; hist: Semana[]; metricas: Metrica[] }) {
   return (
-    <section className="rounded-xl border border-borda bg-superficie p-4 sm:p-5">
+    <section className="entrar rounded-xl border border-borda bg-superficie p-4 sm:p-5">
       <div className="mb-4 flex items-center gap-2">
         <Marca empresa={empresa} tamanho={22} />
         <h2 className="text-sm font-semibold">{empresa.nome}</h2>
@@ -30,7 +28,7 @@ function CartaoEmpresa({ empresa, hist, metricas }: { empresa: Empresa; hist: Se
             <div key={m.nome} className="rounded-lg bg-fundo p-3">
               <dt className="text-xs text-texto-2">{m.nome}</dt>
               <dd className="mt-1 flex items-baseline justify-between gap-2">
-                <span className="text-lg font-semibold">{num(atual, m.casas ?? 0, m.sufixo)}</span>
+                <span className="text-lg font-semibold">{atual == null ? "—" : <Contador valor={atual} casas={m.casas ?? 0} formato={m.sufixo === "%" ? "pct" : "num"} />}</span>
                 <Variacao atual={atual} antes={antes} melhorSobe={m.melhorSobe} />
               </dd>
             </div>
@@ -106,7 +104,7 @@ export default async function Desempenho() {
 
       <div className="mt-3">
         <Cartao titulo={ultima ? `Avaliação da semana de ${diaMes(ultima.inicio)}` : "Avaliação da semana"} extra={
-          ultima && <p className="text-sm"><b className="text-lg">{ultima.geral.toLocaleString("pt-BR", { minimumFractionDigits: 1 })}</b>
+          ultima && <p className="text-sm"><b className="text-lg"><Contador valor={ultima.geral} casas={1} /></b>
             <span className="text-texto-2"> / 10 geral</span></p>}>
           {ultima ? (
             <>
@@ -126,7 +124,7 @@ export default async function Desempenho() {
                         </span>
                       </div>
                       <div className="h-1.5 overflow-hidden rounded-full bg-primaria-suave">
-                        <div className={`h-full rounded-full ${cor}`} style={{ width: `${nota * 10}%` }} />
+                        <div className={`encher h-full rounded-full ${cor}`} style={{ width: `${nota * 10}%` }} />
                       </div>
                     </li>
                   );
