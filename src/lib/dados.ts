@@ -19,7 +19,7 @@ export async function carregarPainel(): Promise<Painel> {
       Authorization: `Bearer ${process.env.PAINEL_DADOS_TOKEN ?? ""}`,
       Accept: "application/vnd.github.raw+json",
     },
-    next: { revalidate: 300 },
+    cache: "no-store", // sempre o JSON mais novo (uso pessoal, bem abaixo do limite da API)
   });
   if (!resp.ok) throw new Error(`painel.json: HTTP ${resp.status}`);
   return (await resp.json()) as Painel;
