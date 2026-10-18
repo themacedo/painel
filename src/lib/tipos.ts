@@ -71,7 +71,11 @@ export type Detalhe = {
   entradas?: { clt: number; pj: number; outros: number; custosPj: number };
   clt?: Clt;
   periodos?: { semana: Periodo[]; mes: Periodo[]; ano: Periodo[] };
+  // dinheiro nas contas − tudo o que se deve no cartão, no fim de cada mês (o último ponto é hoje)
+  posicaoMensal?: (Posicao & { data: string; rotulo: string })[];
 };
+
+export type Posicao = { contas: number; cartao: number; posicao: number };
 
 export type Clt = { itens: { data: string; descricao: string; valor: number; situacao: "recebido" | "previsto" }[]; recebido: number; previsto: number };
 
@@ -83,6 +87,7 @@ export type Periodo = {
   resumo: { receitas: number; despesas: number; despesasAnterior: number };
   // como um período negativo foi pago: rotativo do cartão, Pix no crédito para si, resgate líquido de aplicações
   cobertura?: { rotativo: number; pixCredito: number; resgates: number; jurosRotativo: number };
+  posicao?: { inicio: Posicao; fim: Posicao }; // na véspera do início e no último dia (ou hoje)
   categorias: Detalhe["categorias"];
   clt: Clt;
   pj: Detalhe["pj"];

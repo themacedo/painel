@@ -5,11 +5,12 @@ import { CheckCircle2, Circle, CreditCard, Landmark, PieChart, Receipt, Trending
 import { Cartao } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoParcelas } from "@/components/GraficoParcelas";
+import { GraficoPosicao } from "@/components/GraficoPosicao";
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
 import { diaMes, reais, reaisCurto } from "@/lib/formato";
-import type { Detalhe, Painel, Periodo } from "@/lib/tipos";
+import type { Detalhe, Painel, Periodo, Posicao } from "@/lib/tipos";
 
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 const mesCurto = (ym: string) => `${MESES[Number(ym.slice(5, 7)) - 1]}/${ym.slice(2, 4)}`;
@@ -141,6 +142,14 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
         <Fechamento p={p} modo={modo} entrou={entrou} />
       </div>
 
+      {d.posicaoMensal && d.posicaoMensal.length > 1 && (
+        <div className="mt-3">
+          <Cartao titulo="Posição real mês a mês" extra={<span className="text-xs text-texto-2">contas − dívida do cartão, no fim de cada mês</span>}>
+            <GraficoPosicao dados={d.posicaoMensal} />
+          </Cartao>
+        </div>
+      )}
+
       <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <Cartao titulo="Gastos por categoria" extra={
@@ -244,6 +253,7 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
   const nome = modo === "semana" ? "a semana" : modo === "mes" ? "o mês" : "o ano";
   return (
     <Cartao titulo={`Como ${nome} fechou${p.emCurso ? " até agora" : ""}`}>
+      {p.posicao && <PosicaoReal ini={p.posicao.inicio} fim={p.posicao.fim} emCurso={p.emCurso} />}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <dl className="flex flex-col gap-2 text-sm">
           <div className="flex justify-between"><dt className="text-texto-2">Entrou</dt><dd className="text-ok">{reais(entrou)}</dd></div>
@@ -254,7 +264,7 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
             <dd className={`font-semibold ${negativo ? "text-perigo" : "text-ok"}`}>{negativo ? "− " : ""}{reais(Math.abs(resultado))}</dd>
           </div>
           <p className="text-xs text-texto-2">
-            {negativo ? "Gastou mais do que entrou no período." : "Entrou mais do que saiu no período."} Compras no cartão contam na data da compra.
+            {negativo ? "Gastou mais do que entrou no período: a diferença virou dívida ou saiu do que você tinha." : "Entrou mais do que saiu no período."} Compras no cartão contam na data da compra.
           </p>
         </dl>
         <div className="text-sm">
@@ -277,5 +287,26 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
         </div>
       </div>
     </Cartao>
+  );
+}
+
+// O que você tem menos o que deve no cartão: o acumulado. O resultado do período é o quanto isso mudou.
+function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurso: boolean }) {
+  const delta = fim.posicao - ini.posicao;
+  const sinal = (v: number) => `${v < 0 ? "− " : ""}${reais(Math.abs(v))}`;
+  return (
+    <div className="mb-4 flex flex-col gap-3 border-b border-borda pb-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p className="text-xs text-texto-2">Posição real {emCurso ? "hoje" : "no fim do período"}</p>
+        <p className={`text-2xl font-semibold ${fim.posicao < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fim.posicao)}</p>
+        <p className="text-xs text-texto-2">{reais(fim.contas)} nas contas − {reais(fim.cartao)} devendo no cartão</p>
+      </div>
+      <div className="text-sm sm:text-right">
+        <p className="text-texto-2">No início: {sinal(ini.posicao)}</p>
+        <p className={delta < 0 ? "text-perigo" : "text-ok"}>
+          {delta < 0 ? "Afundou " : "Melhorou "}{reais(Math.abs(delta))} no período
+        </p>
+      </div>
+    </div>
   );
 }

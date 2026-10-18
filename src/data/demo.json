@@ -704,6 +704,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 33948.71,
+                "cartao": 1850.0,
+                "posicao": 32098.71
+              },
+              "fim": {
+                "contas": 38295.34,
+                "cartao": 1850.0,
+                "posicao": 36445.34
+              }
             }
           },
           {
@@ -892,6 +904,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 10.3
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 36054.05,
+                "cartao": 1850.0,
+                "posicao": 34204.05
+              },
+              "fim": {
+                "contas": 38295.34,
+                "cartao": 1850.0,
+                "posicao": 36445.34
+              }
             }
           },
           {
@@ -1073,6 +1097,18 @@
               "pixCredito": 350.0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 38963.23,
+                "cartao": 1850.0,
+                "posicao": 37113.23
+              },
+              "fim": {
+                "contas": 38295.34,
+                "cartao": 1850.0,
+                "posicao": 36445.34
+              }
             }
           },
           {
@@ -1254,6 +1290,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 32979.59,
+                "cartao": 1850.0,
+                "posicao": 31129.59
+              },
+              "fim": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              }
             }
           },
           {
@@ -1435,6 +1483,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 8.4
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 32725.16,
+                "cartao": 1850.0,
+                "posicao": 30875.16
+              },
+              "fim": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              }
             }
           },
           {
@@ -1616,6 +1676,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 32820.56,
+                "cartao": 1850.0,
+                "posicao": 30970.56
+              },
+              "fim": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              }
             }
           },
           {
@@ -1797,6 +1869,18 @@
               "pixCredito": 350.0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 32915.98,
+                "cartao": 1850.0,
+                "posicao": 31065.98
+              },
+              "fim": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              }
             }
           },
           {
@@ -1978,6 +2062,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 7.63
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 25977.28,
+                "cartao": 1850.0,
+                "posicao": 24127.28
+              },
+              "fim": {
+                "contas": 25341.2,
+                "cartao": 1850.0,
+                "posicao": 23491.2
+              }
             }
           }
         ],
@@ -2221,6 +2317,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              },
+              "fim": {
+                "contas": 38295.34,
+                "cartao": 1850.0,
+                "posicao": 36445.34
+              }
             }
           },
           {
@@ -2462,6 +2570,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 41.22
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 25341.2,
+                "cartao": 1850.0,
+                "posicao": 23491.2
+              },
+              "fim": {
+                "contas": 32025.47,
+                "cartao": 1850.0,
+                "posicao": 30175.47
+              }
             }
           },
           {
@@ -2703,6 +2823,18 @@
               "pixCredito": 350.0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 18243.47,
+                "cartao": 1850.0,
+                "posicao": 16393.47
+              },
+              "fim": {
+                "contas": 25341.2,
+                "cartao": 1850.0,
+                "posicao": 23491.2
+              }
             }
           },
           {
@@ -2944,6 +3076,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 11686.42,
+                "cartao": 1850.0,
+                "posicao": 9836.42
+              },
+              "fim": {
+                "contas": 18243.47,
+                "cartao": 1850.0,
+                "posicao": 16393.47
+              }
             }
           },
           {
@@ -3185,6 +3329,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 34.35
+            },
+            "posicao": {
+              "inicio": {
+                "contas": 4429.68,
+                "cartao": 1850.0,
+                "posicao": 2579.68
+              },
+              "fim": {
+                "contas": 11686.42,
+                "cartao": 1850.0,
+                "posicao": 9836.42
+              }
             }
           },
           {
@@ -3426,6 +3582,18 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": -2350.0,
+                "cartao": 1850.0,
+                "posicao": -4200.0
+              },
+              "fim": {
+                "contas": 4429.68,
+                "cartao": 1850.0,
+                "posicao": 2579.68
+              }
             }
           }
         ],
@@ -3612,10 +3780,66 @@
               "pixCredito": 0,
               "resgates": 0,
               "jurosRotativo": 0
+            },
+            "posicao": {
+              "inicio": {
+                "contas": -27799.9,
+                "cartao": 1850.0,
+                "posicao": -29649.9
+              },
+              "fim": {
+                "contas": 38295.34,
+                "cartao": 1850.0,
+                "posicao": 36445.34
+              }
             }
           }
         ]
-      }
+      },
+      "posicaoMensal": [
+        {
+          "data": "2026-05-31",
+          "rotulo": "mai",
+          "contas": 4429.68,
+          "cartao": 1850.0,
+          "posicao": 2579.68
+        },
+        {
+          "data": "2026-06-30",
+          "rotulo": "jun",
+          "contas": 11686.42,
+          "cartao": 1850.0,
+          "posicao": 9836.42
+        },
+        {
+          "data": "2026-07-31",
+          "rotulo": "jul",
+          "contas": 18243.47,
+          "cartao": 1850.0,
+          "posicao": 16393.47
+        },
+        {
+          "data": "2026-08-31",
+          "rotulo": "ago",
+          "contas": 25341.2,
+          "cartao": 1850.0,
+          "posicao": 23491.2
+        },
+        {
+          "data": "2026-09-30",
+          "rotulo": "set",
+          "contas": 32025.47,
+          "cartao": 1850.0,
+          "posicao": 30175.47
+        },
+        {
+          "data": "2026-10-17",
+          "rotulo": "hoje",
+          "contas": 38295.34,
+          "cartao": 1850.0,
+          "posicao": 36445.34
+        }
+      ]
     },
     "compromissos": [
       {
