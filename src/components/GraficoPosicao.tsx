@@ -16,7 +16,9 @@ function Dica({ active, payload }: { active?: boolean; payload?: { payload: Pont
       <div className="mb-2 font-semibold">{p.rotulo === "hoje" ? `Hoje (${dia})` : `Em ${dia}`}</div>
       <dl className="flex flex-col gap-1">
         <div className="flex justify-between"><dt className="text-texto-2">Nas contas</dt><dd>{brl(p.contas, 2)}</dd></div>
+        {(p.investimentos ?? 0) >= 0.5 && <div className="flex justify-between"><dt className="text-texto-2">Investido</dt><dd>{brl(p.investimentos!, 2)}</dd></div>}
         <div className="flex justify-between"><dt className="text-texto-2">Devia no cartão</dt><dd>− {brl(p.cartao, 2)}</dd></div>
+        {(p.emprestimos ?? 0) >= 0.5 && <div className="flex justify-between"><dt className="text-texto-2">Empréstimo</dt><dd>− {brl(p.emprestimos!, 2)}</dd></div>}
         <div className="flex justify-between border-t border-borda pt-1 font-semibold">
           <dt>Posição real</dt><dd className={p.posicao < 0 ? "text-perigo" : "text-ok"}>{brl(p.posicao, 2)}</dd>
         </div>

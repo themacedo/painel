@@ -145,7 +145,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
 
       {serie && serie.length > 1 && (
         <div className="mt-3">
-          <Cartao titulo={`Posição real ${porModo[modo]}`} extra={<span className="text-xs text-texto-2">contas − dívida do cartão, no fim de cada {unidade[modo]}</span>}>
+          <Cartao titulo={`Posição real ${porModo[modo]}`} extra={<span className="text-xs text-texto-2">contas + investimentos − cartão − empréstimos, no fim de cada {unidade[modo]}</span>}>
             <GraficoPosicao dados={serie} destaque={p.ate} />
           </Cartao>
         </div>
@@ -257,9 +257,10 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
   const nome = modo === "semana" ? "a semana" : modo === "mes" ? "o mês" : "o ano";
   const a = p.ajustes;
   const ajustes = a ? [
+    { nome: "Compras parceladas (total − parcelas do período)", valor: a.parcelado ?? 0 },
     { nome: "De/para contas suas fora do app", valor: a.contasFora },
     { nome: "Pix no crédito (limite do cartão)", valor: a.custoPixCredito },
-    { nome: "Empréstimo (depósito e parcelas)", valor: a.emprestimos },
+    { nome: "Empréstimo (juros e encargos)", valor: a.emprestimos },
     { nome: "Aplicações (resgate − aplicação)", valor: a.aplicacoes },
     { nome: "Outras transferências", valor: a.outrasTransferencias },
     { nome: "Não explicado", valor: a.naoExplicado },
@@ -321,7 +322,15 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
   );
 }
 
-// O que você tem menos o que deve no cartão: o acumulado. O resultado do período é o quanto isso mudou.
+export function composicao(x: Posicao) {
+  const partes = [`${reais(x.contas)} nas contas`];
+  if ((x.investimentos ?? 0) >= 0.5) partes.push(`+ ${reais(x.investimentos!)} investidos`);
+  partes.push(`− ${reais(x.cartao)} no cartão`);
+  if ((x.emprestimos ?? 0) >= 0.5) partes.push(`− ${reais(x.emprestimos!)} de empréstimo`);
+  return partes.join(" ");
+}
+
+// O que você tem menos o que deve (cartão e empréstimos): o acumulado. O resultado do período é o quanto isso mudou.
 function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurso: boolean }) {
   const delta = fim.posicao - ini.posicao;
   const sinal = (v: number) => `${v < 0 ? "− " : ""}${reais(Math.abs(v))}`;
@@ -330,7 +339,7 @@ function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurs
       <div>
         <p className="text-xs text-texto-2">Posição real {emCurso ? "hoje" : "no fim do período"}</p>
         <p className={`text-2xl font-semibold ${fim.posicao < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fim.posicao)}</p>
-        <p className="text-xs text-texto-2">{reais(fim.contas)} nas contas − {reais(fim.cartao)} devendo no cartão</p>
+        <p className="text-xs text-texto-2">{composicao(fim)}</p>
       </div>
       <div className="text-sm sm:text-right">
         <p className="text-texto-2">No início: {sinal(ini.posicao)}</p>

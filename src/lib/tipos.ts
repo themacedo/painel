@@ -75,10 +75,11 @@ export type Detalhe = {
   posicaoSerie?: Record<"semana" | "mes" | "ano", PontoPosicao[]>;
 };
 
-export type Posicao = { contas: number; cartao: number; posicao: number };
+export type Posicao = { contas: number; investimentos?: number; cartao: number; emprestimos?: number; posicao: number };
 export type PontoPosicao = Posicao & { data: string; rotulo: string };
 // o que mexe nas contas e na dívida sem ser receita nem gasto: resultado + ajustes = variação da posição
 export type Ajustes = {
+  parcelado?: number; // compras parceladas do período (valor total) − parcelas que caíram nele
   contasFora: number; custoPixCredito: number; emprestimos: number; aplicacoes: number;
   outrasTransferencias: number; naoExplicado: number;
 };
