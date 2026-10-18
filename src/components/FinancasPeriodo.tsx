@@ -6,6 +6,7 @@ import { Cartao } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoParcelas } from "@/components/GraficoParcelas";
 import { GraficoPosicao } from "@/components/GraficoPosicao";
+import { AvisoCartao } from "@/components/AvisoCartao";
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
@@ -106,6 +107,8 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
 
   return (
     <>
+      {d.cicloCartao && <div className="mb-3"><AvisoCartao c={d.cicloCartao} /></div>}
+
       {/* Seletor: tipo de período + qual período */}
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <div role="tablist" aria-label="Tipo de período" className="flex rounded-lg border border-borda bg-superficie p-0.5">

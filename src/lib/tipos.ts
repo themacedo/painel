@@ -72,6 +72,7 @@ export type Detalhe = {
   clt?: Clt;
   periodos?: { semana: Periodo[]; mes: Periodo[]; ano: Periodo[] };
   // dinheiro nas contas − tudo o que se deve no cartão, no fim de cada semana, mês e ano (o último ponto é hoje)
+  cicloCartao?: CicloCartao | null;
   inicioDados?: string; // primeiro dia com dados (o Open Finance traz ~12 meses)
   posicaoSerie?: Record<"semana" | "mes" | "ano", PontoPosicao[]>;
 };
@@ -102,4 +103,12 @@ export type Periodo = {
   clt: Clt;
   pj: Detalhe["pj"];
   fixos?: Detalhe["fixos"];
+};
+
+// Fatura aberta do cartão × a reserva do plano para pagá-la (o item do plano com "fatura"/"cartão" no mês do vencimento)
+export type CicloCartao = {
+  inicio: string; fechamento: string; vencimento: string;
+  teto: number | null; atual: number; comprometido: number; novo: number; projecao: number;
+  dias: number; diasPassados: number; diasRestantes: number; porDia: number | null;
+  status: "ok" | "atencao" | "estourou" | null;
 };

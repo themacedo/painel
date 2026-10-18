@@ -3,6 +3,7 @@ import { Cartao, Moldura } from "@/components/Moldura";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoSemanas } from "@/components/GraficoSemanas";
 import { TabelaPlano } from "@/components/TabelaPlano";
+import { AvisoCartao } from "@/components/AvisoCartao";
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { corClt, corPj } from "@/lib/empresas";
@@ -38,6 +39,8 @@ export default async function Pagina() {
             <Barra pct={(f.diaADia.gasto / f.diaADia.orcamento) * 100} cor={restante < 0 ? "bg-perigo" : "bg-[#8b5cf6]"} />
           </Kpi>
         </div>
+
+        {f.detalhe?.cicloCartao && <div className="mt-3"><AvisoCartao c={f.detalhe.cicloCartao} /></div>}
 
         <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
           <div className="xl:col-span-2">
