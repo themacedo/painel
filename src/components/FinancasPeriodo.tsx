@@ -58,9 +58,12 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
   const ultimaParcela = [...d.parcelas].reverse().find((x) => x.valor > 0);
   const livre = ultimaParcela ? d.parcelas[d.parcelas.indexOf(ultimaParcela) + 1]?.mes : d.parcelas[0]?.mes;
   const cats = p.categorias.filter((c) => c.atual > 0 || c.anterior > 0);
-  const maxCat = Math.max(1, ...cats.map((c) => Math.max(c.atual, c.anterior)));
+  const maxCat = Math.max(1, ...cats.map((c) => Math.max(c.atual, p.anteriorCompleto !== false ? c.anterior : 0)));
   const maior = cats[0];
   const custosPj = Object.entries(p.pj.custos);
+  // os dados começam no meio de um período (histórico do Open Finance): comparar com um período incompleto engana
+  const comparavel = p.anteriorCompleto !== false;
+  const semBase = `os dados começam em ${(d.inicioDados ?? p.anteriorInicio).split("-").reverse().join("/")}`;
   const comparacao = p.emCurso ? `${anterior[modo]} (mesmos dias)` : anterior[modo];
 
   const cardClt = (
@@ -122,7 +125,8 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
 
       <div key={p.chave} className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Kpi titulo={titulo(modo, p)} valor={<Contador valor={r.despesas} formato="brl" />} icone={TrendingDown} cor="bg-primaria"
-          detalhe={<>{comparacao}: {reaisCurto(r.despesasAnterior)}{" "}<Variacao atual={r.despesas} antes={r.despesasAnterior} melhorSobe={false} /></>} />
+          detalhe={comparavel ? <>{comparacao}: {reaisCurto(r.despesasAnterior)}{" "}<Variacao atual={r.despesas} antes={r.despesasAnterior} melhorSobe={false} /></>
+                                : <>Sem comparação: {semBase}</>} />
         <Kpi titulo={`Entrou ${doPeriodo[modo]}`} valor={<Contador valor={entrou} formato="brl" />} icone={Landmark} cor="bg-ok"
           detalhe={<>{e.clt.nome} {reaisCurto(en.clt)} · {e.pj.nome} {reaisCurto(en.pj)}{en.outros > 0.5 && <> · outros {reaisCurto(en.outros)}</>}
             {p.clt.previsto > 0 && <><br />Previsto: {reaisCurto(p.clt.previsto)} ({e.clt.nome})</>}</>} />
@@ -156,7 +160,9 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
           <Cartao titulo="Gastos por categoria" extra={
             <div className="flex items-center gap-3 text-xs text-texto-2">
               <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-primaria" />{p.rotulo}</span>
-              <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-[var(--barra)]" />{comparacao.toLowerCase()}</span>
+              {comparavel
+                ? <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-[var(--barra)]" />{comparacao.toLowerCase()}</span>
+                : <span>sem comparação: {semBase}</span>}
             </div>}>
             <p className="-mt-1 mb-3 text-xs text-texto-2">Passe o mouse ou toque numa categoria para ver o resumo.</p>
             {!cats.length && <p className="text-sm text-texto-2">Nenhum gasto no período.</p>}
@@ -170,12 +176,12 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
                       <span>{c.nome}</span>
                       <span className="flex items-baseline gap-2">
                         <b className="font-medium">{reais(c.atual)}</b>
-                        <Variacao atual={c.atual} antes={c.anterior} melhorSobe={false} />
+                        {comparavel && <Variacao atual={c.atual} antes={c.anterior} melhorSobe={false} />}
                       </span>
                     </div>
                     <div className="flex flex-col gap-0.5">
                       <div className="encher h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
-                      <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />
+                      {comparavel && <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />}
                     </div>
                     <div id={`cat-${idx}`} role="tooltip"
                       className="pointer-events-none absolute left-2 right-2 top-full z-20 mt-1 hidden rounded-lg border border-borda bg-superficie p-3 text-xs shadow-lg group-hover:block group-focus:block sm:left-auto sm:w-72">

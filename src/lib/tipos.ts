@@ -72,6 +72,7 @@ export type Detalhe = {
   clt?: Clt;
   periodos?: { semana: Periodo[]; mes: Periodo[]; ano: Periodo[] };
   // dinheiro nas contas − tudo o que se deve no cartão, no fim de cada semana, mês e ano (o último ponto é hoje)
+  inicioDados?: string; // primeiro dia com dados (o Open Finance traz ~12 meses)
   posicaoSerie?: Record<"semana" | "mes" | "ano", PontoPosicao[]>;
 };
 
@@ -90,6 +91,7 @@ export type Clt = { itens: { data: string; descricao: string; valor: number; sit
 export type Periodo = {
   chave: string; rotulo: string; inicio: string; fim: string; ate: string;
   anteriorInicio: string; anteriorAte: string; emCurso: boolean;
+  anteriorCompleto?: boolean; // false: o período de comparação começa antes dos dados
   entradas: { clt: number; pj: number; outros: number; custosPj: number };
   resumo: { receitas: number; despesas: number; despesasAnterior: number };
   // como um período negativo foi pago: rotativo do cartão, Pix no crédito para si, resgate líquido de aplicações
