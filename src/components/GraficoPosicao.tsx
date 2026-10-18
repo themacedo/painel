@@ -1,10 +1,8 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, ReferenceDot, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useMovimento } from "@/lib/movimento";
-import type { Posicao } from "@/lib/tipos";
-
-type Ponto = Posicao & { rotulo: string; data: string };
+import type { PontoPosicao as Ponto } from "@/lib/tipos";
 
 const brl = (v: number, casas = 0) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: casas, maximumFractionDigits: casas });
@@ -15,7 +13,7 @@ function Dica({ active, payload }: { active?: boolean; payload?: { payload: Pont
   const dia = p.data.split("-").reverse().join("/");
   return (
     <div className="w-56 rounded-lg border border-borda bg-superficie p-3 text-xs shadow-lg">
-      <div className="mb-2 font-semibold">{p.rotulo === "hoje" ? `Hoje (${dia})` : `Fim de ${p.rotulo} (${dia})`}</div>
+      <div className="mb-2 font-semibold">{p.rotulo === "hoje" ? `Hoje (${dia})` : `Em ${dia}`}</div>
       <dl className="flex flex-col gap-1">
         <div className="flex justify-between"><dt className="text-texto-2">Nas contas</dt><dd>{brl(p.contas, 2)}</dd></div>
         <div className="flex justify-between"><dt className="text-texto-2">Devia no cartão</dt><dd>− {brl(p.cartao, 2)}</dd></div>
@@ -27,9 +25,11 @@ function Dica({ active, payload }: { active?: boolean; payload?: { payload: Pont
   );
 }
 
-export function GraficoPosicao({ dados }: { dados: Ponto[] }) {
+// `destaque`: a data do fim do período escolhido no seletor
+export function GraficoPosicao({ dados, destaque }: { dados: Ponto[]; destaque?: string }) {
   const mov = useMovimento();
   const cor = (dados.at(-1)?.posicao ?? 0) < 0 ? "var(--perigo)" : "var(--ok)";
+  const marcado = dados.find((d) => d.data === destaque);
   return (
     <div className="h-56 w-full">
       <ResponsiveContainer>
@@ -47,6 +47,7 @@ export function GraficoPosicao({ dados }: { dados: Ponto[] }) {
           <Tooltip content={<Dica />} cursor={{ stroke: "var(--borda)" }} wrapperStyle={{ zIndex: 20 }} />
           <Area type="monotone" dataKey="posicao" stroke={cor} strokeWidth={2} fill="url(#posicao-area)"
                 dot={{ r: 3, fill: cor }} isAnimationActive={mov} animationDuration={900} animationEasing="ease-out" />
+          {marcado && <ReferenceDot x={marcado.rotulo} y={marcado.posicao} r={6} fill={cor} stroke="var(--fundo)" strokeWidth={2} />}
         </AreaChart>
       </ResponsiveContainer>
     </div>

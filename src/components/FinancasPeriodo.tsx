@@ -49,6 +49,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
   if (!p) return <p className="text-sm text-texto-2">Sem dados para este período.</p>;
 
   const r = p.resumo, en = p.entradas;
+  const serie = d.posicaoSerie?.[modo];
   const entrou = en.clt + en.pj + en.outros;
   const fixos = p.fixos ?? [];
   const pagos = fixos.filter((f) => f.pago);
@@ -142,10 +143,10 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
         <Fechamento p={p} modo={modo} entrou={entrou} />
       </div>
 
-      {d.posicaoMensal && d.posicaoMensal.length > 1 && (
+      {serie && serie.length > 1 && (
         <div className="mt-3">
-          <Cartao titulo="Posição real mês a mês" extra={<span className="text-xs text-texto-2">contas − dívida do cartão, no fim de cada mês</span>}>
-            <GraficoPosicao dados={d.posicaoMensal} />
+          <Cartao titulo={`Posição real ${porModo[modo]}`} extra={<span className="text-xs text-texto-2">contas − dívida do cartão, no fim de cada {unidade[modo]}</span>}>
+            <GraficoPosicao dados={serie} destaque={p.ate} />
           </Cartao>
         </div>
       )}
@@ -241,6 +242,9 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
 
 
 // Como o período fechou: resultado (entrou − gastou) e, quando houve, de onde veio a diferença.
+const porModo: Record<Modo, string> = { semana: "semana a semana", mes: "mês a mês", ano: "ano a ano" };
+const unidade: Record<Modo, string> = { semana: "semana", mes: "mês", ano: "ano" };
+
 function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: number }) {
   const r = p.resumo, en = p.entradas, c = p.cobertura;
   const resultado = entrou - r.despesas - en.custosPj;
@@ -251,6 +255,16 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
     { nome: "Resgate líquido de aplicações", valor: c.resgates },
   ].filter((l) => l.valor > 0.5) : [];
   const nome = modo === "semana" ? "a semana" : modo === "mes" ? "o mês" : "o ano";
+  const a = p.ajustes;
+  const ajustes = a ? [
+    { nome: "De/para contas suas fora do app", valor: a.contasFora },
+    { nome: "Pix no crédito (limite do cartão)", valor: a.custoPixCredito },
+    { nome: "Empréstimo (depósito e parcelas)", valor: a.emprestimos },
+    { nome: "Aplicações (resgate − aplicação)", valor: a.aplicacoes },
+    { nome: "Outras transferências", valor: a.outrasTransferencias },
+    { nome: "Não explicado", valor: a.naoExplicado },
+  ].filter((l) => Math.abs(l.valor) >= 0.5) : [];
+  const variacao = p.posicao ? p.posicao.fim.posicao - p.posicao.inicio.posicao : null;
   return (
     <Cartao titulo={`Como ${nome} fechou${p.emCurso ? " até agora" : ""}`}>
       {p.posicao && <PosicaoReal ini={p.posicao.inicio} fim={p.posicao.fim} emCurso={p.emCurso} />}
@@ -263,6 +277,23 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
             <dt className="font-medium">Resultado</dt>
             <dd className={`font-semibold ${negativo ? "text-perigo" : "text-ok"}`}>{negativo ? "− " : ""}{reais(Math.abs(resultado))}</dd>
           </div>
+          {ajustes.length > 0 && (
+            <>
+              <p className="pt-1 text-xs text-texto-2">Fora do resultado (não é receita nem gasto, mas mexe na posição):</p>
+              {ajustes.map((l) => (
+                <div key={l.nome} className="flex justify-between gap-3">
+                  <dt className="text-texto-2">{l.nome}</dt>
+                  <dd className={l.valor < 0 ? "" : "text-ok"}>{l.valor < 0 ? "− " : "+ "}{reais(Math.abs(l.valor))}</dd>
+                </div>
+              ))}
+            </>
+          )}
+          {variacao !== null && (
+            <div className="flex justify-between border-t border-borda pt-2 text-base">
+              <dt className="font-medium">Variação da posição real</dt>
+              <dd className={`font-semibold ${variacao < 0 ? "text-perigo" : "text-ok"}`}>{variacao < 0 ? "− " : "+ "}{reais(Math.abs(variacao))}</dd>
+            </div>
+          )}
           <p className="text-xs text-texto-2">
             {negativo ? "Gastou mais do que entrou no período: a diferença virou dívida ou saiu do que você tinha." : "Entrou mais do que saiu no período."} Compras no cartão contam na data da compra.
           </p>
