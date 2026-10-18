@@ -69,5 +69,20 @@ export type Detalhe = {
   pj: { faturamento: number; retiradas: number; custos: Record<string, number> };
   // o que entrou de cada fonte (a retirada PJ → PF é o mesmo dinheiro mudando de conta, não conta de novo)
   entradas?: { clt: number; pj: number; outros: number; custosPj: number };
-  clt?: { itens: { data: string; descricao: string; valor: number; situacao: "recebido" | "previsto" }[]; recebido: number; previsto: number };
+  clt?: Clt;
+  periodos?: { semana: Periodo[]; mes: Periodo[]; ano: Periodo[] };
+};
+
+export type Clt = { itens: { data: string; descricao: string; valor: number; situacao: "recebido" | "previsto" }[]; recebido: number; previsto: number };
+
+// Um período do seletor (semana, mês ou ano). Em curso: cortado em hoje, e a comparação usa os mesmos dias.
+export type Periodo = {
+  chave: string; rotulo: string; inicio: string; fim: string; ate: string;
+  anteriorInicio: string; anteriorAte: string; emCurso: boolean;
+  entradas: { clt: number; pj: number; outros: number; custosPj: number };
+  resumo: { receitas: number; despesas: number; despesasAnterior: number };
+  categorias: Detalhe["categorias"];
+  clt: Clt;
+  pj: Detalhe["pj"];
+  fixos?: Detalhe["fixos"];
 };

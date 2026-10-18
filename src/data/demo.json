@@ -519,6 +519,3012 @@
         ],
         "recebido": 3100,
         "previsto": 2100
+      },
+      "periodos": {
+        "semana": [
+          {
+            "chave": "s-2026-10-12",
+            "rotulo": "12/10 a 18/10",
+            "inicio": "2026-10-12",
+            "fim": "2026-10-18",
+            "ate": "2026-10-17",
+            "anteriorInicio": "2026-10-05",
+            "anteriorAte": "2026-10-10",
+            "emCurso": true,
+            "entradas": {
+              "clt": 0,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 572.47,
+              "despesasAnterior": 644.03
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 216.0,
+                "anterior": 243.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 216.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 216.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 109.85,
+                "anterior": 123.59,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 57.67,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 28.96,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 23.22,
+                    "n": 2
+                  }
+                ],
+                "n": 3,
+                "bruto": 109.85
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 70.06,
+                "anterior": 78.81,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 8.08,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 21.6,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 11.7,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 70.06
+              },
+              {
+                "nome": "Transporte",
+                "atual": 62.03,
+                "anterior": 69.78,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 41.4,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 20.63,
+                    "n": 5
+                  }
+                ],
+                "n": 1,
+                "bruto": 62.03
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 57.6,
+                "anterior": 64.8,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 57.6,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 57.6
+              },
+              {
+                "nome": "Lazer",
+                "atual": 32.49,
+                "anterior": 36.55,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 10.89,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 21.6,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 32.49
+              },
+              {
+                "nome": "Saúde",
+                "atual": 17.24,
+                "anterior": 19.4,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 17.24,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 17.24
+              },
+              {
+                "nome": "Compras",
+                "atual": 7.2,
+                "anterior": 8.1,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 7.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 7.2
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            }
+          },
+          {
+            "chave": "s-2026-10-05",
+            "rotulo": "05/10 a 11/10",
+            "inicio": "2026-10-05",
+            "fim": "2026-10-11",
+            "ate": "2026-10-11",
+            "anteriorInicio": "2026-09-28",
+            "anteriorAte": "2026-10-04",
+            "emCurso": false,
+            "entradas": {
+              "clt": 3100,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 3100,
+              "despesas": 858.71,
+              "despesasAnterior": 667.89
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 324.0,
+                "anterior": 252.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 324.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 324.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 164.78,
+                "anterior": 128.16,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 86.51,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 43.44,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 34.83,
+                    "n": 2
+                  }
+                ],
+                "n": 4,
+                "bruto": 164.78
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 105.08,
+                "anterior": 81.73,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 12.12,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 32.4,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 17.55,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 105.08
+              },
+              {
+                "nome": "Transporte",
+                "atual": 93.04,
+                "anterior": 72.37,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 62.1,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 30.94,
+                    "n": 5
+                  }
+                ],
+                "n": 2,
+                "bruto": 93.04
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 86.4,
+                "anterior": 67.2,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 86.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 86.4
+              },
+              {
+                "nome": "Lazer",
+                "atual": 48.74,
+                "anterior": 37.91,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 16.34,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 32.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 48.74
+              },
+              {
+                "nome": "Saúde",
+                "atual": 25.87,
+                "anterior": 20.12,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 25.87,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 25.87
+              },
+              {
+                "nome": "Compras",
+                "atual": 10.8,
+                "anterior": 8.4,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 10.8,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 10.8
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-10-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 3100,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-09-28",
+            "rotulo": "28/09 a 04/10",
+            "inicio": "2026-09-28",
+            "fim": "2026-10-04",
+            "ate": "2026-10-04",
+            "anteriorInicio": "2026-09-21",
+            "anteriorAte": "2026-09-27",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 667.89,
+              "despesasAnterior": 954.12
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 252.0,
+                "anterior": 360.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 252.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 252.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 128.16,
+                "anterior": 183.09,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 67.28,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 33.79,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 27.09,
+                    "n": 2
+                  }
+                ],
+                "n": 3,
+                "bruto": 128.16
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 81.73,
+                "anterior": 116.76,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 9.43,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 25.2,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 13.65,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 81.73
+              },
+              {
+                "nome": "Transporte",
+                "atual": 72.37,
+                "anterior": 103.38,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 48.3,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 24.07,
+                    "n": 5
+                  }
+                ],
+                "n": 1,
+                "bruto": 72.37
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 67.2,
+                "anterior": 96.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 67.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 67.2
+              },
+              {
+                "nome": "Lazer",
+                "atual": 37.91,
+                "anterior": 54.15,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 12.71,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 25.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 37.91
+              },
+              {
+                "nome": "Saúde",
+                "atual": 20.12,
+                "anterior": 28.74,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 20.12,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 20.12
+              },
+              {
+                "nome": "Compras",
+                "atual": 8.4,
+                "anterior": 12.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 8.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 8.4
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-09-21",
+            "rotulo": "21/09 a 27/09",
+            "inicio": "2026-09-21",
+            "fim": "2026-09-27",
+            "ate": "2026-09-27",
+            "anteriorInicio": "2026-09-14",
+            "anteriorAte": "2026-09-20",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 954.12,
+              "despesasAnterior": 699.69
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 360.0,
+                "anterior": 264.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 360.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 360.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 183.09,
+                "anterior": 134.27,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 96.12,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 48.27,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 38.7,
+                    "n": 2
+                  }
+                ],
+                "n": 4,
+                "bruto": 183.09
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 116.76,
+                "anterior": 85.62,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 13.47,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 36.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 19.5,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 116.76
+              },
+              {
+                "nome": "Transporte",
+                "atual": 103.38,
+                "anterior": 75.81,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 69.0,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 34.38,
+                    "n": 5
+                  }
+                ],
+                "n": 2,
+                "bruto": 103.38
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 96.0,
+                "anterior": 70.4,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 96.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 96.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 54.15,
+                "anterior": 39.71,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 18.15,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 36.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 54.15
+              },
+              {
+                "nome": "Saúde",
+                "atual": 28.74,
+                "anterior": 21.08,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 28.74,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 28.74
+              },
+              {
+                "nome": "Compras",
+                "atual": 12.0,
+                "anterior": 8.8,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 12.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 12.0
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-09-14",
+            "rotulo": "14/09 a 20/09",
+            "inicio": "2026-09-14",
+            "fim": "2026-09-20",
+            "ate": "2026-09-20",
+            "anteriorInicio": "2026-09-07",
+            "anteriorAte": "2026-09-13",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 699.69,
+              "despesasAnterior": 795.09
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 264.0,
+                "anterior": 300.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 264.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 264.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 134.27,
+                "anterior": 152.57,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 70.49,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 35.4,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 28.38,
+                    "n": 2
+                  }
+                ],
+                "n": 3,
+                "bruto": 134.27
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 85.62,
+                "anterior": 97.3,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 9.88,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 26.4,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 14.3,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 85.62
+              },
+              {
+                "nome": "Transporte",
+                "atual": 75.81,
+                "anterior": 86.15,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 50.6,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 25.21,
+                    "n": 5
+                  }
+                ],
+                "n": 2,
+                "bruto": 75.81
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 70.4,
+                "anterior": 80.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 70.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 70.4
+              },
+              {
+                "nome": "Lazer",
+                "atual": 39.71,
+                "anterior": 45.12,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 13.31,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 26.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 39.71
+              },
+              {
+                "nome": "Saúde",
+                "atual": 21.08,
+                "anterior": 23.95,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 21.08,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 21.08
+              },
+              {
+                "nome": "Compras",
+                "atual": 8.8,
+                "anterior": 10.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 8.8,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 8.8
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-09-07",
+            "rotulo": "07/09 a 13/09",
+            "inicio": "2026-09-07",
+            "fim": "2026-09-13",
+            "ate": "2026-09-13",
+            "anteriorInicio": "2026-08-31",
+            "anteriorAte": "2026-09-06",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 795.09,
+              "despesasAnterior": 890.51
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 300.0,
+                "anterior": 336.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 300.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 300.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 152.57,
+                "anterior": 170.88,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 80.1,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 40.23,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 32.25,
+                    "n": 2
+                  }
+                ],
+                "n": 4,
+                "bruto": 152.57
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 97.3,
+                "anterior": 108.98,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 11.22,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 30.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 16.25,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 97.3
+              },
+              {
+                "nome": "Transporte",
+                "atual": 86.15,
+                "anterior": 96.49,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 57.5,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 28.65,
+                    "n": 5
+                  }
+                ],
+                "n": 2,
+                "bruto": 86.15
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 80.0,
+                "anterior": 89.6,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 80.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 80.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 45.12,
+                "anterior": 50.54,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 15.12,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 30.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 45.12
+              },
+              {
+                "nome": "Saúde",
+                "atual": 23.95,
+                "anterior": 26.82,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 23.95,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 23.95
+              },
+              {
+                "nome": "Compras",
+                "atual": 10.0,
+                "anterior": 11.2,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 10.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 10.0
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-08-31",
+            "rotulo": "31/08 a 06/09",
+            "inicio": "2026-08-31",
+            "fim": "2026-09-06",
+            "ate": "2026-09-06",
+            "anteriorInicio": "2026-08-24",
+            "anteriorAte": "2026-08-30",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 890.51,
+              "despesasAnterior": 636.08
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 336.0,
+                "anterior": 240.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 336.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 336.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 170.88,
+                "anterior": 122.06,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 89.71,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 45.05,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 36.12,
+                    "n": 2
+                  }
+                ],
+                "n": 4,
+                "bruto": 170.88
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 108.98,
+                "anterior": 77.84,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 12.57,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 33.6,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 18.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 108.98
+              },
+              {
+                "nome": "Transporte",
+                "atual": 96.49,
+                "anterior": 68.92,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 64.4,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 32.09,
+                    "n": 5
+                  }
+                ],
+                "n": 2,
+                "bruto": 96.49
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 89.6,
+                "anterior": 64.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 89.6,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 89.6
+              },
+              {
+                "nome": "Lazer",
+                "atual": 50.54,
+                "anterior": 36.1,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 16.94,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 33.6,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 50.54
+              },
+              {
+                "nome": "Saúde",
+                "atual": 26.82,
+                "anterior": 19.16,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 26.82,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 26.82
+              },
+              {
+                "nome": "Compras",
+                "atual": 11.2,
+                "anterior": 8.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 11.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 11.2
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          },
+          {
+            "chave": "s-2026-08-24",
+            "rotulo": "24/08 a 30/08",
+            "inicio": "2026-08-24",
+            "fim": "2026-08-30",
+            "ate": "2026-08-30",
+            "anteriorInicio": "2026-08-17",
+            "anteriorAte": "2026-08-23",
+            "emCurso": false,
+            "entradas": {
+              "clt": 0,
+              "pj": 0,
+              "outros": 0,
+              "custosPj": 0
+            },
+            "resumo": {
+              "receitas": 0,
+              "despesas": 636.08,
+              "despesasAnterior": 763.29
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 240.0,
+                "anterior": 288.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 240.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 240.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 122.06,
+                "anterior": 146.47,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 64.08,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 32.18,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 25.8,
+                    "n": 2
+                  }
+                ],
+                "n": 3,
+                "bruto": 122.06
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 77.84,
+                "anterior": 93.41,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 8.98,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 24.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 13.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 77.84
+              },
+              {
+                "nome": "Transporte",
+                "atual": 68.92,
+                "anterior": 82.7,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 46.0,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 22.92,
+                    "n": 5
+                  }
+                ],
+                "n": 1,
+                "bruto": 68.92
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 64.0,
+                "anterior": 76.8,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 64.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 64.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 36.1,
+                "anterior": 43.32,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 12.1,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 24.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 36.1
+              },
+              {
+                "nome": "Saúde",
+                "atual": 19.16,
+                "anterior": 22.99,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 19.16,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 19.16
+              },
+              {
+                "nome": "Compras",
+                "atual": 8.0,
+                "anterior": 9.6,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 8.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 8.0
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 0,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 0,
+              "retiradas": 0,
+              "custos": {}
+            }
+          }
+        ],
+        "mes": [
+          {
+            "chave": "m-2026-10",
+            "rotulo": "out/26",
+            "inicio": "2026-10-01",
+            "fim": "2026-10-31",
+            "ate": "2026-10-17",
+            "anteriorInicio": "2026-10-01",
+            "anteriorAte": "2026-10-17",
+            "emCurso": true,
+            "entradas": {
+              "clt": 3100,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 3100,
+              "despesas": 1749.23,
+              "despesasAnterior": 1889.16
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 660.0,
+                "anterior": 712.8,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 660.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 660.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 335.67,
+                "anterior": 362.52,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 176.22,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 88.5,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 70.95,
+                    "n": 2
+                  }
+                ],
+                "n": 8,
+                "bruto": 335.67
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 214.06,
+                "anterior": 231.18,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 24.7,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 66.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 35.75,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 214.06
+              },
+              {
+                "nome": "Transporte",
+                "atual": 189.53,
+                "anterior": 204.69,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 126.5,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 63.03,
+                    "n": 5
+                  }
+                ],
+                "n": 4,
+                "bruto": 189.53
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 176.0,
+                "anterior": 190.08,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 176.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 176.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 99.28,
+                "anterior": 107.22,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 33.28,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 66.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 99.28
+              },
+              {
+                "nome": "Saúde",
+                "atual": 52.69,
+                "anterior": 56.91,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 52.69,
+                    "n": 2
+                  }
+                ],
+                "n": 1,
+                "bruto": 52.69
+              },
+              {
+                "nome": "Compras",
+                "atual": 22.0,
+                "anterior": 23.76,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 22.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 22.0
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-10-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-10-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "previsto"
+                }
+              ],
+              "recebido": 3100,
+              "previsto": 2100
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": false
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": false
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": false
+              }
+            ]
+          },
+          {
+            "chave": "m-2026-09",
+            "rotulo": "set/26",
+            "inicio": "2026-09-01",
+            "fim": "2026-09-30",
+            "ate": "2026-09-30",
+            "anteriorInicio": "2026-09-01",
+            "anteriorAte": "2026-09-30",
+            "emCurso": false,
+            "entradas": {
+              "clt": 5200,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 5200,
+              "despesas": 3434.83,
+              "despesasAnterior": 3021.37
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 1296.0,
+                "anterior": 1140.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 1296.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 1296.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 659.12,
+                "anterior": 579.78,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 346.03,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 173.77,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 139.32,
+                    "n": 2
+                  }
+                ],
+                "n": 15,
+                "bruto": 659.12
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 420.34,
+                "anterior": 369.74,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 48.49,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 129.6,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 70.2,
+                    "n": 1
+                  }
+                ],
+                "n": 3,
+                "bruto": 420.34
+              },
+              {
+                "nome": "Transporte",
+                "atual": 372.17,
+                "anterior": 327.37,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 248.4,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 123.77,
+                    "n": 5
+                  }
+                ],
+                "n": 8,
+                "bruto": 372.17
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 345.6,
+                "anterior": 304.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 345.6,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 345.6
+              },
+              {
+                "nome": "Lazer",
+                "atual": 194.94,
+                "anterior": 171.47,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 65.34,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 129.6,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 194.94
+              },
+              {
+                "nome": "Saúde",
+                "atual": 103.46,
+                "anterior": 91.01,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 103.46,
+                    "n": 2
+                  }
+                ],
+                "n": 2,
+                "bruto": 103.46
+              },
+              {
+                "nome": "Compras",
+                "atual": 43.2,
+                "anterior": 38.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 43.2,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 43.2
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-09-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-09-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 5200,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": true
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": true
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": true
+              }
+            ]
+          },
+          {
+            "chave": "m-2026-08",
+            "rotulo": "ago/26",
+            "inicio": "2026-08-01",
+            "fim": "2026-08-31",
+            "ate": "2026-08-31",
+            "anteriorInicio": "2026-08-01",
+            "anteriorAte": "2026-08-31",
+            "emCurso": false,
+            "entradas": {
+              "clt": 5200,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 5200,
+              "despesas": 3021.37,
+              "despesasAnterior": 3562.05
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 1140.0,
+                "anterior": 1344.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 1140.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 1140.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 579.78,
+                "anterior": 683.54,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 304.38,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 152.85,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 122.55,
+                    "n": 2
+                  }
+                ],
+                "n": 13,
+                "bruto": 579.78
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 369.74,
+                "anterior": 435.9,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 42.65,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 114.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 61.75,
+                    "n": 1
+                  }
+                ],
+                "n": 3,
+                "bruto": 369.74
+              },
+              {
+                "nome": "Transporte",
+                "atual": 327.37,
+                "anterior": 385.95,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 218.5,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 108.87,
+                    "n": 5
+                  }
+                ],
+                "n": 7,
+                "bruto": 327.37
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 304.0,
+                "anterior": 358.4,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 304.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 304.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 171.47,
+                "anterior": 202.16,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 57.47,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 114.0,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 171.47
+              },
+              {
+                "nome": "Saúde",
+                "atual": 91.01,
+                "anterior": 107.3,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 91.01,
+                    "n": 2
+                  }
+                ],
+                "n": 2,
+                "bruto": 91.01
+              },
+              {
+                "nome": "Compras",
+                "atual": 38.0,
+                "anterior": 44.8,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 38.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 38.0
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-08-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-08-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 5200,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": true
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": true
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": true
+              }
+            ]
+          },
+          {
+            "chave": "m-2026-07",
+            "rotulo": "jul/26",
+            "inicio": "2026-07-01",
+            "fim": "2026-07-31",
+            "ate": "2026-07-31",
+            "anteriorInicio": "2026-07-01",
+            "anteriorAte": "2026-07-31",
+            "emCurso": false,
+            "entradas": {
+              "clt": 5200,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 5200,
+              "despesas": 3562.05,
+              "despesasAnterior": 2862.36
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 1344.0,
+                "anterior": 1080.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 1344.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 1344.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 683.54,
+                "anterior": 549.27,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 358.85,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 180.21,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 144.48,
+                    "n": 2
+                  }
+                ],
+                "n": 16,
+                "bruto": 683.54
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 435.9,
+                "anterior": 350.28,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 50.29,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 134.4,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 72.8,
+                    "n": 1
+                  }
+                ],
+                "n": 3,
+                "bruto": 435.9
+              },
+              {
+                "nome": "Transporte",
+                "atual": 385.95,
+                "anterior": 310.14,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 257.6,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 128.35,
+                    "n": 5
+                  }
+                ],
+                "n": 8,
+                "bruto": 385.95
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 358.4,
+                "anterior": 288.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 358.4,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 358.4
+              },
+              {
+                "nome": "Lazer",
+                "atual": 202.16,
+                "anterior": 162.45,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 67.76,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 134.4,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 202.16
+              },
+              {
+                "nome": "Saúde",
+                "atual": 107.3,
+                "anterior": 86.22,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 107.3,
+                    "n": 2
+                  }
+                ],
+                "n": 2,
+                "bruto": 107.3
+              },
+              {
+                "nome": "Compras",
+                "atual": 44.8,
+                "anterior": 36.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 44.8,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 44.8
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-07-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-07-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 5200,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": true
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": true
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": true
+              }
+            ]
+          },
+          {
+            "chave": "m-2026-06",
+            "rotulo": "jun/26",
+            "inicio": "2026-06-01",
+            "fim": "2026-06-30",
+            "ate": "2026-06-30",
+            "anteriorInicio": "2026-06-01",
+            "anteriorAte": "2026-06-30",
+            "emCurso": false,
+            "entradas": {
+              "clt": 5200,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 5200,
+              "despesas": 2862.36,
+              "despesasAnterior": 3339.42
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 1080.0,
+                "anterior": 1260.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 1080.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 1080.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 549.27,
+                "anterior": 640.81,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 288.36,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 144.81,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 116.1,
+                    "n": 2
+                  }
+                ],
+                "n": 13,
+                "bruto": 549.27
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 350.28,
+                "anterior": 408.66,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 40.41,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 108.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 58.5,
+                    "n": 1
+                  }
+                ],
+                "n": 3,
+                "bruto": 350.28
+              },
+              {
+                "nome": "Transporte",
+                "atual": 310.14,
+                "anterior": 361.83,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 207.0,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 103.14,
+                    "n": 5
+                  }
+                ],
+                "n": 6,
+                "bruto": 310.14
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 288.0,
+                "anterior": 336.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 288.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 288.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 162.45,
+                "anterior": 189.53,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 54.45,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 108.0,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 162.45
+              },
+              {
+                "nome": "Saúde",
+                "atual": 86.22,
+                "anterior": 100.59,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 86.22,
+                    "n": 2
+                  }
+                ],
+                "n": 2,
+                "bruto": 86.22
+              },
+              {
+                "nome": "Compras",
+                "atual": 36.0,
+                "anterior": 42.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 36.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 36.0
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-06-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-06-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 5200,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": true
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": true
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": true
+              }
+            ]
+          },
+          {
+            "chave": "m-2026-05",
+            "rotulo": "mai/26",
+            "inicio": "2026-05-01",
+            "fim": "2026-05-31",
+            "ate": "2026-05-31",
+            "anteriorInicio": "2026-05-01",
+            "anteriorAte": "2026-05-31",
+            "emCurso": false,
+            "entradas": {
+              "clt": 5200,
+              "pj": 5200,
+              "outros": 0,
+              "custosPj": 280.9
+            },
+            "resumo": {
+              "receitas": 5200,
+              "despesas": 3339.42,
+              "despesasAnterior": 3180.4
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 1260.0,
+                "anterior": 1200,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 1260.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 1260.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 640.81,
+                "anterior": 610.3,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 336.42,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 168.95,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 135.45,
+                    "n": 2
+                  }
+                ],
+                "n": 15,
+                "bruto": 640.81
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 408.66,
+                "anterior": 389.2,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 47.15,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 126.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 68.25,
+                    "n": 1
+                  }
+                ],
+                "n": 3,
+                "bruto": 408.66
+              },
+              {
+                "nome": "Transporte",
+                "atual": 361.83,
+                "anterior": 344.6,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 241.5,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 120.33,
+                    "n": 5
+                  }
+                ],
+                "n": 7,
+                "bruto": 361.83
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 336.0,
+                "anterior": 320,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 336.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 336.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 189.53,
+                "anterior": 180.5,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 63.53,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 126.0,
+                    "n": 1
+                  }
+                ],
+                "n": 2,
+                "bruto": 189.53
+              },
+              {
+                "nome": "Saúde",
+                "atual": 100.59,
+                "anterior": 95.8,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 100.59,
+                    "n": 2
+                  }
+                ],
+                "n": 2,
+                "bruto": 100.59
+              },
+              {
+                "nome": "Compras",
+                "atual": 42.0,
+                "anterior": 40,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 42.0,
+                    "n": 1
+                  }
+                ],
+                "n": 1,
+                "bruto": 42.0
+              }
+            ],
+            "clt": {
+              "itens": [
+                {
+                  "data": "2026-05-05",
+                  "descricao": "Salário",
+                  "valor": 3100,
+                  "situacao": "recebido"
+                },
+                {
+                  "data": "2026-05-20",
+                  "descricao": "Adiantamento",
+                  "valor": 2100,
+                  "situacao": "recebido"
+                }
+              ],
+              "recebido": 5200,
+              "previsto": 0
+            },
+            "pj": {
+              "faturamento": 5200,
+              "retiradas": 3100,
+              "custos": {
+                "Contabilidade PJ": 200,
+                "Impostos/DAS": 80.9
+              }
+            },
+            "fixos": [
+              {
+                "nome": "Aluguel",
+                "valor": 1200,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Faculdade",
+                "valor": 320,
+                "dia": 5,
+                "pago": true
+              },
+              {
+                "nome": "Academia",
+                "valor": 120,
+                "dia": 9,
+                "pago": true
+              },
+              {
+                "nome": "Streaming",
+                "valor": 44.9,
+                "dia": 12,
+                "pago": true
+              },
+              {
+                "nome": "Internet",
+                "valor": 119.9,
+                "dia": 20,
+                "pago": true
+              },
+              {
+                "nome": "Telefone",
+                "valor": 65,
+                "dia": 28,
+                "pago": true
+              },
+              {
+                "nome": "DAS do MEI",
+                "valor": 80.9,
+                "dia": 20,
+                "pago": true
+              }
+            ]
+          }
+        ],
+        "ano": [
+          {
+            "chave": "a-2026",
+            "rotulo": "2026",
+            "inicio": "2026-01-01",
+            "fim": "2026-12-31",
+            "ate": "2026-10-17",
+            "anteriorInicio": "2025-01-01",
+            "anteriorAte": "2025-10-17",
+            "emCurso": true,
+            "entradas": {
+              "clt": 49400,
+              "pj": 49400,
+              "outros": 0,
+              "custosPj": 2809
+            },
+            "resumo": {
+              "receitas": 49400,
+              "despesas": 29895.76,
+              "despesasAnterior": 27987.52
+            },
+            "categorias": [
+              {
+                "nome": "Moradia",
+                "atual": 11280.0,
+                "anterior": 10560.0,
+                "onde": [
+                  {
+                    "nome": "Aluguel",
+                    "valor": 11280.0,
+                    "n": 1
+                  }
+                ],
+                "n": 9,
+                "bruto": 11280.0
+              },
+              {
+                "nome": "Alimentação",
+                "atual": 5736.82,
+                "anterior": 5370.64,
+                "onde": [
+                  {
+                    "nome": "Mercado Central",
+                    "valor": 3011.76,
+                    "n": 4
+                  },
+                  {
+                    "nome": "Padaria da Esquina",
+                    "valor": 1512.46,
+                    "n": 6
+                  },
+                  {
+                    "nome": "Restaurante Sabor",
+                    "valor": 1212.6,
+                    "n": 2
+                  }
+                ],
+                "n": 132,
+                "bruto": 5736.82
+              },
+              {
+                "nome": "Assinaturas",
+                "atual": 3658.48,
+                "anterior": 3424.96,
+                "onde": [
+                  {
+                    "nome": "Streaming de Vídeo",
+                    "valor": 422.06,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Academia",
+                    "valor": 1128.0,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Telefone",
+                    "valor": 611.0,
+                    "n": 1
+                  }
+                ],
+                "n": 28,
+                "bruto": 3658.48
+              },
+              {
+                "nome": "Transporte",
+                "atual": 3239.24,
+                "anterior": 3032.48,
+                "onde": [
+                  {
+                    "nome": "Posto Avenida",
+                    "valor": 2162.0,
+                    "n": 2
+                  },
+                  {
+                    "nome": "Aplicativo de Transporte",
+                    "valor": 1077.24,
+                    "n": 5
+                  }
+                ],
+                "n": 66,
+                "bruto": 3239.24
+              },
+              {
+                "nome": "Estudo/Cert",
+                "atual": 3008.0,
+                "anterior": 2816.0,
+                "onde": [
+                  {
+                    "nome": "Faculdade",
+                    "valor": 3008.0,
+                    "n": 1
+                  }
+                ],
+                "n": 9,
+                "bruto": 3008.0
+              },
+              {
+                "nome": "Lazer",
+                "atual": 1696.7,
+                "anterior": 1588.4,
+                "onde": [
+                  {
+                    "nome": "Cinema",
+                    "valor": 568.7,
+                    "n": 1
+                  },
+                  {
+                    "nome": "Pessoa física (nome oculto)",
+                    "valor": 1128.0,
+                    "n": 1
+                  }
+                ],
+                "n": 19,
+                "bruto": 1696.7
+              },
+              {
+                "nome": "Saúde",
+                "atual": 900.52,
+                "anterior": 843.04,
+                "onde": [
+                  {
+                    "nome": "Farmácia",
+                    "valor": 900.52,
+                    "n": 2
+                  }
+                ],
+                "n": 19,
+                "bruto": 900.52
+              },
+              {
+                "nome": "Compras",
+                "atual": 376.0,
+                "anterior": 352.0,
+                "onde": [
+                  {
+                    "nome": "Loja Online",
+                    "valor": 376.0,
+                    "n": 1
+                  }
+                ],
+                "n": 9,
+                "bruto": 376.0
+              }
+            ],
+            "clt": {
+              "itens": [],
+              "recebido": 49400,
+              "previsto": 2100
+            },
+            "pj": {
+              "faturamento": 49400,
+              "retiradas": 30000,
+              "custos": {
+                "Contabilidade PJ": 2000,
+                "Impostos/DAS": 809
+              }
+            }
+          }
+        ]
       }
     },
     "compromissos": [
