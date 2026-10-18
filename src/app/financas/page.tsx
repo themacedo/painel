@@ -31,6 +31,8 @@ export default async function Financas() {
   const maxCat = Math.max(1, ...d.categorias.map((c) => Math.max(c.atual, c.anterior)));
   const custosPj = Object.entries(d.pj.custos);
   const e = p.empresas;
+  const en = d.entradas;
+  const entrou = en ? en.clt + en.pj + en.outros : r.receitas;
 
   return (
     <Moldura {...moldura}>
@@ -38,8 +40,11 @@ export default async function Financas() {
         <Kpi titulo={`Gasto em ${mesCurto(d.mes)} até ${diaMes(d.ate)}`} valor={<Contador valor={r.despesas} formato="brl" />} icone={TrendingDown} cor="bg-primaria"
           detalhe={<>Mesmo período do mês anterior: {reaisCurto(r.despesasAnteriorMesmoPeriodo)}{" "}
             <Variacao atual={r.despesas} antes={r.despesasAnteriorMesmoPeriodo} melhorSobe={false} /></>} />
-        <Kpi titulo="Entrou no mês" valor={<Contador valor={r.receitas} formato="brl" />} icone={Landmark} cor="bg-ok"
-          detalhe={<>Saldo do mês até agora: {reaisCurto(r.receitas - r.despesas)}</>} />
+        <Kpi titulo="Entrou no mês" valor={<Contador valor={entrou} formato="brl" />} icone={Landmark} cor="bg-ok"
+          detalhe={en ? <>{e.clt.nome} {reaisCurto(en.clt)} · {e.pj.nome} {reaisCurto(en.pj)}{en.outros > 0.5 && <> · outros {reaisCurto(en.outros)}</>}
+            {d.clt && d.clt.previsto > 0 && <><br />Previsto: {reaisCurto(d.clt.previsto)} ({e.clt.nome})</>}
+            <br />Saldo do mês até agora: {reaisCurto(entrou - r.despesas - en.custosPj)}</>
+            : <>Saldo do mês até agora: {reaisCurto(r.receitas - r.despesas)}</>} />
         <Kpi titulo="Contas fixas" valor={<><Contador valor={pagos.length} /> de {d.fixos.length} pagas</>} icone={Receipt} cor="bg-alerta"
           detalhe={<>Faltam {reaisCurto(pendente)} de {reaisCurto(totalFixos)}</>}>
           <Barra pct={(pagos.length / Math.max(1, d.fixos.length)) * 100} cor="bg-alerta" />
@@ -127,6 +132,27 @@ export default async function Financas() {
             <GraficoParcelas dados={d.parcelas.map((x) => ({ rotulo: mesCurto(x.mes), valor: x.valor, itens: x.itens ?? [] }))} />
           </Cartao>
         </div>
+        <div className="flex flex-col gap-3">
+        {d.clt && (
+          <Cartao titulo={`CLT em ${mesCurto(d.mes)}`} extra={<Marca empresa={e.clt} tamanho={18} />}>
+            <dl className="flex flex-col gap-3 text-sm">
+              {d.clt.itens.map((i) => (
+                <div key={i.data + i.descricao} className="flex items-baseline justify-between gap-2">
+                  <dt className="text-texto-2">{i.descricao} <span className="text-xs">({diaMes(i.data)})</span></dt>
+                  <dd className="flex items-baseline gap-2">
+                    {i.situacao === "previsto" && <span className="rounded-md bg-primaria-suave px-1.5 py-0.5 text-[11px] text-primaria">previsto</span>}
+                    <span className={i.situacao === "recebido" ? "font-medium text-ok" : ""}>{reais(i.valor)}</span>
+                  </dd>
+                </div>
+              ))}
+              {!d.clt.itens.length && <p className="text-texto-2">Nenhum pagamento registrado ainda.</p>}
+              <div className="flex justify-between border-t border-borda pt-3">
+                <dt className="text-texto-2">Total do mês</dt>
+                <dd className="font-medium">{reais(d.clt.recebido + d.clt.previsto)}</dd>
+              </div>
+            </dl>
+          </Cartao>
+        )}
         <Cartao titulo={`PJ em ${mesCurto(d.mes)}`} extra={<Marca empresa={e.pj} tamanho={18} />}>
           <dl className="flex flex-col gap-3 text-sm">
             <div className="flex justify-between"><dt className="text-texto-2">Faturamento</dt><dd className="font-medium text-ok">{reais(d.pj.faturamento)}</dd></div>
@@ -142,6 +168,7 @@ export default async function Financas() {
             </div>
           </dl>
         </Cartao>
+        </div>
       </div>
     </Moldura>
   );

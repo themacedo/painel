@@ -495,6 +495,30 @@
           "Contabilidade PJ": 200,
           "Impostos/DAS": 80.9
         }
+      },
+      "entradas": {
+        "clt": 3100,
+        "pj": 5200,
+        "outros": 0,
+        "custosPj": 280.9
+      },
+      "clt": {
+        "itens": [
+          {
+            "data": "2026-10-05",
+            "descricao": "Salário",
+            "valor": 3100,
+            "situacao": "recebido"
+          },
+          {
+            "data": "2026-10-20",
+            "descricao": "Adiantamento",
+            "valor": 2100,
+            "situacao": "previsto"
+          }
+        ],
+        "recebido": 3100,
+        "previsto": 2100
       }
     },
     "compromissos": [

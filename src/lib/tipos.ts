@@ -67,4 +67,7 @@ export type Detalhe = {
   fixos: { nome: string; valor: number; dia: number; pago: boolean }[];
   parcelas: { mes: string; valor: number; itens?: { nome: string; parcela: string; valor: number; categoria: string }[] }[];
   pj: { faturamento: number; retiradas: number; custos: Record<string, number> };
+  // o que entrou de cada fonte (a retirada PJ → PF é o mesmo dinheiro mudando de conta, não conta de novo)
+  entradas?: { clt: number; pj: number; outros: number; custosPj: number };
+  clt?: { itens: { data: string; descricao: string; valor: number; situacao: "recebido" | "previsto" }[]; recebido: number; previsto: number };
 };
