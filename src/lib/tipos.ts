@@ -81,6 +81,8 @@ export type Periodo = {
   anteriorInicio: string; anteriorAte: string; emCurso: boolean;
   entradas: { clt: number; pj: number; outros: number; custosPj: number };
   resumo: { receitas: number; despesas: number; despesasAnterior: number };
+  // como um período negativo foi pago: rotativo do cartão, Pix no crédito para si, resgate líquido de aplicações
+  cobertura?: { rotativo: number; pixCredito: number; resgates: number; jurosRotativo: number };
   categorias: Detalhe["categorias"];
   clt: Clt;
   pj: Detalhe["pj"];

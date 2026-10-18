@@ -123,8 +123,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
           detalhe={<>{comparacao}: {reaisCurto(r.despesasAnterior)}{" "}<Variacao atual={r.despesas} antes={r.despesasAnterior} melhorSobe={false} /></>} />
         <Kpi titulo={`Entrou ${doPeriodo[modo]}`} valor={<Contador valor={entrou} formato="brl" />} icone={Landmark} cor="bg-ok"
           detalhe={<>{e.clt.nome} {reaisCurto(en.clt)} · {e.pj.nome} {reaisCurto(en.pj)}{en.outros > 0.5 && <> · outros {reaisCurto(en.outros)}</>}
-            {p.clt.previsto > 0 && <><br />Previsto: {reaisCurto(p.clt.previsto)} ({e.clt.nome})</>}
-            <br />Saldo {doPeriodo[modo]}{p.emCurso ? " até agora" : ""}: {reaisCurto(entrou - r.despesas - en.custosPj)}</>} />
+            {p.clt.previsto > 0 && <><br />Previsto: {reaisCurto(p.clt.previsto)} ({e.clt.nome})</>}</>} />
         {modo === "mes" ? (
           <Kpi titulo="Contas fixas" valor={<><Contador valor={pagos.length} /> de {fixos.length} pagas</>} icone={Receipt} cor="bg-alerta"
             detalhe={<>Faltam {reaisCurto(pendente)} de {reaisCurto(fixos.reduce((s, f) => s + f.valor, 0))}</>}>
@@ -136,6 +135,10 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
         )}
         <Kpi titulo="Parcelas nos próximos 12 meses" valor={<Contador valor={parcelas12} formato="brl" />} icone={CreditCard} cor="bg-[#8b5cf6]"
           detalhe={livre ? <>Livre de parcelas a partir de {mesCurto(livre)}</> : <>Parcelas em todos os 12 meses</>} />
+      </div>
+
+      <div className="mt-3">
+        <Fechamento p={p} modo={modo} entrou={entrou} />
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
@@ -224,5 +227,55 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
         {modo === "mes" && <div className="flex flex-col gap-3">{cardClt}{cardPj}</div>}
       </div>
     </>
+  );
+}
+
+
+// Como o período fechou: resultado (entrou − gastou) e, quando houve, de onde veio a diferença.
+function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: number }) {
+  const r = p.resumo, en = p.entradas, c = p.cobertura;
+  const resultado = entrou - r.despesas - en.custosPj;
+  const negativo = resultado < 0;
+  const linhas = c ? [
+    { nome: modo === "mes" ? "Ficou no rotativo do cartão" : "Ficou no rotativo do cartão (soma das faturas)", valor: c.rotativo },
+    { nome: "Pix no crédito para você", valor: c.pixCredito },
+    { nome: "Resgate líquido de aplicações", valor: c.resgates },
+  ].filter((l) => l.valor > 0.5) : [];
+  const nome = modo === "semana" ? "a semana" : modo === "mes" ? "o mês" : "o ano";
+  return (
+    <Cartao titulo={`Como ${nome} fechou${p.emCurso ? " até agora" : ""}`}>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <dl className="flex flex-col gap-2 text-sm">
+          <div className="flex justify-between"><dt className="text-texto-2">Entrou</dt><dd className="text-ok">{reais(entrou)}</dd></div>
+          <div className="flex justify-between"><dt className="text-texto-2">Gastou</dt><dd>− {reais(r.despesas)}</dd></div>
+          {en.custosPj > 0.5 && <div className="flex justify-between"><dt className="text-texto-2">Custos da PJ</dt><dd>− {reais(en.custosPj)}</dd></div>}
+          <div className="flex justify-between border-t border-borda pt-2 text-base">
+            <dt className="font-medium">Resultado</dt>
+            <dd className={`font-semibold ${negativo ? "text-perigo" : "text-ok"}`}>{negativo ? "− " : ""}{reais(Math.abs(resultado))}</dd>
+          </div>
+          <p className="text-xs text-texto-2">
+            {negativo ? "Gastou mais do que entrou no período." : "Entrou mais do que saiu no período."} Compras no cartão contam na data da compra.
+          </p>
+        </dl>
+        <div className="text-sm">
+          {linhas.length ? (
+            <>
+              <p className="mb-2 font-medium">{negativo ? "De onde veio a diferença" : "Mesmo assim, ficou para depois"}</p>
+              <dl className="flex flex-col gap-2">
+                {linhas.map((l) => (
+                  <div key={l.nome} className="flex justify-between gap-3"><dt className="text-texto-2">{l.nome}</dt><dd className="text-alerta">{reais(l.valor)}</dd></div>
+                ))}
+                {c && c.jurosRotativo > 0.5 && (
+                  <div className="flex justify-between gap-3 border-t border-borda pt-2"><dt className="text-texto-2">Juros e IOF do rotativo</dt><dd className="text-perigo">{reais(c.jurosRotativo)}</dd></div>
+                )}
+              </dl>
+            </>
+          ) : (
+            <p className="text-texto-2">Sem rotativo, Pix no crédito ou resgate no período.
+              {c && c.jurosRotativo > 0.5 && <> Juros e IOF do rotativo de antes: <b className="text-perigo">{reais(c.jurosRotativo)}</b>.</>}</p>
+          )}
+        </div>
+      </div>
+    </Cartao>
   );
 }
