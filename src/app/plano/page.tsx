@@ -38,7 +38,8 @@ export default async function Plano() {
   const compromissos = (f.compromissos ?? []).map((c) => {
     const total = nMeses(c.de, c.ate);
     // Meses anteriores ao atual contam como pagos; o atual, só se o item do plano com o mesmo nome já foi feito.
-    const pagoNoMes = f.plano.some((i) => i.status === "feito" && i.data.startsWith(hoje) && i.descricao === c.descricao);
+    // o status do mês vem da conta fixa ligada ao compromisso; sem ligação, do item do plano com o mesmo nome
+    const pagoNoMes = c.pagoNoMes ?? f.plano.some((i) => i.status === "feito" && i.data.startsWith(hoje) && i.descricao === c.descricao);
     const pagos = Math.min(total, Math.max(0, nMeses(c.de, hoje) - 1 + (pagoNoMes ? 1 : 0)));
     return { ...c, total, pagos, falta: (total - pagos) * c.mensal };
   });
