@@ -111,4 +111,6 @@ export type CicloCartao = {
   teto: number | null; atual: number; comprometido: number; novo: number; projecao: number;
   dias: number; diasPassados: number; diasRestantes: number; porDia: number | null;
   status: "ok" | "atencao" | "estourou" | null;
+  reservado?: number; // cobranças recorrentes (assinaturas etc.) que ainda vão cair nesta fatura
+  previstas?: { nome: string; valor: number; dia: number }[];
 };

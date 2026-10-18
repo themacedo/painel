@@ -4042,7 +4042,25 @@
         "diasPassados": 14,
         "diasRestantes": 17,
         "porDia": 44.97,
-        "status": "atencao"
+        "status": "atencao",
+        "reservado": 96.7,
+        "previstas": [
+          {
+            "nome": "Streaming",
+            "valor": 39.9,
+            "dia": 12
+          },
+          {
+            "nome": "Música",
+            "valor": 21.9,
+            "dia": 15
+          },
+          {
+            "nome": "Nuvem de fotos",
+            "valor": 34.9,
+            "dia": 28
+          }
+        ]
       }
     },
     "compromissos": [
