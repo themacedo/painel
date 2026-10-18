@@ -74,3 +74,6 @@ main > :nth-child(2) .entrar, main > .entrar:nth-child(2) { animation-delay: 0s;
 @media (prefers-reduced-motion: reduce) {
   .entrar, .encher { animation: none; }
 }
+
+/* Card de resumo (hover/foco) precisa ficar acima dos blocos vizinhos, que têm camada própria pela animação. */
+.entrar:hover, .entrar:focus-within { position: relative; z-index: 30; }

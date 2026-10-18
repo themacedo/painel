@@ -59,8 +59,12 @@ export type Semana = {
 export type Detalhe = {
   mes: string; ate: string; anteriorAte: string;
   resumo: { receitas: number; despesas: number; despesasAnteriorMesmoPeriodo: number; despesasAnteriorMesCheio: number };
-  categorias: { nome: string; atual: number; anterior: number }[];
+  categorias: {
+    nome: string; atual: number; anterior: number;
+    n?: number; bruto?: number; // lançamentos e total antes de créditos e estornos
+    onde?: { nome: string; valor: number; n: number }[]; // até 3 estabelecimentos; pessoa física aparece sem nome
+  }[];
   fixos: { nome: string; valor: number; dia: number; pago: boolean }[];
-  parcelas: { mes: string; valor: number }[];
+  parcelas: { mes: string; valor: number; itens?: { nome: string; parcela: string; valor: number; categoria: string }[] }[];
   pj: { faturamento: number; retiradas: number; custos: Record<string, number> };
 };

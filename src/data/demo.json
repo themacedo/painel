@@ -176,42 +176,144 @@
         {
           "nome": "Moradia",
           "atual": 1200,
-          "anterior": 1200
+          "anterior": 1200,
+          "onde": [
+            {
+              "nome": "Aluguel",
+              "valor": 1200,
+              "n": 1
+            }
+          ],
+          "n": 1,
+          "bruto": 1200
         },
         {
           "nome": "Alimentação",
           "atual": 610.3,
-          "anterior": 780.9
+          "anterior": 780.9,
+          "onde": [
+            {
+              "nome": "Mercado Central",
+              "valor": 320.4,
+              "n": 4
+            },
+            {
+              "nome": "Padaria da Esquina",
+              "valor": 160.9,
+              "n": 6
+            },
+            {
+              "nome": "Restaurante Sabor",
+              "valor": 129,
+              "n": 2
+            }
+          ],
+          "n": 14,
+          "bruto": 610.3
         },
         {
           "nome": "Assinaturas",
           "atual": 389.2,
-          "anterior": 371.5
+          "anterior": 371.5,
+          "onde": [
+            {
+              "nome": "Streaming de Vídeo",
+              "valor": 44.9,
+              "n": 1
+            },
+            {
+              "nome": "Academia",
+              "valor": 120,
+              "n": 1
+            },
+            {
+              "nome": "Telefone",
+              "valor": 65,
+              "n": 1
+            }
+          ],
+          "n": 3,
+          "bruto": 389.2
         },
         {
           "nome": "Transporte",
           "atual": 344.6,
-          "anterior": 512.0
+          "anterior": 512.0,
+          "onde": [
+            {
+              "nome": "Posto Avenida",
+              "valor": 230,
+              "n": 2
+            },
+            {
+              "nome": "Aplicativo de Transporte",
+              "valor": 114.6,
+              "n": 5
+            }
+          ],
+          "n": 7,
+          "bruto": 344.6
         },
         {
           "nome": "Estudo/Cert",
           "atual": 320,
-          "anterior": 320
+          "anterior": 320,
+          "onde": [
+            {
+              "nome": "Faculdade",
+              "valor": 320,
+              "n": 1
+            }
+          ],
+          "n": 1,
+          "bruto": 320
         },
         {
           "nome": "Lazer",
           "atual": 180.5,
-          "anterior": 290.2
+          "anterior": 290.2,
+          "onde": [
+            {
+              "nome": "Cinema",
+              "valor": 60.5,
+              "n": 1
+            },
+            {
+              "nome": "Pessoa física (nome oculto)",
+              "valor": 120,
+              "n": 1
+            }
+          ],
+          "n": 2,
+          "bruto": 180.5
         },
         {
           "nome": "Saúde",
           "atual": 95.8,
-          "anterior": 145.5
+          "anterior": 145.5,
+          "onde": [
+            {
+              "nome": "Farmácia",
+              "valor": 95.8,
+              "n": 2
+            }
+          ],
+          "n": 2,
+          "bruto": 95.8
         },
         {
           "nome": "Compras",
           "atual": 40,
-          "anterior": 0
+          "anterior": 0,
+          "onde": [
+            {
+              "nome": "Loja Online",
+              "valor": 40,
+              "n": 1
+            }
+          ],
+          "n": 1,
+          "bruto": 55
         }
       ],
       "fixos": [
@@ -261,51 +363,129 @@
       "parcelas": [
         {
           "mes": "2026-11",
-          "valor": 640.3
+          "valor": 630.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "5/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            },
+            {
+              "nome": "Curso de inglês",
+              "parcela": "10/16",
+              "valor": 210,
+              "categoria": "Estudo/Cert"
+            }
+          ]
         },
         {
           "mes": "2026-12",
-          "valor": 640.3
+          "valor": 630.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "6/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            },
+            {
+              "nome": "Curso de inglês",
+              "parcela": "11/16",
+              "valor": 210,
+              "categoria": "Estudo/Cert"
+            }
+          ]
         },
         {
           "mes": "2027-01",
-          "valor": 420.1
+          "valor": 630.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "7/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            },
+            {
+              "nome": "Curso de inglês",
+              "parcela": "12/16",
+              "valor": 210,
+              "categoria": "Estudo/Cert"
+            }
+          ]
         },
         {
           "mes": "2027-02",
-          "valor": 420.1
+          "valor": 630.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "8/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            },
+            {
+              "nome": "Curso de inglês",
+              "parcela": "13/16",
+              "valor": 210,
+              "categoria": "Estudo/Cert"
+            }
+          ]
         },
         {
           "mes": "2027-03",
-          "valor": 210
+          "valor": 420.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "9/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            }
+          ]
         },
         {
           "mes": "2027-04",
-          "valor": 210
+          "valor": 420.1,
+          "itens": [
+            {
+              "nome": "Notebook",
+              "parcela": "10/10",
+              "valor": 420.1,
+              "categoria": "Compras"
+            }
+          ]
         },
         {
           "mes": "2027-05",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         },
         {
           "mes": "2027-06",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         },
         {
           "mes": "2027-07",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         },
         {
           "mes": "2027-08",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         },
         {
           "mes": "2027-09",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         },
         {
           "mes": "2027-10",
-          "valor": 0
+          "valor": 0,
+          "itens": []
         }
       ],
       "pj": {

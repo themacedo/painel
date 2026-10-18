@@ -55,22 +55,55 @@ export default async function Financas() {
               <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-primaria" />até {diaMes(d.ate)}</span>
               <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-[var(--barra)]" />até {diaMes(d.anteriorAte)}</span>
             </div>}>
+            <p className="-mt-1 mb-3 text-xs text-texto-2">Passe o mouse ou toque numa categoria para ver o resumo.</p>
             <ul className="flex flex-col gap-3">
-              {d.categorias.filter((c) => c.atual > 0 || c.anterior > 0).map((c) => (
-                <li key={c.nome}>
-                  <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
-                    <span>{c.nome}</span>
-                    <span className="flex items-baseline gap-2">
-                      <b className="font-medium">{reais(c.atual)}</b>
-                      <Variacao atual={c.atual} antes={c.anterior} melhorSobe={false} />
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-0.5">
-                    <div className="encher h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
-                    <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />
-                  </div>
-                </li>
-              ))}
+              {d.categorias.filter((c) => c.atual > 0 || c.anterior > 0).map((c, idx) => {
+                const creditos = (c.bruto ?? c.atual) - c.atual;
+                return (
+                  <li key={c.nome} tabIndex={0} aria-describedby={`cat-${idx}`}
+                    className="group relative -mx-2 rounded-lg px-2 py-1 outline-none hover:bg-fundo focus-visible:bg-fundo focus-visible:ring-2 focus-visible:ring-primaria">
+                    <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                      <span>{c.nome}</span>
+                      <span className="flex items-baseline gap-2">
+                        <b className="font-medium">{reais(c.atual)}</b>
+                        <Variacao atual={c.atual} antes={c.anterior} melhorSobe={false} />
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="encher h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
+                      <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />
+                    </div>
+                    {/* card do resumo: aparece ao passar o mouse ou ao focar (toque/teclado) */}
+                    <div id={`cat-${idx}`} role="tooltip"
+                      className="pointer-events-none absolute left-2 right-2 top-full z-20 mt-1 hidden rounded-lg border border-borda bg-superficie p-3 text-xs shadow-lg group-hover:block group-focus:block sm:left-auto sm:w-72">
+                      <div className="mb-2 flex items-baseline justify-between">
+                        <span className="font-semibold">{c.nome}</span>
+                        <span className="font-semibold">{reais(c.atual)}</span>
+                      </div>
+                      <dl className="mb-2 grid grid-cols-2 gap-x-3 gap-y-1 text-texto-2">
+                        <dt>Lançamentos</dt><dd className="text-right text-texto">{c.n ?? "—"}</dd>
+                        <dt>Ticket médio</dt><dd className="text-right text-texto">{c.n ? reais((c.bruto ?? c.atual) / c.n) : "—"}</dd>
+                        <dt>Do gasto do mês</dt><dd className="text-right text-texto">{r.despesas ? `${Math.round((100 * c.atual) / r.despesas)}%` : "—"}</dd>
+                        <dt>Até {diaMes(d.anteriorAte)}</dt><dd className="text-right text-texto">{reais(c.anterior)}</dd>
+                        {creditos > 0.5 && <><dt>Créditos e estornos</dt><dd className="text-right text-ok">− {reais(creditos)}</dd></>}
+                      </dl>
+                      {!!c.onde?.length && (
+                        <>
+                          <p className="mb-1 font-medium">Onde mais gastou</p>
+                          <ul className="flex flex-col gap-1">
+                            {c.onde.map((o) => (
+                              <li key={o.nome} className="flex justify-between gap-3">
+                                <span className="truncate">{o.nome}{o.n > 1 && <span className="text-texto-2"> · {o.n}x</span>}</span>
+                                <span className="shrink-0">{reais(o.valor)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </Cartao>
         </div>
@@ -90,8 +123,8 @@ export default async function Financas() {
 
       <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <Cartao titulo="Parcelas já assumidas, por mês">
-            <GraficoParcelas dados={d.parcelas.map((x) => ({ rotulo: mesCurto(x.mes), valor: x.valor }))} />
+          <Cartao titulo="Parcelas já assumidas, por mês" extra={<span className="text-xs text-texto-2">passe o mouse ou toque num mês para ver as compras</span>}>
+            <GraficoParcelas dados={d.parcelas.map((x) => ({ rotulo: mesCurto(x.mes), valor: x.valor, itens: x.itens ?? [] }))} />
           </Cartao>
         </div>
         <Cartao titulo={`PJ em ${mesCurto(d.mes)}`} extra={<Marca empresa={e.pj} tamanho={18} />}>
