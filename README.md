@@ -57,8 +57,13 @@ Em produção (Vercel), em vez do arquivo:
 | Variável | Valor |
 |---|---|
 | `PAINEL_MODO` | `privado` |
-| `PAINEL_SENHA` | a senha da página |
+| `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | cliente OAuth do Google (redirect `https://<site>/api/auth/callback/google`) |
+| `NEXTAUTH_SECRET` | chave aleatória que assina a sessão (`openssl rand -base64 32`) |
+| `NEXTAUTH_URL` | o endereço do site |
+| `PAINEL_EMAILS` | os e-mails Google que podem entrar, separados por vírgula |
 | `PAINEL_DADOS_URL` | `https://api.github.com/repos/<você>/<repo-privado>/contents/painel.json` |
 | `PAINEL_DADOS_TOKEN` | token *fine-grained* só com leitura de conteúdo desse repositório |
 
-Sem `PAINEL_SENHA`, o modo privado nega todo acesso.
+Com `AUTH_GOOGLE_ID`, o modo privado pede login com Google (tela `/entrar`, sessão de 30 dias) e confere o e-mail em
+todo pedido. Sem ele, cai na senha antiga (`PAINEL_SENHA`, HTTP Basic). Sem nenhum dos dois, nega todo acesso.
+O site também é um app instalável (PWA): no celular, "Adicionar à tela inicial".

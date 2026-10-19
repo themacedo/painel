@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { LayoutGrid, Wallet, Activity, CalendarDays, Settings } from "lucide-react";
+import { BotaoSair } from "./BotaoSair";
+
+// com o login do Google ligado, há sessão para encerrar
+const comLogin = () => process.env.PAINEL_MODO === "privado" && Boolean(process.env.AUTH_GOOGLE_ID);
 
 export type Tela = "visao" | "financas" | "desempenho" | "plano";
 
@@ -37,7 +41,8 @@ export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {
           );
         })}
       </nav>
-      <div className="mt-auto flex items-center gap-2.5 px-2 text-sm text-texto-2">
+      {comLogin() && <div className="mt-auto"><BotaoSair /></div>}
+      <div className={`${comLogin() ? "mt-1" : "mt-auto"} flex items-center gap-2.5 px-2 text-sm text-texto-2`}>
         <Settings size={16} />
         {modo === "demo" ? "Modo demonstração" : "Modo privado"}
       </div>
@@ -57,6 +62,7 @@ export function NavMovel({ ativa }: { ativa: Tela }) {
           {nome}
         </Link>
       ))}
+      {comLogin() && <span className="ml-auto"><BotaoSair compacto /></span>}
     </nav>
   );
 }
