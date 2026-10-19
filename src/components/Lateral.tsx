@@ -3,7 +3,7 @@ import { LayoutGrid, Wallet, Activity, CalendarDays, Settings } from "lucide-rea
 import { BotaoSair } from "./BotaoSair";
 
 // com o login do Google ligado, há sessão para encerrar
-const comLogin = () => process.env.PAINEL_MODO === "privado" && Boolean(process.env.AUTH_GOOGLE_ID);
+export const comLogin = () => process.env.PAINEL_MODO === "privado" && Boolean(process.env.AUTH_GOOGLE_ID);
 
 export type Tela = "visao" | "financas" | "desempenho" | "plano";
 
@@ -53,16 +53,15 @@ export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {
 // No celular a lateral some: as telas viram abas no topo.
 export function NavMovel({ ativa }: { ativa: Tela }) {
   return (
-    <nav className="-mx-4 mb-4 flex gap-1 overflow-x-auto px-4 lg:hidden">
+    <nav className="mb-4 flex gap-1 lg:hidden">
       {telas.filter((t) => t.pronta).map(({ id, nome, href }) => (
         <Link key={id} href={href}
-          className={`shrink-0 rounded-lg px-3 py-1.5 text-sm ${
+          className={`flex-1 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-center text-[13px] ${
             id === ativa ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2"
           }`}>
           {nome}
         </Link>
       ))}
-      {comLogin() && <span className="ml-auto"><BotaoSair compacto /></span>}
     </nav>
   );
 }

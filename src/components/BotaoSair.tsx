@@ -2,12 +2,21 @@
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
+// compacto: só o ícone (no celular, ao lado do título)
 export function BotaoSair({ compacto = false }: { compacto?: boolean }) {
+  const sair = () => void signOut({ callbackUrl: "/entrar" });
+  if (compacto) {
+    return (
+      <button type="button" onClick={sair} aria-label="Sair" title="Sair"
+        className="grid size-9 place-items-center rounded-lg border border-borda text-texto-2 hover:text-texto">
+        <LogOut size={16} />
+      </button>
+    );
+  }
   return (
-    <button type="button" onClick={() => void signOut({ callbackUrl: "/entrar" })}
-      className={compacto ? "shrink-0 rounded-lg px-3 py-1.5 text-sm text-texto-2"
-        : "flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-texto-2 hover:text-texto"}>
-      {!compacto && <LogOut size={16} />}
+    <button type="button" onClick={sair}
+      className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-texto-2 hover:text-texto">
+      <LogOut size={16} />
       Sair
     </button>
   );
