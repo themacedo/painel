@@ -1,5 +1,4 @@
-import { BotaoSair } from "./BotaoSair";
-import { comLogin, Lateral, NavMovel, type Tela } from "./Lateral";
+import { Lateral, NavMovel, type Tela } from "./Lateral";
 import { dataHora } from "@/lib/formato";
 
 type Props = { ativa: Tela; titulo: string; modo: string; dono: string; atualizadoEm: string; children: React.ReactNode };
@@ -19,7 +18,6 @@ export function Moldura({ ativa, titulo, modo, dono, atualizadoEm, children }: P
           {modo === "demo" && (
             <span className="shrink-0 rounded-lg bg-alerta-suave px-2.5 py-1 text-xs font-medium text-alerta">Dados fictícios</span>
           )}
-          {comLogin() && <span className="shrink-0 lg:hidden"><BotaoSair compacto /></span>}
         </header>
         {children}
       </main>

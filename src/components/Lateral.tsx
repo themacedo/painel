@@ -50,18 +50,27 @@ export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {
   );
 }
 
-// No celular a lateral some: as telas viram abas no topo.
+// No celular a lateral some: em cima a marca (e o Sair), embaixo as telas como abas de largura igual.
 export function NavMovel({ ativa }: { ativa: Tela }) {
   return (
-    <nav className="mb-4 flex gap-1 lg:hidden">
-      {telas.filter((t) => t.pronta).map(({ id, nome, href }) => (
-        <Link key={id} href={href}
-          className={`flex-1 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-center text-[13px] ${
-            id === ativa ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2"
-          }`}>
-          {nome}
-        </Link>
-      ))}
-    </nav>
+    <div className="mb-5 lg:hidden">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="grid size-7 place-items-center rounded-lg bg-primaria text-sm font-bold text-white">P</span>
+          <span className="font-semibold">Painel</span>
+        </div>
+        {comLogin() && <BotaoSair compacto />}
+      </div>
+      <nav className="flex gap-0.5 rounded-xl border border-borda bg-superficie p-1">
+        {telas.filter((t) => t.pronta).map(({ id, nome, href }) => (
+          <Link key={id} href={href}
+            className={`flex-auto whitespace-nowrap rounded-lg px-1.5 py-1.5 text-center text-[13px] ${
+              id === ativa ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2"
+            }`}>
+            {id === "visao" ? "Início" : nome}
+          </Link>
+        ))}
+      </nav>
+    </div>
   );
 }
