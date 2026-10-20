@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
 // sem ele, a senha antiga (HTTP Basic com PAINEL_SENHA), para o site não abrir enquanto o Google não está pronto.
 // Sem nenhum dos dois, nega. Ficam livres só a tela de login, as rotas do next-auth e o que o celular pede para
 // instalar o app (manifesto e ícones, sem dado nenhum).
-const LIVRES = ["/entrar", "/api/auth/", "/manifest.webmanifest", "/icones/"];
+const LIVRES = ["/entrar", "/privacidade", "/api/auth/", "/manifest.webmanifest", "/icones/"];
 
 export async function middleware(req: NextRequest) {
   if (process.env.PAINEL_MODO !== "privado") return NextResponse.next();
