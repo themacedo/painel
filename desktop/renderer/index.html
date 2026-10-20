@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <!-- a tela só roda código local e não chama a internet: quem fala com a API é o processo principal -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel</title>
+  </head>
+  <body>
+    <div id="raiz"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

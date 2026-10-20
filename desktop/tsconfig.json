@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "lib": ["dom", "dom.iterable", "esnext"], "module": "esnext", "moduleResolution": "bundler",
+    "strict": true, "noEmit": true, "skipLibCheck": true, "jsx": "react-jsx", "resolveJsonModule": true,
+    "isolatedModules": true, "types": ["node"],
+    "paths": { "@/*": ["../src/*"], "next/link": ["./shims/next-link.tsx"] }
+  },
+  "include": ["main", "renderer", "test", "shims", "vite.config.ts", "../src/telas", "../src/components", "../src/lib/tipos.ts", "../src/lib/formato.ts", "../src/lib/empresas.ts", "../src/lib/metricas.ts", "../src/lib/movimento.ts"],
+  "exclude": ["../src/app", "../src/lib/dados.ts", "../src/lib/auth.ts", "../src/middleware.ts"]
+}

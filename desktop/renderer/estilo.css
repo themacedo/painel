@@ -1,0 +1,8 @@
+@import "../../src/app/globals.css";
+/* as classes do Tailwind vêm dos componentes do site */
+@source "../../src";
+@source ".";
+
+/* área de arrastar a janela (a barra de título é escondida no macOS) */
+.arrastar { -webkit-app-region: drag; }
+.arrastar button { -webkit-app-region: no-drag; }
