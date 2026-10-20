@@ -30,5 +30,6 @@
     "react": "19.1.10",
     "react-dom": "19.1.10",
     "recharts": "2.15.4"
-  }
+  },
+  "packageManager": "pnpm@9.15.4"
 }

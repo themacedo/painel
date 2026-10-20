@@ -76,7 +76,8 @@ function criarJanela() {
   // a tela é local e só fala com o processo principal: nada de navegar nem abrir janelas
   janela.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   janela.webContents.on("will-navigate", (e) => e.preventDefault());
-  janela.loadFile(join(__dirname, "../renderer/index.html"));
+  // PAINEL_ABA abre direto numa aba (para conferir as telas); sem ela, vale a última aba usada
+  janela.loadFile(join(__dirname, "../renderer/index.html"), process.env["PAINEL_ABA"] ? { query: { aba: process.env["PAINEL_ABA"] } } : {});
   janela.once("ready-to-show", () => janela?.show());
   janela.on("close", (e) => { if (process.platform === "darwin" && !sairDeVez) { e.preventDefault(); janela?.hide(); } });
 }
