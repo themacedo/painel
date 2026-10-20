@@ -5,5 +5,5 @@ cd "${0:A:h}"
 export PATH="$HOME/.nvm/versions/node/v24.18.0/bin:$PATH"
 [[ -d node_modules ]] || pnpm install --ignore-workspace
 [[ -f node_modules/electron/path.txt ]] || node node_modules/electron/install.js
-pnpm -s build >/dev/null
+pnpm -s build >/dev/null 2>&1 || { echo "falhou ao compilar: rode 'cd ${0:A:h} && pnpm build' para ver o erro"; exit 1; }
 nohup ./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron . >/dev/null 2>&1 &

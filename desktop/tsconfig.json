@@ -5,6 +5,6 @@
     "isolatedModules": true, "types": ["node"],
     "paths": { "@/*": ["../src/*"], "next/link": ["./shims/next-link.tsx"] }
   },
-  "include": ["main", "renderer", "test", "shims", "vite.config.ts", "../src/telas", "../src/components", "../src/lib/tipos.ts", "../src/lib/formato.ts", "../src/lib/empresas.ts", "../src/lib/metricas.ts", "../src/lib/movimento.ts"],
+  "include": ["main", "renderer", "test", "shims", "vite.config.mts", "../src/telas", "../src/components", "../src/lib/tipos.ts", "../src/lib/formato.ts", "../src/lib/empresas.ts", "../src/lib/metricas.ts", "../src/lib/movimento.ts"],
   "exclude": ["../src/app", "../src/lib/dados.ts", "../src/lib/auth.ts", "../src/middleware.ts"]
 }

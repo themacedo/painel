@@ -1,8 +1,11 @@
 // A tela do app: React + Tailwind, reaproveitando os componentes do site (@ → ../src).
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: resolve(__dirname, "renderer"),
@@ -14,5 +17,6 @@ export default defineConfig({
     dedupe: ["react", "react-dom", "recharts", "lucide-react"],
   },
   define: { "process.env": "{}" }, // os componentes do site leem process.env só no servidor; aqui fica vazio
-  build: { outDir: resolve(__dirname, "dist/renderer"), emptyOutDir: true },
+  // app local: um arquivo só de ~580 kB carrega do disco na hora, não precisa dividir
+  build: { outDir: resolve(__dirname, "dist/renderer"), emptyOutDir: true, chunkSizeWarningLimit: 1500 },
 });
