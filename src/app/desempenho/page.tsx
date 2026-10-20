@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function Pagina() {
   const p = await carregarPainel();
   return (
-    <Moldura ativa="desempenho" titulo="Desempenho" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
+    <Moldura ativa="desempenho" titulo="Desempenho" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm} pendentes={p.saude?.pendentes}>
       <Desempenho p={p} modo={modo} mostraHorario={mostraHorario} />
     </Moldura>
   );

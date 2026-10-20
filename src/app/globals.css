@@ -1,44 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --fundo: #f6f7fb;
+  --fundo: #f4f5f7;
   --superficie: #ffffff;
-  --borda: #e7e9f0;
-  --texto: #111827;
-  --texto-2: #6b7280;
-  --primaria: #3d5afe;
-  --primaria-suave: #e8ecff;
-  --barra: #c9d2ff;
-  --barra-2: #9aa9ff;
-  --ok: #16a34a;
-  --ok-suave: #e7f6ec;
-  --alerta: #d97706;
-  --alerta-suave: #fdf3e2;
-  --perigo: #dc2626;
+  --superficie-2: #f8f9fa;
+  --borda: #e2e4e9;
+  --texto: #14161a;
+  --texto-2: #5a606c;
+  --primaria: #0b7a62;
+  --primaria-suave: #e2f3ee;
+  --barra: #e8eaee;
+  --barra-2: #c2c7d0;
+  --ok: #0b7a62;
+  --ok-suave: #e2f3ee;
+  --alerta: #a85207;
+  --alerta-suave: #fbeedc;
+  --perigo: #b42318;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fundo: #000000;
-    --superficie: #0f0f0f;
-    --borda: #232323;
-    --texto: #ededed;
-    --texto-2: #8f8f8f;
-    --primaria: #3b82f6;
-    --primaria-suave: #1a1a1a;
-    --barra: #3a3a3a;
-    --barra-2: #5a5a5a;
-    --ok: #22c55e;
-    --ok-suave: #0f2417;
-    --alerta: #f59e0b;
-    --alerta-suave: #2a1f0a;
-    --perigo: #ef4444;
+    --fundo: #0d0e11;
+    --superficie: #16181c;
+    --superficie-2: #1c1f24;
+    --borda: #2a2d34;
+    --texto: #ecedef;
+    --texto-2: #9ca2ad;
+    --primaria: #3cc6a2;
+    --primaria-suave: #11302a;
+    --barra: #262930;
+    --barra-2: #4a4f59;
+    --ok: #3cc6a2;
+    --ok-suave: #11302a;
+    --alerta: #f0a04b;
+    --alerta-suave: #33240f;
+    --perigo: #f87171;
   }
 }
 
 @theme inline {
   --color-fundo: var(--fundo);
   --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-barra: var(--barra);
   --color-borda: var(--borda);
   --color-texto: var(--texto);
   --color-texto-2: var(--texto-2);
@@ -50,6 +54,7 @@
   --color-alerta-suave: var(--alerta-suave);
   --color-perigo: var(--perigo);
   --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono-num);
 }
 
 /* app instalado (tela cheia): nada por baixo da barra de status, do entalhe ou da barra de início */
@@ -71,6 +76,20 @@ body {
   color: var(--texto);
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "tnum";
+}
+
+/* números (valores, datas, contagens): fonte mono com algarismos de largura igual */
+.num { font-family: var(--font-mono-num), ui-monospace, SFMono-Regular, Menlo, monospace; font-feature-settings: "tnum"; letter-spacing: -0.02em; }
+
+/* seções recolhíveis no fim das telas: começam abertas, fecham com um toque */
+.secao > summary { list-style: none; cursor: pointer; }
+.secao > summary::-webkit-details-marker { display: none; }
+.secao > summary::after { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--texto-2); border-bottom: 2px solid var(--texto-2); transform: rotate(45deg); margin-top: -4px; }
+.secao[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+
+/* no celular as abas ficam numa barra fixa embaixo: a página reserva o espaço dela */
+@media (max-width: 1023px) {
+  .com-abas { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
 }
 
 /* Movimento: cartões entram em sequência, barras enchem da esquerda. Desligado com "reduzir movimento". */

@@ -1,4 +1,4 @@
-// O app: tela de login, carregando, erro, ou a Visão geral (a mesma tela do site) com os dados da API.
+// O app: tela de login, carregando, erro, ou a tela Hoje (a mesma tela do site) com os dados da API.
 import { LogOut, RefreshCw } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { FonteRevisar, Painel, Pendentes, RevisaoEnvio } from "@/lib/tipos";
@@ -17,10 +17,10 @@ const fonteRevisar: FonteRevisar = {
 const TelaRevisar = () => <Revisar fonte={fonteRevisar} />;
 
 const ABAS = [
-  { id: "visao", nome: "Visão geral", Tela: VisaoGeral },
-  { id: "desempenho", nome: "Desempenho", Tela: Desempenho },
-  { id: "financas", nome: "Finanças", Tela: Financas },
+  { id: "visao", nome: "Hoje", Tela: VisaoGeral },
   { id: "plano", nome: "Plano", Tela: Plano },
+  { id: "financas", nome: "Finanças", Tela: Financas },
+  { id: "desempenho", nome: "Desempenho", Tela: Desempenho },
   { id: "revisar", nome: "Revisar", Tela: TelaRevisar },
 ] as const;
 type Aba = (typeof ABAS)[number]["id"];
@@ -46,7 +46,7 @@ function Centro({ children }: { children: React.ReactNode }) {
     <main className="arrastar grid min-h-dvh place-items-center bg-fundo px-4">
       <div className="w-full max-w-sm rounded-2xl border border-borda bg-superficie p-8">
         <div className="mb-6 flex items-center gap-2">
-          <span className="grid size-9 place-items-center rounded-xl bg-primaria text-base font-bold text-white">P</span>
+          <span className="grid size-9 place-items-center rounded-xl bg-texto text-base font-bold text-fundo">P</span>
           <span className="text-lg font-semibold">Painel</span>
         </div>
         {children}
@@ -107,12 +107,13 @@ export function App() {
   return (
     <div className="min-h-dvh bg-fundo">
       <header className="arrastar sticky top-0 z-40 flex items-center gap-3 border-b border-borda bg-fundo/90 py-2.5 pl-20 pr-4 backdrop-blur">
-        <span className="grid size-6 place-items-center rounded-md bg-primaria text-xs font-bold text-white">P</span>
-        <nav className="flex min-w-0 gap-0.5 overflow-x-auto rounded-lg border border-borda bg-superficie p-0.5" role="tablist">
+        <span className="grid size-7 place-items-center rounded-lg bg-texto text-sm font-bold text-fundo">P</span>
+        <nav className="flex min-w-0 gap-0.5 overflow-x-auto rounded-xl border border-borda bg-superficie p-1" role="tablist">
           {ABAS.map((x) => (
             <button key={x.id} type="button" role="tab" aria-selected={aba === x.id} onClick={() => irPara(x.id)}
-              className={`shrink-0 whitespace-nowrap rounded-md px-2.5 py-1 text-[13px] ${aba === x.id ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2 hover:text-texto"}`}>
+              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] ${aba === x.id ? "bg-primaria-suave font-semibold text-primaria" : "text-texto-2 hover:text-texto"}`}>
               {x.nome}
+              {x.id === "revisar" && !!p.saude?.pendentes && <span className="num rounded-full bg-alerta-suave px-1.5 text-[11px] font-medium text-alerta">{p.saude.pendentes}</span>}
             </button>
           ))}
         </nav>
@@ -128,8 +129,10 @@ export function App() {
           </button>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
-        {ABAS.filter((x) => x.id === aba).map(({ id, Tela }) => <Tela key={id} p={p} modo="privado" mostraHorario />)}
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+        <h1 className="mb-5 text-[28px] font-semibold tracking-tight">{ABAS.find((x) => x.id === aba)!.nome}</h1>
+        {aba === "visao" ? <VisaoGeral p={p} modo="privado" mostraHorario aoRevisar={() => irPara("revisar")} />
+          : ABAS.filter((x) => x.id === aba).map(({ id, Tela }) => <Tela key={id} p={p} modo="privado" mostraHorario />)}
       </main>
     </div>
   );

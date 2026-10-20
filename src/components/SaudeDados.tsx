@@ -53,7 +53,7 @@ export function SaudeDados({ saude, referencia }: { saude: Saude; referencia?: s
   ];
 
   return (
-    <section className="entrar mb-3 rounded-xl border border-borda bg-superficie px-4 py-2.5 text-xs">
+    <section className="entrar rounded-2xl border border-borda bg-superficie px-4 py-3 text-xs">
       <button type="button" onClick={() => setAberto((a) => !a)} aria-expanded={aberto}
         className="flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-left">
         <span className={`flex items-center gap-1.5 font-medium ${TEXTO[geral]}`}>

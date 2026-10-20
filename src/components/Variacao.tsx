@@ -5,7 +5,7 @@ export function Variacao({ atual, antes, melhorSobe = true }: { atual: number | 
   if (Math.abs(pct) < 15) return <span className="text-xs text-texto-2">manteve</span>;
   const bom = pct > 0 === melhorSobe;
   return (
-    <span className={`text-xs font-medium ${bom ? "text-ok" : "text-perigo"}`}>
+    <span className={`text-xs font-medium ${bom ? "text-ok" : "text-alerta"}`}>
       {pct > 0 ? "▲" : "▼"} {Math.abs(Math.round(pct))}%
     </span>
   );

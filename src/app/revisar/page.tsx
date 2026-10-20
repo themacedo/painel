@@ -10,7 +10,7 @@ export default async function Pagina() {
   if (modo !== "privado") notFound();
   const p = await carregarPainel();
   return (
-    <Moldura ativa="revisar" titulo="Revisar" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
+    <Moldura ativa="revisar" titulo="Revisar" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm} pendentes={p.saude?.pendentes}>
       <RevisarWeb />
     </Moldura>
   );

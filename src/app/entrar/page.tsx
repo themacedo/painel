@@ -24,7 +24,7 @@ export default async function Entrar({ searchParams }: { searchParams: Promise<{
     <main className="grid min-h-dvh place-items-center bg-fundo px-4">
       <div className="entrar w-full max-w-sm rounded-2xl border border-borda bg-superficie p-8 shadow-sm">
         <div className="mb-8 flex items-center gap-2">
-          <span className="grid size-9 place-items-center rounded-xl bg-primaria text-base font-bold text-white">P</span>
+          <span className="grid size-9 place-items-center rounded-xl bg-texto text-base font-bold text-fundo">P</span>
           <span className="text-lg font-semibold">Painel</span>
         </div>
         <h1 className="text-xl font-semibold">Entrar</h1>

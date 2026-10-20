@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CheckCircle2, Circle, CreditCard, Landmark, PieChart, Receipt, TrendingDown } from "lucide-react";
-import { Cartao } from "@/components/Moldura";
+import { Cartao, Secao } from "@/components/Cartao";
 import { Barra, Kpi } from "@/components/Kpi";
 import { GraficoParcelas } from "@/components/GraficoParcelas";
 import { GraficoPosicao } from "@/components/GraficoPosicao";
@@ -106,98 +105,85 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
   );
 
   return (
-    <>
-      {d.cicloCartao && <div className="mb-3"><AvisoCartao c={d.cicloCartao} /></div>}
-
+    <div className="flex flex-col gap-3.5">
       {/* Seletor: tipo de período + qual período */}
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <div role="tablist" aria-label="Tipo de período" className="flex rounded-lg border border-borda bg-superficie p-0.5">
+      <div className="flex flex-wrap items-center gap-2">
+        <div role="tablist" aria-label="Tipo de período" className="flex rounded-xl border border-borda bg-superficie p-1">
           {(["semana", "mes", "ano"] as Modo[]).map((m) => (
             <button key={m} role="tab" aria-selected={modo === m} disabled={!periodos[m].length} onClick={() => trocarModo(m)}
-              className={`rounded-md px-3 py-1.5 text-sm transition-colors disabled:opacity-40 ${modo === m ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2 hover:text-texto"}`}>
+              className={`min-h-9 rounded-lg px-3.5 text-sm transition-colors disabled:opacity-40 ${modo === m ? "bg-texto font-semibold text-fundo" : "text-texto-2 hover:text-texto"}`}>
               {NOMES[m]}
             </button>
           ))}
         </div>
         <label className="sr-only" htmlFor="periodo">Período</label>
         <select id="periodo" value={p.chave} onChange={(ev) => setChave(ev.target.value)}
-          className="rounded-lg border border-borda bg-superficie px-3 py-2 text-sm text-texto outline-none focus-visible:ring-2 focus-visible:ring-primaria">
+          className="min-h-11 rounded-xl border border-borda bg-superficie px-3 text-sm text-texto outline-none focus-visible:ring-2 focus-visible:ring-primaria">
           {lista.map((x) => <option key={x.chave} value={x.chave}>{x.rotulo}{x.emCurso ? " (em curso)" : ""}</option>)}
         </select>
       </div>
 
-      <div key={p.chave} className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Kpi titulo={titulo(modo, p)} valor={<Contador valor={r.despesas} formato="brl" />} icone={TrendingDown} cor="bg-primaria"
+      <div key={p.chave} className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
+        <Kpi titulo={titulo(modo, p)} valor={<Contador valor={r.despesas} formato="brl" />}
           detalhe={comparavel ? <>{comparacao}: {reaisCurto(r.despesasAnterior)}{" "}<Variacao atual={r.despesas} antes={r.despesasAnterior} melhorSobe={false} /></>
                                 : <>Sem comparação: {semBase}</>} />
-        <Kpi titulo={`Entrou ${doPeriodo[modo]}`} valor={<Contador valor={entrou} formato="brl" />} icone={Landmark} cor="bg-ok"
+        <Kpi titulo={`Entrou ${doPeriodo[modo]}`} valor={<span className="text-ok"><Contador valor={entrou} formato="brl" /></span>}
           detalhe={<>{e.clt.nome} {reaisCurto(en.clt)} · {e.pj.nome} {reaisCurto(en.pj)}{en.outros > 0.5 && <> · outros {reaisCurto(en.outros)}</>}
             {p.clt.previsto > 0 && <><br />Previsto: {reaisCurto(p.clt.previsto)} ({e.clt.nome})</>}</>} />
-        {modo === "mes" ? (
-          <Kpi titulo="Contas fixas" valor={<><Contador valor={pagos.length} /> de {fixos.length} pagas</>} icone={Receipt} cor="bg-alerta"
+        <Kpi titulo="Maior categoria" valor={<span className="font-sans font-semibold">{maior ? maior.nome : "—"}</span>}
+          detalhe={maior ? <>{reais(maior.atual)} · {r.despesas ? Math.round((100 * maior.atual) / r.despesas) : 0}% do gasto {doPeriodo[modo]}</> : <>Sem gastos no período</>} />
+        {modo === "mes" && (
+          <Kpi titulo="Contas fixas" valor={<><Contador valor={pagos.length} /> de {fixos.length} <span className="font-sans text-sm text-texto-2">pagas</span></>}
             detalhe={<>Faltam {reaisCurto(pendente)} de {reaisCurto(fixos.reduce((s, f) => s + f.valor, 0))}</>}>
             <Barra pct={(pagos.length / Math.max(1, fixos.length)) * 100} cor="bg-alerta" />
           </Kpi>
-        ) : (
-          <Kpi titulo="Maior categoria" valor={maior ? maior.nome : "—"} icone={PieChart} cor="bg-alerta"
-            detalhe={maior ? <>{reais(maior.atual)} · {r.despesas ? Math.round((100 * maior.atual) / r.despesas) : 0}% do gasto {doPeriodo[modo]}</> : <>Sem gastos no período</>} />
         )}
-        <Kpi titulo="Parcelas nos próximos 12 meses" valor={<Contador valor={parcelas12} formato="brl" />} icone={CreditCard} cor="bg-[#8b5cf6]"
+        <Kpi titulo="Parcelas nos próximos 12 meses" valor={<Contador valor={parcelas12} formato="brl" />}
           detalhe={livre ? <>Livre de parcelas a partir de {mesCurto(livre)}</> : <>Parcelas em todos os 12 meses</>} />
       </div>
 
-      <div className="mt-3">
-        <Fechamento p={p} modo={modo} entrou={entrou} />
-      </div>
+      <Fechamento p={p} modo={modo} entrou={entrou} />
 
-      {serie && serie.length > 1 && (
-        <div className="mt-3">
-          <Cartao titulo={`Posição real ${porModo[modo]}`} extra={<span className="text-xs text-texto-2">contas + investimentos − cartão − empréstimos, no fim de cada {unidade[modo]}</span>}>
-            <GraficoPosicao dados={serie} destaque={p.ate} />
-          </Cartao>
-        </div>
-      )}
-
-      <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3.5 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <Cartao titulo="Gastos por categoria" extra={
             <div className="flex items-center gap-3 text-xs text-texto-2">
-              <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-primaria" />{p.rotulo}</span>
+              <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-texto" />{p.rotulo}</span>
               {comparavel
-                ? <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-[var(--barra)]" />{comparacao.toLowerCase()}</span>
+                ? <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-barra" />{comparacao.toLowerCase()}</span>
                 : <span>sem comparação: {semBase}</span>}
             </div>}>
             <p className="-mt-1 mb-3 text-xs text-texto-2">Passe o mouse ou toque numa categoria para ver o resumo.</p>
             {!cats.length && <p className="text-sm text-texto-2">Nenhum gasto no período.</p>}
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-2">
               {cats.map((c, idx) => {
                 const creditos = (c.bruto ?? c.atual) - c.atual;
                 return (
                   <li key={p.chave + c.nome} tabIndex={0} aria-describedby={`cat-${idx}`}
-                    className="group relative -mx-2 rounded-lg px-2 py-1 outline-none hover:bg-fundo focus-visible:bg-fundo focus-visible:ring-2 focus-visible:ring-primaria">
-                    <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                    className="group relative -mx-2 rounded-xl px-2 py-1.5 outline-none hover:bg-superficie-2 focus-visible:bg-superficie-2 focus-visible:ring-2 focus-visible:ring-primaria">
+                    <div className="mb-1.5 flex items-baseline justify-between gap-2 text-sm">
                       <span>{c.nome}</span>
                       <span className="flex items-baseline gap-2">
-                        <b className="font-medium">{reais(c.atual)}</b>
+                        <b className="num font-medium">{reais(c.atual)}</b>
                         {comparavel && <Variacao atual={c.atual} antes={c.anterior} melhorSobe={false} />}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-0.5">
-                      <div className="encher h-1.5 rounded-full bg-primaria" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
-                      {comparavel && <div className="encher h-1.5 rounded-full bg-[var(--barra)]" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />}
+                    <div className="flex flex-col gap-1">
+                      <div className="encher h-2 rounded-full bg-texto" style={{ width: `${(c.atual / maxCat) * 100}%` }} />
+                      {comparavel && <div className="encher h-2 rounded-full bg-barra" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />}
                     </div>
                     <div id={`cat-${idx}`} role="tooltip"
-                      className="pointer-events-none absolute left-2 right-2 top-full z-20 mt-1 hidden rounded-lg border border-borda bg-superficie p-3 text-xs shadow-lg group-hover:block group-focus:block sm:left-auto sm:w-72">
+                      className="pointer-events-none absolute left-2 right-2 top-full z-20 mt-1 hidden rounded-xl border border-borda bg-superficie p-3 text-xs shadow-lg group-hover:block group-focus:block sm:left-auto sm:w-72">
                       <div className="mb-2 flex items-baseline justify-between">
                         <span className="font-semibold">{c.nome}</span>
-                        <span className="font-semibold">{reais(c.atual)}</span>
+                        <span className="num font-semibold">{reais(c.atual)}</span>
                       </div>
                       <dl className="mb-2 grid grid-cols-2 gap-x-3 gap-y-1 text-texto-2">
-                        <dt>Lançamentos</dt><dd className="text-right text-texto">{c.n ?? "—"}</dd>
-                        <dt>Ticket médio</dt><dd className="text-right text-texto">{c.n ? reais((c.bruto ?? c.atual) / c.n) : "—"}</dd>
-                        <dt>Do gasto {doPeriodo[modo]}</dt><dd className="text-right text-texto">{r.despesas ? `${Math.round((100 * c.atual) / r.despesas)}%` : "—"}</dd>
-                        <dt>{anterior[modo]}</dt><dd className="text-right text-texto">{reais(c.anterior)}</dd>
-                        {creditos > 0.5 && <><dt>Créditos e estornos</dt><dd className="text-right text-ok">− {reais(creditos)}</dd></>}
+                        <dt>Lançamentos</dt><dd className="num text-right text-texto">{c.n ?? "—"}</dd>
+                        <dt>Ticket médio</dt><dd className="num text-right text-texto">{c.n ? reais((c.bruto ?? c.atual) / c.n) : "—"}</dd>
+                        <dt>Do gasto {doPeriodo[modo]}</dt><dd className="num text-right text-texto">{r.despesas ? `${Math.round((100 * c.atual) / r.despesas)}%` : "—"}</dd>
+                        <dt>{anterior[modo]}</dt><dd className="num text-right text-texto">{reais(c.anterior)}</dd>
+                        {creditos > 0.5 && <><dt>Créditos e estornos</dt><dd className="num text-right text-ok">− {reais(creditos)}</dd></>}
                       </dl>
                       {!!c.onde?.length && (
                         <>
@@ -206,7 +192,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
                             {c.onde.map((o) => (
                               <li key={o.nome} className="flex justify-between gap-3">
                                 <span className="truncate">{o.nome}{o.n > 1 && <span className="text-texto-2"> · {o.n}x</span>}</span>
-                                <span className="shrink-0">{reais(o.valor)}</span>
+                                <span className="num shrink-0">{reais(o.valor)}</span>
                               </li>
                             ))}
                           </ul>
@@ -223,29 +209,42 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
           <Cartao titulo={`Contas fixas de ${p.rotulo}`}>
             <ul className="divide-y divide-borda text-sm">
               {[...fixos].sort((a, b) => Number(a.pago) - Number(b.pago) || a.dia - b.dia).map((f) => (
-                <li key={f.nome} className="flex items-center gap-2.5 py-2">
-                  {f.pago ? <CheckCircle2 size={16} className="shrink-0 text-ok" /> : <Circle size={16} className="shrink-0 text-alerta" />}
+                <li key={f.nome} className="flex min-h-11 items-center gap-2.5">
+                  <span className="num w-11 text-xs text-texto-2">dia {f.dia}</span>
                   <span className="min-w-0 flex-1 truncate">{f.nome}</span>
-                  <span className="text-xs text-texto-2">dia {f.dia}</span>
-                  <span className="w-24 text-right">{reais(f.valor)}</span>
+                  <span className="num text-[13px]">{reais(f.valor)}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${f.pago ? "bg-ok-suave text-ok" : "bg-alerta-suave text-alerta"}`}>{f.pago ? "Pago" : "A vencer"}</span>
                 </li>
               ))}
             </ul>
           </Cartao>
         ) : (
-          <div className="flex flex-col gap-3">{cardClt}{cardPj}</div>
+          <div className="flex flex-col gap-3.5">{cardClt}{cardPj}</div>
         )}
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-3">
-        <div className={modo === "mes" ? "xl:col-span-2" : "xl:col-span-3"}>
-          <Cartao titulo="Parcelas já assumidas, por mês" extra={<span className="text-xs text-texto-2">passe o mouse ou toque num mês para ver as compras</span>}>
-            <GraficoParcelas dados={d.parcelas.map((x) => ({ rotulo: mesCurto(x.mes), valor: x.valor, itens: x.itens ?? [] }))} />
-          </Cartao>
-        </div>
-        {modo === "mes" && <div className="flex flex-col gap-3">{cardClt}{cardPj}</div>}
-      </div>
-    </>
+      {serie && serie.length > 1 && (
+        <Secao titulo={`Posição real ${porModo[modo]}`} resumo={`contas + investimentos − cartão − empréstimos, no fim de cada ${unidade[modo]}`}>
+          <GraficoPosicao dados={serie} destaque={p.ate} />
+        </Secao>
+      )}
+
+      <Secao titulo="Parcelas já assumidas, por mês" resumo={<>{reais(parcelas12)} nos próximos 12 meses · toque num mês para ver as compras</>}>
+        <GraficoParcelas dados={d.parcelas.map((x) => ({ rotulo: mesCurto(x.mes), valor: x.valor, itens: x.itens ?? [] }))} />
+      </Secao>
+
+      {modo === "mes" && (
+        <Secao titulo={`${e.clt.nome} e ${e.pj.nome} em ${p.rotulo}`} resumo={`entrou ${reaisCurto(en.clt)} e ${reaisCurto(en.pj)}`}>
+          <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-2">{cardClt}{cardPj}</div>
+        </Secao>
+      )}
+
+      {d.cicloCartao && d.cicloCartao.teto !== null && d.cicloCartao.status !== null && (
+        <Secao titulo="Cartão de crédito: quanto ainda cabe na fatura" resumo={`fecha ${diaMes(d.cicloCartao.fechamento)} · vence ${diaMes(d.cicloCartao.vencimento)}`}>
+          <AvisoCartao c={d.cicloCartao} />
+        </Secao>
+      )}
+    </div>
   );
 }
 
@@ -278,6 +277,7 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
   return (
     <Cartao titulo={`Como ${nome} fechou${p.emCurso ? " até agora" : ""}`}>
       {p.posicao && <PosicaoReal ini={p.posicao.inicio} fim={p.posicao.fim} emCurso={p.emCurso} />}
+      {p.posicao && <Cascata ini={p.posicao.inicio.posicao} entrou={entrou} gastou={r.despesas} custosPj={en.custosPj} fim={p.posicao.fim.posicao} />}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <dl className="flex flex-col gap-2 text-sm">
           <div className="flex justify-between"><dt className="text-texto-2">Entrou</dt><dd className="text-ok">{reais(entrou)}</dd></div>
@@ -347,7 +347,7 @@ function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurs
     <div className="mb-4 flex flex-col gap-3 border-b border-borda pb-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p className="text-xs text-texto-2">Posição real {emCurso ? "hoje" : "no fim do período"}</p>
-        <p className={`text-2xl font-semibold ${fim.posicao < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fim.posicao)}</p>
+        <p className={`num text-3xl font-medium ${fim.posicao < 0 ? "text-perigo" : ""}`}>{sinal(fim.posicao)}</p>
         <p className="text-xs text-texto-2">{composicao(fim)}</p>
       </div>
       <div className="text-sm sm:text-right">
@@ -356,6 +356,42 @@ function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurs
           {delta < 0 ? "Afundou " : "Melhorou "}{reais(Math.abs(delta))} no período
         </p>
       </div>
+    </div>
+  );
+}
+
+// A posição do período em cascata: início → entrou → gastou → custos da PJ → (o que mexeu fora do resultado) → fim.
+// A escala começa perto do menor ponto para as diferenças aparecerem; o texto embaixo diz de onde ela parte.
+function Cascata({ ini, entrou, gastou, custosPj, fim }: { ini: number; entrou: number; gastou: number; custosPj: number; fim: number }) {
+  const aposEntrar = ini + entrou, aposGastar = aposEntrar - gastou, aposCustos = aposGastar - custosPj;
+  const fora = fim - aposCustos;
+  const pontos = [0, ini, aposEntrar, aposGastar, aposCustos, fim];
+  const topo = Math.max(...pontos), baixo = Math.min(...pontos);
+  const minPos = Math.min(ini, aposGastar, aposCustos, fim);
+  const base = baixo < 0 ? baixo : Math.floor((minPos * 0.92) / 1000) * 1000;
+  const faixa = Math.max(1, topo - base);
+  const barra = (de: number, ate: number) => {
+    const a = Math.max(Math.min(de, ate), base), b = Math.max(de, ate);
+    return { left: `${((a - base) / faixa) * 100}%`, width: `${Math.max(0.4, ((b - a) / faixa) * 100)}%` };
+  };
+  const linhas = [
+    { nome: "Início", valor: reais(ini), cor: "bg-texto-2", ...barra(Math.min(0, ini), ini) },
+    { nome: "Entrou", valor: `+ ${reais(entrou)}`, cor: "bg-ok", ...barra(ini, aposEntrar) },
+    { nome: "Gastou", valor: `− ${reais(gastou)}`, cor: "bg-alerta", ...barra(aposGastar, aposEntrar) },
+    ...(custosPj > 0.5 ? [{ nome: "Custos da PJ", valor: `− ${reais(custosPj)}`, cor: "bg-alerta", ...barra(aposCustos, aposGastar) }] : []),
+    ...(Math.abs(fora) >= 0.5 ? [{ nome: "Fora do resultado", valor: `${fora < 0 ? "−" : "+"} ${reais(Math.abs(fora))}`, cor: "bg-barra-2", ...barra(aposCustos, fim) }] : []),
+    { nome: "Fim", valor: reais(fim), cor: fim < 0 ? "bg-perigo" : "bg-texto", ...barra(Math.min(0, fim), fim) },
+  ];
+  return (
+    <div className="mb-4 flex flex-col gap-1.5 border-b border-borda pb-4">
+      {linhas.map((l) => (
+        <div key={l.nome} className="grid grid-cols-[7rem_minmax(0,1fr)_7.5rem] items-center gap-3 text-[13px] sm:grid-cols-[8rem_minmax(0,1fr)_8.5rem]">
+          <span className="text-texto-2">{l.nome}</span>
+          <span className="relative h-4 rounded bg-superficie-2"><span className={`absolute inset-y-0 rounded ${l.cor}`} style={{ left: l.left, width: l.width }} /></span>
+          <span className="num text-right">{l.valor}</span>
+        </div>
+      ))}
+      <p className="mt-1 text-xs text-texto-2">Escala a partir de {reaisCurto(base)}.</p>
     </div>
   );
 }
