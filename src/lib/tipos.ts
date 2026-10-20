@@ -34,9 +34,15 @@ export type Painel = {
     historico: Semana[];
     marcos: { data: string; rotulo: string }[];
     notas: { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string }[];
+    horas?: HorasSemana[];
     atual: { nota: number | null; foraDoExpedientePct: number; destaque: string };
   };
 };
+
+// Horas nas sessões do Claude numa semana (sábado a sexta), por empresa: total, a parte seg–sex 09–18 ("Expediente")
+// e a de 00–06 ("Madrugada"). É um piso: calls e trabalho fora do Claude não entram. Chaves ausentes = 0.
+export type HorasSemana = { inicio: string; total: number; paralelo?: number } & Partial<Record<
+  "clt" | "pj" | "pessoal" | "outros" | `${"clt" | "pj" | "pessoal" | "outros"}${"Expediente" | "Madrugada"}`, number>>;
 
 // Uma semana da revisão (sábado a sexta). null = não medido naquela semana.
 export type Semana = {

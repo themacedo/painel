@@ -1,5 +1,5 @@
 import { Cartao, Moldura } from "@/components/Moldura";
-import { HistoricoCommits, Linhas } from "@/components/GraficosDesempenho";
+import { HistoricoCommits, HorasPorSemana, Linhas } from "@/components/GraficosDesempenho";
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
@@ -8,7 +8,50 @@ import { corClt, corPj } from "@/lib/empresas";
 import { diaMes } from "@/lib/formato";
 import { comparar, mediaMovel, retrabalho, semanaDe, sobrecarga, type Chave } from "@/lib/metricas";
 import { TriangleAlert } from "lucide-react";
-import type { Empresa, Semana } from "@/lib/tipos";
+import type { Empresa, HorasSemana, Painel, Semana } from "@/lib/tipos";
+
+type Empresas = Painel["empresas"];
+
+const h1 = (v: number) => `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h`;
+const madrugada = (h: HorasSemana) => (h.cltMadrugada ?? 0) + (h.pjMadrugada ?? 0) + (h.pessoalMadrugada ?? 0) + (h.outrosMadrugada ?? 0);
+
+// Horas nas sessões do Claude: a última semana fechada contra a média das 4 anteriores, o pessoal no horário comercial,
+// a madrugada e o gráfico por semana. É um piso (calls e trabalho fora do Claude não entram).
+function HorasSessoes({ horas, e }: { horas: HorasSemana[]; e: Empresas }) {
+  const ult = horas.at(-1)!;
+  const ant = horas.slice(-5, -1);
+  const media = ant.length ? ant.reduce((s, h) => s + h.total, 0) / ant.length : null;
+  const itens = [
+    { nome: "Total da semana", valor: h1(ult.total), sub: media == null ? "sem base" : `média das 4 anteriores: ${h1(media)}` },
+    { nome: `${e.clt.nome} · ${e.pj.nome}`, valor: `${h1(ult.clt ?? 0)} · ${h1(ult.pj ?? 0)}`,
+      sub: `${h1(ult.paralelo ?? 0)} com as duas abertas ao mesmo tempo` },
+    { nome: "Pessoal em horário comercial", valor: h1(ult.pessoalExpediente ?? 0), sub: `de ${h1(ult.pessoal ?? 0)} no pessoal` },
+    { nome: "Madrugada (00–06 h)", valor: h1(madrugada(ult)), sub: media == null ? "" : `média das 4 anteriores: ${h1(ant.reduce((s, h) => s + madrugada(h), 0) / ant.length)}` },
+  ];
+  return (
+    <>
+      <dl className="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {itens.map((i) => (
+          <div key={i.nome} className="rounded-lg bg-fundo p-3">
+            <dt className="text-xs text-texto-2">{i.nome}</dt>
+            <dd className="mt-1 text-lg font-semibold">{i.valor}</dd>
+            {i.sub && <p className="mt-1 text-xs text-texto-2">{i.sub}</p>}
+          </div>
+        ))}
+      </dl>
+      <HorasPorSemana horas={horas} series={[
+        { chave: "clt", nome: e.clt.nome, cor: corClt(e) },
+        { chave: "pj", nome: e.pj.nome, cor: corPj(e) },
+        { chave: "pessoal", nome: "Pessoal", cor: "var(--barra-2)" },
+        { chave: "outros", nome: "Sem classificação", cor: "var(--barra)" },
+      ]} />
+      <p className="mt-2 text-xs text-texto-2">
+        Tempo ativo nas sessões do Claude (pausas acima de 10 min não contam), semanas de sábado a sexta. É um piso: calls,
+        Teams e trabalho fora do Claude não aparecem.
+      </p>
+    </>
+  );
+}
 
 export const dynamic = "force-dynamic";
 
@@ -122,6 +165,19 @@ export default async function Desempenho() {
           ]} />
         </Cartao>
       </div>
+
+      {!!p.desempenho.horas?.length && (
+        <div className="mt-3">
+          <Cartao titulo={`Horas nas sessões · semana de ${diaMes(p.desempenho.horas.at(-1)!.inicio)}`} extra={
+            <div className="flex flex-wrap items-center gap-3 text-xs text-texto-2">
+              <span className="flex items-center gap-1.5"><Marca empresa={e.clt} tamanho={14} />{e.clt.nome}</span>
+              <span className="flex items-center gap-1.5"><Marca empresa={e.pj} tamanho={14} />{e.pj.nome}</span>
+              <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm" style={{ background: "var(--barra-2)" }} />Pessoal</span>
+            </div>}>
+            <HorasSessoes horas={p.desempenho.horas} e={e} />
+          </Cartao>
+        </div>
+      )}
 
       <div className="mt-3">
         <Cartao titulo={ultima ? `Avaliação da semana de ${diaMes(ultima.inicio)}` : "Avaliação da semana"} extra={
