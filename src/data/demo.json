@@ -5140,6 +5140,34 @@
               }
             ]
           }
+        ],
+        "veredito": "Pleno avançado: entrega e autonomia fortes; comunicação escrita em evolução.",
+        "revisores": "dois avaliadores independentes",
+        "patamares": [
+          {
+            "criterio": "Execução e entrega",
+            "de": 2,
+            "ate": 2,
+            "leitura": "Vazão alta com cycle time baixo."
+          },
+          {
+            "criterio": "Qualidade",
+            "de": 2,
+            "ate": 3,
+            "leitura": "Poucas falhas e testes consistentes."
+          },
+          {
+            "criterio": "Influência e comunicação",
+            "de": 1,
+            "ate": 1,
+            "leitura": "Registro escrito irregular."
+          },
+          {
+            "criterio": "Consistência",
+            "de": 1,
+            "ate": 2,
+            "leitura": "Ritmo estável nas últimas semanas."
+          }
         ]
       }
     ]

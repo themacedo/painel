@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Contador } from "@/components/Contador";
 import { useMovimento } from "@/lib/movimento";
-import type { KpiMensal, LenteItem, NotaMensal, NotaSemanal } from "@/lib/tipos";
+import type { KpiMensal, LenteItem, NotaMensal, NotaSemanal, Patamar } from "@/lib/tipos";
 
 const diaMes = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
 const corNota = (n: number) => (n >= 8 ? "bg-ok" : n >= 6 ? "bg-primaria" : n >= 4 ? "bg-alerta" : "bg-perigo");
@@ -73,6 +73,45 @@ function Kpi({ k }: { k: KpiMensal }) {
   );
 }
 
+const NIVEIS = ["Júnior", "Pleno", "Pleno avançado", "Sênior"];
+
+// Régua de Júnior a Sênior por critério; uma faixa (de–ate) quando o patamar fica entre dois níveis.
+function Patamares({ itens, veredito }: { itens: Patamar[]; veredito?: string }) {
+  return (
+    <div className="mt-5">
+      <p className="mb-2 text-xs font-medium uppercase tracking-wider text-texto-2">Patamar por critério</p>
+      {veredito && <p className="mb-3 rounded-lg bg-primaria-suave px-3 py-2 text-sm">{veredito}</p>}
+      <div className="mb-1 hidden grid-cols-[minmax(0,11rem)_1fr] gap-3 sm:grid">
+        <span />
+        <div className="grid grid-cols-4 text-center text-[11px] text-texto-2">{NIVEIS.map((n) => <span key={n}>{n}</span>)}</div>
+      </div>
+      <ul className="flex flex-col gap-3">
+        {itens.map((p) => {
+          const rotulo = p.critico ? "Crítica" : p.de === p.ate ? NIVEIS[p.de] : `${NIVEIS[p.de]} a ${NIVEIS[p.ate]}`;
+          return (
+            <li key={p.criterio} className="grid grid-cols-1 gap-1.5 sm:grid-cols-[minmax(0,11rem)_1fr] sm:gap-3">
+              <div className="flex items-baseline justify-between gap-2 text-sm sm:block">
+                <span className="font-medium">{p.criterio}</span>
+                <span className={`text-xs sm:block ${p.critico ? "text-perigo" : "text-primaria"}`}>{rotulo}</span>
+              </div>
+              <div>
+                <div className="grid grid-cols-4 gap-1">
+                  {NIVEIS.map((n, i) => (
+                    <span key={n} title={n} className={`encher h-2 rounded-full ${
+                      p.critico ? (i === 0 ? "bg-perigo/40" : "bg-primaria-suave")
+                        : i >= p.de && i <= p.ate ? "bg-primaria" : i < p.de ? "bg-primaria/30" : "bg-primaria-suave"}`} />
+                  ))}
+                </div>
+                <p className="mt-1 text-xs text-texto-2">{p.leitura}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 const STATUS: Record<LenteItem["status"], string> = { ok: "bg-ok", atencao: "bg-alerta", ruim: "bg-perigo" };
 
 function Lente({ titulo, itens }: { titulo: string; itens: LenteItem[] }) {
@@ -111,6 +150,7 @@ function Mes({ m, anterior, nomes }: { m: NotaMensal; anterior?: NotaMensal; nom
           <div className="mt-4"><Areas atual={m.areas} antes={anterior?.areas} /></div>
         </div>
       </div>
+      {!!m.patamares?.length && <Patamares itens={m.patamares} veredito={m.veredito} />}
       {grupos.map((g) => (
         <div key={g} className="mt-5">
           <p className="mb-2 text-xs font-medium uppercase tracking-wider text-texto-2">{nomes[g] ?? g} · antes de 15/09 × ciclo</p>
@@ -124,6 +164,7 @@ function Mes({ m, anterior, nomes }: { m: NotaMensal; anterior?: NotaMensal; nom
           {m.lentes.map((l) => <Lente key={l.titulo} titulo={l.titulo} itens={l.itens} />)}
         </div>
       )}
+      {m.revisores && <p className="mt-4 text-xs text-texto-2">Avaliação: {m.revisores}.</p>}
     </>
   );
 }
