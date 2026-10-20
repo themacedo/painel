@@ -4,6 +4,9 @@ import demo from "@/data/demo.json";
 import type { Painel } from "./tipos";
 
 export const modo = process.env.PAINEL_MODO === "privado" ? "privado" : "demo";
+// O demo é público e vai para o portfólio: métricas de horário (fora do expediente, madrugada, horário comercial,
+// as duas frentes ao mesmo tempo) ficam só no modo privado.
+export const mostraHorario = modo === "privado";
 
 // Modo demo: dados fictícios do repositório. Modo privado: o painel.json gerado no Mac,
 // lido só no servidor (arquivo local em dev; em produção, a API de conteúdo de um repositório

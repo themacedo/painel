@@ -68,7 +68,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
   const comparacao = p.emCurso ? `${anterior[modo]} (mesmos dias)` : anterior[modo];
 
   const cardClt = (
-    <Cartao titulo={`CLT · ${p.rotulo}`} extra={<Marca empresa={e.clt} tamanho={18} />}>
+    <Cartao titulo={`${e.clt.nome} · ${p.rotulo}`} extra={<Marca empresa={e.clt} tamanho={18} />}>
       <dl className="flex flex-col gap-3 text-sm">
         {p.clt.itens.map((i) => (
           <div key={i.data + i.descricao} className="flex items-baseline justify-between gap-2">
@@ -88,7 +88,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
     </Cartao>
   );
   const cardPj = (
-    <Cartao titulo={`PJ · ${p.rotulo}`} extra={<Marca empresa={e.pj} tamanho={18} />}>
+    <Cartao titulo={`${e.pj.nome} · ${p.rotulo}`} extra={<Marca empresa={e.pj} tamanho={18} />}>
       <dl className="flex flex-col gap-3 text-sm">
         <div className="flex justify-between"><dt className="text-texto-2">Faturamento</dt><dd className="font-medium text-ok">{reais(p.pj.faturamento)}</dd></div>
         {custosPj.map(([c, v]) => (

@@ -4,7 +4,7 @@ import { HistoricoCommits, HorasPorSemana, Linhas } from "@/components/GraficosD
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
-import { carregarPainel, modo } from "@/lib/dados";
+import { carregarPainel, modo, mostraHorario } from "@/lib/dados";
 import { corClt, corPj } from "@/lib/empresas";
 import { diaMes } from "@/lib/formato";
 import { comparar, mediaMovel, retrabalho, semanaDe, sobrecarga, type Chave } from "@/lib/metricas";
@@ -18,20 +18,21 @@ const madrugada = (h: HorasSemana) => (h.cltMadrugada ?? 0) + (h.pjMadrugada ?? 
 
 // Horas nas sessões do Claude: a última semana fechada contra a média das 4 anteriores, o pessoal no horário comercial,
 // a madrugada e o gráfico por semana. É um piso (calls e trabalho fora do Claude não entram).
-function HorasSessoes({ horas, e }: { horas: HorasSemana[]; e: Empresas }) {
+function HorasSessoes({ horas, e, horario }: { horas: HorasSemana[]; e: Empresas; horario: boolean }) {
   const ult = horas.at(-1)!;
   const ant = horas.slice(-5, -1);
   const media = ant.length ? ant.reduce((s, h) => s + h.total, 0) / ant.length : null;
-  const itens = [
+  const todos = [
     { nome: "Total da semana", valor: h1(ult.total), sub: media == null ? "sem base" : `média das 4 anteriores: ${h1(media)}` },
     { nome: `${e.clt.nome} · ${e.pj.nome}`, valor: `${h1(ult.clt ?? 0)} · ${h1(ult.pj ?? 0)}`,
-      sub: `${h1(ult.paralelo ?? 0)} com as duas abertas ao mesmo tempo` },
+      sub: horario ? `${h1(ult.paralelo ?? 0)} com as duas abertas ao mesmo tempo` : "na semana" },
     { nome: "Pessoal em horário comercial", valor: h1(ult.pessoalExpediente ?? 0), sub: `de ${h1(ult.pessoal ?? 0)} no pessoal` },
     { nome: "Madrugada (00–06 h)", valor: h1(madrugada(ult)), sub: media == null ? "" : `média das 4 anteriores: ${h1(ant.reduce((s, h) => s + madrugada(h), 0) / ant.length)}` },
   ];
+  const itens = horario ? todos : todos.slice(0, 2); // demo: sem horário comercial nem madrugada
   return (
     <>
-      <dl className="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <dl className={`mb-4 grid grid-cols-2 gap-3 ${horario ? "lg:grid-cols-4" : ""}`}>
         {itens.map((i) => (
           <div key={i.nome} className="rounded-lg bg-fundo p-3">
             <dt className="text-xs text-texto-2">{i.nome}</dt>
@@ -96,7 +97,7 @@ export default async function Desempenho() {
   const fora = hist.map((s, i) => ({ rotulo: s.rotulo, clt: mmClt[i], pj: mmPj[i] }));
   const retr = retrabalho(hist);
   const desdeCriacao = comparar(hist, "cicloClt").atual; // inclui o tempo parado no backlog antes de chegar a mim
-  const alerta = sobrecarga(hist, ultima?.areas["Energia e sono"]);
+  const alerta = mostraHorario ? sobrecarga(hist, ultima?.areas["Energia e sono"]) : null;
   const pct = (v: number | null) => (v == null ? "—" : `${Math.round(v)}%`);
 
   return (
@@ -123,7 +124,7 @@ export default async function Desempenho() {
           { nome: "Bugs resolvidos (sustentação)", chave: "bugsClt", casas: 1 },
           { nome: "Tempo de atendimento (dias)", chave: "atendClt", casas: 1, melhorSobe: false,
             sub: desdeCriacao == null ? undefined : <>Desde a abertura do bug: {desdeCriacao.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} dias</> },
-          { nome: "Fora do expediente", chave: "foraClt", sufixo: "%", melhorSobe: false },
+          ...(mostraHorario ? [{ nome: "Fora do expediente", chave: "foraClt" as Chave, sufixo: "%", melhorSobe: false }] : []),
         ]} />
         <CartaoEmpresa empresa={e.pj} hist={hist} metricas={[
           { nome: "Entregas por semana", chave: "entregasPj", casas: 1 },
@@ -131,7 +132,7 @@ export default async function Desempenho() {
           { nome: "Aprovação de 1ª", chave: "aprov1Pj", sufixo: "%" },
           { nome: "Constância (8 semanas)", chave: "constPj", sufixo: "%" },
           { nome: "Pendências comigo", chave: "pendenciasPj", casas: 1, melhorSobe: false },
-          { nome: "Fora do expediente", chave: "foraPj", sufixo: "%", melhorSobe: false },
+          ...(mostraHorario ? [{ nome: "Fora do expediente", chave: "foraPj" as Chave, sufixo: "%", melhorSobe: false }] : []),
         ]} />
       </div>
 
@@ -147,7 +148,7 @@ export default async function Desempenho() {
         </Cartao>
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-2">
+      <div className={`mt-3 grid grid-cols-1 gap-3 ${mostraHorario ? "xl:grid-cols-2" : ""}`}>
         <Cartao titulo="Entregas e PRs" extra={
           <div className="flex items-center gap-3 text-xs text-texto-2">
             <span className="flex items-center gap-1.5"><i className="h-0.5 w-3 rounded" style={{ background: corClt(e) }} />PRs</span>
@@ -158,12 +159,14 @@ export default async function Desempenho() {
             { chave: "entregasPj", nome: `Entregas ${e.pj.nome}`, cor: corPj(e) },
           ]} />
         </Cartao>
-        <Cartao titulo="Commits fora do expediente" extra={<span className="text-xs text-texto-2">média móvel de 4 semanas</span>}>
-          <Linhas hist={fora} unidade="%" dominio={[0, 100]} series={[
-            { chave: "clt", nome: e.clt.nome, cor: corClt(e) },
-            { chave: "pj", nome: e.pj.nome, cor: corPj(e) },
-          ]} />
-        </Cartao>
+        {mostraHorario && (
+          <Cartao titulo="Commits fora do expediente" extra={<span className="text-xs text-texto-2">média móvel de 4 semanas</span>}>
+            <Linhas hist={fora} unidade="%" dominio={[0, 100]} series={[
+              { chave: "clt", nome: e.clt.nome, cor: corClt(e) },
+              { chave: "pj", nome: e.pj.nome, cor: corPj(e) },
+            ]} />
+          </Cartao>
+        )}
       </div>
 
       {!!p.desempenho.horas?.length && (
@@ -174,7 +177,7 @@ export default async function Desempenho() {
               <span className="flex items-center gap-1.5"><Marca empresa={e.pj} tamanho={14} />{e.pj.nome}</span>
               <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm" style={{ background: "var(--barra-2)" }} />Pessoal</span>
             </div>}>
-            <HorasSessoes horas={p.desempenho.horas} e={e} />
+            <HorasSessoes horas={p.desempenho.horas} e={e} horario={mostraHorario} />
           </Cartao>
         </div>
       )}

@@ -6,6 +6,7 @@ export type Status = "feito" | "previsto" | "atencao";
 export type Empresa = { nome: string; logo?: string; cor?: string }; // logo: data URL
 
 export type Painel = {
+  saude?: Saude;
   atualizadoEm: string; // ISO 8601
   dono: string;
   empresas: { clt: Empresa; pj: Empresa };
@@ -38,6 +39,14 @@ export type Painel = {
     notasMensais?: NotaMensal[];
     atual: { nota: number | null; foraDoExpedientePct: number; destaque: string };
   };
+};
+
+// Saúde dos dados (gerada no sync): último sync, cada banco no Pluggy, pendentes de revisão, última comparação da nuvem.
+export type Saude = {
+  sync: { em: string; status: string; novos: number; ultimoSucesso: string | null } | null;
+  conexoes: { banco: string; status: string | null; ultima: string | null; proxima: string | null }[];
+  pendentes: number;
+  sombra: { hoje: string | null; sync: string | null; campos: number | null; diferencas: number | null } | null;
 };
 
 export type NotaSemanal = { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string };

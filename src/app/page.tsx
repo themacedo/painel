@@ -7,7 +7,8 @@ import { AvisoCartao } from "@/components/AvisoCartao";
 import { Marca } from "@/components/Marca";
 import { Contador } from "@/components/Contador";
 import { corClt, corPj } from "@/lib/empresas";
-import { carregarPainel, modo } from "@/lib/dados";
+import { carregarPainel, modo, mostraHorario } from "@/lib/dados";
+import { SaudeDados } from "@/components/SaudeDados";
 import { diaMes, diasAte, reaisCurto } from "@/lib/formato";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,7 @@ export default async function Pagina() {
 
   return (
     <Moldura ativa="visao" titulo="Visão geral" modo={modo} dono={p.dono} atualizadoEm={p.atualizadoEm}>
+      {p.saude && <SaudeDados saude={p.saude} referencia={modo === "demo" ? p.atualizadoEm : undefined} />}
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <Kpi titulo="Saldo nas contas" valor={<Contador valor={saldo} formato="brl" />} icone={Landmark} cor="bg-primaria"
@@ -70,10 +72,12 @@ export default async function Pagina() {
                   <dd className="text-lg font-semibold">{ultima.prsClt}
                     {penultima && <span className="ml-1 text-xs font-normal text-texto-2">({penultima.prsClt} antes)</span>}</dd>
                 </div>
-                <div className="col-span-2 rounded-lg bg-fundo p-3">
-                  <dt className="text-xs text-texto-2">Commits fora do expediente</dt>
-                  <dd className="text-lg font-semibold"><Contador valor={d.atual.foraDoExpedientePct} formato="pct" /></dd>
-                </div>
+                {mostraHorario && (
+                  <div className="col-span-2 rounded-lg bg-fundo p-3">
+                    <dt className="text-xs text-texto-2">Commits fora do expediente</dt>
+                    <dd className="text-lg font-semibold"><Contador valor={d.atual.foraDoExpedientePct} formato="pct" /></dd>
+                  </div>
+                )}
               </dl>
             )}
           </Cartao>
