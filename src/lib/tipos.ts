@@ -140,3 +140,11 @@ export type CicloCartao = {
   reservado?: number; // cobranças recorrentes (assinaturas etc.) que ainda vão cair nesta fatura
   previstas?: { nome: string; valor: number; dia: number }[];
 };
+
+// Tela Revisar: a lista que o Mac publica na nuvem (só atrás do login; nunca no painel.json nem no GitHub) e a
+// decisão que volta pela fila. valor em reais (negativo = saída).
+export type Pendente = { id: number; data: string; valor: number; conta: string; descricao: string; natureza: string | null;
+  sugestao: string | null; motivo: string; parcela: string | null };
+export type Pendentes = { geradoEm: string; itens: Pendente[]; categorias: { nome: string; natureza: string }[]; essencial: string[] };
+export type RevisaoEnvio = { id: number; categoria: string; essencial: string | null };
+export type FonteRevisar = { carregar(): Promise<Pendentes>; enviar(revisoes: RevisaoEnvio[]): Promise<number> };

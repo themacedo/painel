@@ -1,5 +1,5 @@
 // Processo principal: a janela, o ícone na barra de menu, o login e a chamada à API. A tela não tem acesso ao Node:
-// só pede "carregar", "entrar" e "sair" pelo preload.
+// só pede "carregar", "entrar", "sair" e as duas chamadas da tela Revisar pelo preload.
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -81,6 +81,20 @@ async function buscar(): Promise<Resultado> {
   }
 }
 
+// Tela Revisar: a lista de pendentes e o envio das decisões, pela mesma API e o mesmo login. Erro volta como
+// { erro } para a tela mostrar (o IPC não carrega exceções com mensagem útil).
+async function api(caminho: string, init: RequestInit = {}): Promise<unknown> {
+  try {
+    const token = await idToken();
+    if (!token) return { erro: "entre de novo para revisar" };
+    const r = await fetch(`${API}${caminho}`, { ...init, headers: { ...(init.headers ?? {}), Authorization: `Bearer ${token}` } });
+    const corpo = (await r.json().catch(() => ({}))) as Record<string, unknown>;
+    return r.ok ? corpo : { erro: String(corpo["erro"] ?? `API respondeu ${r.status}`) };
+  } catch (e) {
+    return { erro: e instanceof Error ? e.message : String(e) };
+  }
+}
+
 async function entrar(): Promise<Resultado> {
   const segredo = await lerSegredo();
   if (!segredo) return { estado: "sem-segredo" };
@@ -146,6 +160,9 @@ app.whenReady().then(() => {
   const prefs = lerJson<{ abrirNoLogin?: boolean }>("prefs.json", {});
   if (app.isPackaged && prefs.abrirNoLogin !== false && !abreNoLogin()) abrirNoLogin(true);
   ipcMain.handle("auth:entrar", () => entrar().catch((e: Error) => ({ estado: "erro", mensagem: e.message }) as Resultado));
+  ipcMain.handle("revisar:pendentes", () => api("/pendentes"));
+  ipcMain.handle("revisar:enviar", (_e, revisoes: unknown[]) =>
+    api("/revisoes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ revisoes }) }));
   ipcMain.handle("auth:sair", () => { sair(); ultimo = { estado: "sem-login" }; bandeja?.setTitle(""); return ultimo; });
   criarJanela();
   criarBandeja();

@@ -1,18 +1,21 @@
 import Link from "next/link";
-import { LayoutGrid, Wallet, Activity, CalendarDays, Settings } from "lucide-react";
+import { LayoutGrid, Wallet, Activity, CalendarDays, ListChecks, Settings } from "lucide-react";
 import { BotaoSair } from "./BotaoSair";
 
 // com o login do Google ligado, há sessão para encerrar
 export const comLogin = () => process.env.PAINEL_MODO === "privado" && Boolean(process.env.AUTH_GOOGLE_ID);
 
-export type Tela = "visao" | "financas" | "desempenho" | "plano";
+export type Tela = "visao" | "financas" | "desempenho" | "plano" | "revisar";
 
 export const telas: { id: Tela; nome: string; href: string; icone: typeof LayoutGrid; pronta: boolean }[] = [
   { id: "visao", nome: "Visão geral", href: "/", icone: LayoutGrid, pronta: true },
   { id: "desempenho", nome: "Desempenho", href: "/desempenho", icone: Activity, pronta: true },
   { id: "financas", nome: "Finanças", href: "/financas", icone: Wallet, pronta: true },
   { id: "plano", nome: "Plano", href: "/plano", icone: CalendarDays, pronta: true },
+  { id: "revisar", nome: "Revisar", href: "/revisar", icone: ListChecks, pronta: true },
 ];
+// Revisar mostra lançamentos de verdade: só no modo privado
+const visiveis = () => telas.filter((t) => t.id !== "revisar" || process.env.PAINEL_MODO === "privado");
 
 export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {
   return (
@@ -23,7 +26,7 @@ export function Lateral({ modo, ativa }: { modo: string; ativa: Tela }) {
       </div>
       <p className="mb-2 px-2 text-[11px] font-medium uppercase tracking-wider text-texto-2">Menu</p>
       <nav className="flex flex-col gap-0.5">
-        {telas.map(({ id, nome, href, icone: Icone, pronta }) => {
+        {visiveis().map(({ id, nome, href, icone: Icone, pronta }) => {
           const classe = `flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm ${
             id === ativa ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2"
           }`;
@@ -62,7 +65,7 @@ export function NavMovel({ ativa }: { ativa: Tela }) {
         {comLogin() && <BotaoSair compacto />}
       </div>
       <nav className="flex gap-0.5 rounded-xl border border-borda bg-superficie p-1">
-        {telas.filter((t) => t.pronta).map(({ id, nome, href }) => (
+        {visiveis().filter((t) => t.pronta).map(({ id, nome, href }) => (
           <Link key={id} href={href}
             className={`flex-auto whitespace-nowrap rounded-lg px-1.5 py-1.5 text-center text-[13px] ${
               id === ativa ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2"

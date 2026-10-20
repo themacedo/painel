@@ -1,17 +1,27 @@
 // O app: tela de login, carregando, erro, ou a Visão geral (a mesma tela do site) com os dados da API.
 import { LogOut, RefreshCw } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import type { Painel } from "@/lib/tipos";
+import type { FonteRevisar, Painel, Pendentes, RevisaoEnvio } from "@/lib/tipos";
 import { Desempenho } from "@/telas/Desempenho";
 import { Financas } from "@/telas/Financas";
 import { Plano } from "@/telas/Plano";
+import { Revisar } from "@/telas/Revisar";
 import { VisaoGeral } from "@/telas/VisaoGeral";
+
+// a tela Revisar fala com a API pelo processo principal (o token fica lá, não na tela)
+const semErro = <T,>(r: T | { erro: string }): T => { if (r && typeof r === "object" && "erro" in r) throw new Error(r.erro); return r as T; };
+const fonteRevisar: FonteRevisar = {
+  carregar: async () => semErro(await window.fin.pendentes()),
+  enviar: async (revisoes) => semErro(await window.fin.revisar(revisoes)).enviadas,
+};
+const TelaRevisar = () => <Revisar fonte={fonteRevisar} />;
 
 const ABAS = [
   { id: "visao", nome: "Visão geral", Tela: VisaoGeral },
   { id: "desempenho", nome: "Desempenho", Tela: Desempenho },
   { id: "financas", nome: "Finanças", Tela: Financas },
   { id: "plano", nome: "Plano", Tela: Plano },
+  { id: "revisar", nome: "Revisar", Tela: TelaRevisar },
 ] as const;
 type Aba = (typeof ABAS)[number]["id"];
 const abaSalva = (): Aba => {
@@ -24,7 +34,8 @@ type Resultado =
 
 declare global {
   interface Window {
-    fin: { carregar(forcar?: boolean): Promise<Resultado>; entrar(): Promise<Resultado>; sair(): Promise<Resultado>; aoAtualizar(cb: (r: Resultado) => void): () => void };
+    fin: { carregar(forcar?: boolean): Promise<Resultado>; entrar(): Promise<Resultado>; sair(): Promise<Resultado>; aoAtualizar(cb: (r: Resultado) => void): () => void;
+      pendentes(): Promise<Pendentes | { erro: string }>; revisar(revisoes: RevisaoEnvio[]): Promise<{ enviadas: number } | { erro: string }> };
   }
 }
 
@@ -97,10 +108,10 @@ export function App() {
     <div className="min-h-dvh bg-fundo">
       <header className="arrastar sticky top-0 z-40 flex items-center gap-3 border-b border-borda bg-fundo/90 py-2.5 pl-20 pr-4 backdrop-blur">
         <span className="grid size-6 place-items-center rounded-md bg-primaria text-xs font-bold text-white">P</span>
-        <nav className="flex gap-0.5 rounded-lg border border-borda bg-superficie p-0.5" role="tablist">
+        <nav className="flex min-w-0 gap-0.5 overflow-x-auto rounded-lg border border-borda bg-superficie p-0.5" role="tablist">
           {ABAS.map((x) => (
             <button key={x.id} type="button" role="tab" aria-selected={aba === x.id} onClick={() => irPara(x.id)}
-              className={`rounded-md px-2.5 py-1 text-[13px] ${aba === x.id ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2 hover:text-texto"}`}>
+              className={`shrink-0 whitespace-nowrap rounded-md px-2.5 py-1 text-[13px] ${aba === x.id ? "bg-primaria-suave font-medium text-primaria" : "text-texto-2 hover:text-texto"}`}>
               {x.nome}
             </button>
           ))}
