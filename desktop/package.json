@@ -35,7 +35,7 @@
   "build": {
     "appId": "br.themacedo.painel",
     "productName": "Painel",
-    "copyright": "Matheus Macedo",
+    "copyright": "themacedo",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -66,5 +66,5 @@
       "artifactName": "Painel-${version}.dmg"
     }
   },
-  "author": "Matheus Macedo"
+  "author": "themacedo"
 }
