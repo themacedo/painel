@@ -5023,6 +5023,125 @@
         "pessoalMadrugada": 0.84,
         "outros": 0.42
       }
+    ],
+    "notasMensais": [
+      {
+        "inicio": "2026-08-16",
+        "fim": "2026-09-15",
+        "geral": 6.0,
+        "areas": {
+          "Entrega Cliente PJ": 6,
+          "Entrega Empresa CLT": 7,
+          "Foco": 6,
+          "Energia e sono": 6,
+          "Visibilidade": 5,
+          "Finanças": 6
+        },
+        "destaque": "Ciclo de ajuste.",
+        "acoes": []
+      },
+      {
+        "inicio": "2026-09-16",
+        "fim": "2026-10-15",
+        "geral": 7.2,
+        "areas": {
+          "Entrega Cliente PJ": 8,
+          "Entrega Empresa CLT": 8,
+          "Foco": 7,
+          "Energia e sono": 6,
+          "Visibilidade": 7,
+          "Finanças": 7
+        },
+        "destaque": "Entrega em alta nas duas frentes, com qualidade estável; o próximo passo é reduzir o trabalho fora do horário.",
+        "acoes": [
+          "70% das horas da CLT no expediente",
+          "Madrugada abaixo de 10 h no ciclo",
+          "Recap escrito depois de cada call com decisão"
+        ],
+        "kpis": [
+          {
+            "grupo": "CLT",
+            "nome": "PRs por semana",
+            "antes": 6,
+            "depois": 10,
+            "melhorSobe": true
+          },
+          {
+            "grupo": "CLT",
+            "nome": "Bugs resolvidos por semana",
+            "antes": 4,
+            "depois": 9,
+            "melhorSobe": true
+          },
+          {
+            "grupo": "CLT",
+            "nome": "Cycle time do PR",
+            "antes": 1.2,
+            "depois": 0.7,
+            "unidade": " d",
+            "melhorSobe": false
+          },
+          {
+            "grupo": "PJ",
+            "nome": "Entregas por semana",
+            "antes": 1,
+            "depois": 2.4,
+            "melhorSobe": true
+          },
+          {
+            "grupo": "PJ",
+            "nome": "Lead time do card",
+            "antes": 15,
+            "depois": 8,
+            "unidade": " d",
+            "melhorSobe": false
+          },
+          {
+            "grupo": "PJ",
+            "nome": "Constância (8 semanas)",
+            "antes": 40,
+            "depois": 70,
+            "unidade": "%",
+            "melhorSobe": true
+          }
+        ],
+        "lentes": [
+          {
+            "titulo": "Engenharia de Produção",
+            "itens": [
+              {
+                "nome": "OEE adaptado · CLT",
+                "valor": "68%",
+                "status": "atencao",
+                "leitura": "Disponibilidade 95% × regularidade 85% × qualidade 84%."
+              },
+              {
+                "nome": "Gargalo",
+                "valor": "validação do cliente",
+                "status": "atencao",
+                "leitura": "Itens esperando teste por mais de uma semana."
+              }
+            ]
+          },
+          {
+            "titulo": "Engenharia de Software",
+            "itens": [
+              {
+                "nome": "Lead time de mudança (DORA)",
+                "valor": "0,7 d",
+                "status": "ok",
+                "leitura": "Faixa elite."
+              },
+              {
+                "nome": "Taxa de falha de mudança (DORA)",
+                "valor": "4%",
+                "status": "ok",
+                "leitura": "Faixa elite (0–15%)."
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 }

@@ -1,3 +1,4 @@
+import { Avaliacao } from "@/components/Avaliacao";
 import { Cartao, Moldura } from "@/components/Moldura";
 import { HistoricoCommits, HorasPorSemana, Linhas } from "@/components/GraficosDesempenho";
 import { Marca } from "@/components/Marca";
@@ -90,7 +91,6 @@ export default async function Desempenho() {
   const e = p.empresas;
   const marco = marcos[0] && semanaDe(hist, marcos[0].data);
   const ultima = notas.at(-1);
-  const anterior = notas.at(-2);
   const mmClt = mediaMovel(hist, "foraClt");
   const mmPj = mediaMovel(hist, "foraPj");
   const fora = hist.map((s, i) => ({ rotulo: s.rotulo, clt: mmClt[i], pj: mmPj[i] }));
@@ -180,37 +180,7 @@ export default async function Desempenho() {
       )}
 
       <div className="mt-3">
-        <Cartao titulo={ultima ? `Avaliação da semana de ${diaMes(ultima.inicio)}` : "Avaliação da semana"} extra={
-          ultima && <p className="text-sm"><b className="text-lg"><Contador valor={ultima.geral} casas={1} /></b>
-            <span className="text-texto-2"> / 10 geral</span></p>}>
-          {ultima ? (
-            <>
-              <p className="mb-4 text-sm">{ultima.destaque}</p>
-              <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
-                {Object.entries(ultima.areas).map(([area, nota]) => {
-                  const antes = anterior?.areas[area];
-                  const cor = nota >= 8 ? "bg-ok" : nota >= 6 ? "bg-primaria" : nota >= 4 ? "bg-alerta" : "bg-perigo";
-                  return (
-                    <li key={area}>
-                      <div className="mb-1 flex justify-between text-sm">
-                        <span>{area}</span>
-                        <span className="font-medium">{nota}
-                          {antes != null && antes !== nota && (
-                            <span className={`ml-1.5 text-xs ${nota > antes ? "text-ok" : "text-perigo"}`}>{nota > antes ? "▲" : "▼"}{Math.abs(nota - antes)}</span>
-                          )}
-                        </span>
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-primaria-suave">
-                        <div className={`encher h-full rounded-full ${cor}`} style={{ width: `${nota * 10}%` }} />
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-              {notas.length < 2 && <p className="mt-4 text-xs text-texto-2">A comparação com a semana anterior aparece a partir da próxima revisão.</p>}
-            </>
-          ) : <p className="text-sm text-texto-2">Ainda sem avaliação registrada.</p>}
-        </Cartao>
+        <Avaliacao semanais={notas} mensais={p.desempenho.notasMensais ?? []} nomes={{ CLT: e.clt.nome, PJ: e.pj.nome, Geral: "Geral" }} />
       </div>
     </Moldura>
   );

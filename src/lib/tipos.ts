@@ -35,9 +35,17 @@ export type Painel = {
     marcos: { data: string; rotulo: string }[];
     notas: { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string }[];
     horas?: HorasSemana[];
+    notasMensais?: NotaMensal[];
     atual: { nota: number | null; foraDoExpedientePct: number; destaque: string };
   };
 };
+
+export type NotaSemanal = { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string };
+
+// Revisão mensal de coach (ciclo do dia 16 ao 15). grupo dos KPIs: "CLT", "PJ" ou "Geral" (o nome vem de empresas).
+export type KpiMensal = { grupo: string; nome: string; antes: number | null; depois: number; unidade?: string; melhorSobe?: boolean };
+export type LenteItem = { nome: string; valor: string; status: "ok" | "atencao" | "ruim"; leitura: string };
+export type NotaMensal = NotaSemanal & { fim: string; acoes?: string[]; kpis?: KpiMensal[]; lentes?: { titulo: string; itens: LenteItem[] }[] };
 
 // Horas nas sessões do Claude numa semana (sábado a sexta), por empresa: total, a parte seg–sex 09–18 ("Expediente")
 // e a de 00–06 ("Madrugada"). É um piso: calls e trabalho fora do Claude não entram. Chaves ausentes = 0.
