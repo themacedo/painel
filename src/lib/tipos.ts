@@ -44,7 +44,7 @@ export type Painel = {
 // Saúde dos dados (gerada no sync): último sync, cada banco no Pluggy, pendentes de revisão, última comparação da nuvem.
 export type Saude = {
   sync: { em: string; status: string; novos: number; ultimoSucesso: string | null } | null;
-  conexoes: { banco: string; status: string | null; ultima: string | null; proxima: string | null }[];
+  conexoes: { banco: string; status: string | null; ultima: string | null; proxima: string | null; consentimento?: string | null }[];
   pendentes: number;
   sombra: { hoje: string | null; sync: string | null; campos: number | null; diferencas: number | null } | null;
 };

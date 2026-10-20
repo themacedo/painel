@@ -5100,19 +5100,22 @@
         "banco": "Banco A",
         "status": "UPDATED",
         "ultima": "2026-10-17T14:05:00Z",
-        "proxima": "2026-10-18T14:05:00Z"
+        "proxima": "2026-10-18T14:05:00Z",
+        "consentimento": "2027-09-30T12:00:00Z"
       },
       {
         "banco": "Banco B",
         "status": "UPDATED",
         "ultima": "2026-10-17T16:40:00Z",
-        "proxima": "2026-10-18T16:40:00Z"
+        "proxima": "2026-10-18T16:40:00Z",
+        "consentimento": "2027-09-30T12:00:00Z"
       },
       {
         "banco": "Conta PJ",
         "status": "UPDATED",
         "ultima": "2026-10-17T13:30:00Z",
-        "proxima": "2026-10-18T13:30:00Z"
+        "proxima": "2026-10-18T13:30:00Z",
+        "consentimento": "2027-09-30T12:00:00Z"
       }
     ],
     "pendentes": 4,

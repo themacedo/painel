@@ -15,6 +15,14 @@ const quando = (iso: string | null) => {
 };
 // mais de um dia (com folga) sem atualizar já é atenção; mais de dois, problema
 const pelaIdade = (h: number): Nivel => (h <= 26 ? 0 : h <= 50 ? 1 : 2);
+// a autorização do Meu Pluggy vale 1 ano: atenção nos últimos 30 dias, problema depois de vencer
+const peloConsentimento = (iso: string | null | undefined, agora: number): Nivel => {
+  if (!iso) return 0;
+  const dias = (new Date(iso).getTime() - agora) / 86_400_000;
+  return dias < 0 ? 2 : dias <= 30 ? 1 : 0;
+};
+const data = (iso: string | null | undefined) =>
+  iso ? new Date(iso).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit", year: "numeric" }) : "—";
 
 // Faixa de saúde dos dados: o painel está atualizado? cada banco está em dia no Pluggy? há lançamentos para revisar?
 // a nuvem bate com o Mac? `referencia` fixa o "agora" (o demo usa a data dos dados fictícios).
@@ -24,7 +32,11 @@ export function SaudeDados({ saude, referencia }: { saude: Saude; referencia?: s
   useEffect(() => { if (!referencia) setAgora(Date.now()); }, [referencia]);
 
   const sync: Nivel = !saude.sync ? 2 : saude.sync.status === "error" ? 2 : pelaIdade(horasDesde(saude.sync.ultimoSucesso, agora));
-  const bancos = saude.conexoes.map((c) => ({ ...c, nivel: (c.status !== "UPDATED" ? 2 : pelaIdade(horasDesde(c.ultima, agora))) as Nivel }));
+  const bancos = saude.conexoes.map((c) => {
+    const consent = peloConsentimento(c.consentimento, agora);
+    return { ...c, consent, nivel: Math.max(c.status !== "UPDATED" ? 2 : pelaIdade(horasDesde(c.ultima, agora)), consent) as Nivel };
+  });
+  const vencendo = bancos.filter((b) => b.consent > 0);
   const piorBanco = Math.max(0, ...bancos.map((b) => b.nivel)) as Nivel;
   const atrasados = bancos.filter((b) => b.nivel > 0);
   const pend: Nivel = saude.pendentes > 20 ? 1 : 0;
@@ -34,6 +46,7 @@ export function SaudeDados({ saude, referencia }: { saude: Saude; referencia?: s
   const itens: [Nivel, string][] = [
     [sync, saude.sync ? `sync ${quando(saude.sync.em)}` : "nenhum sync registrado"],
     [piorBanco, !bancos.length ? "bancos: aparece no próximo sync"
+      : vencendo.length ? `autorização ${vencendo.some((b) => b.consent === 2) ? "vencida" : "vencendo"}: ${vencendo.map((b) => b.banco).join(", ")}`
       : atrasados.length ? `${atrasados.map((b) => b.banco).join(", ")} atrasado${atrasados.length > 1 ? "s" : ""}` : `${bancos.length} bancos em dia`],
     [pend, `${saude.pendentes} para revisar`],
     [nuvem, !saude.sombra ? "nuvem: sem comparação" : saude.sombra.diferencas === 0 ? "nuvem bate (0 diferenças)" : `nuvem: ${saude.sombra.diferencas} diferenças`],
@@ -63,7 +76,9 @@ export function SaudeDados({ saude, referencia }: { saude: Saude; referencia?: s
                 <li key={b.banco} className="flex items-center gap-2">
                   <i className={`size-1.5 shrink-0 rounded-full ${COR[b.nivel]}`} />
                   <span className="font-medium">{b.banco}</span>
-                  <span className="text-texto-2">atualizado {quando(b.ultima)} · próxima {quando(b.proxima)}{b.status !== "UPDATED" ? ` · ${b.status}` : ""}</span>
+                  <span className="text-texto-2">atualizado {quando(b.ultima)} · próxima {quando(b.proxima)}
+                    {b.consentimento && <> · <span className={b.consent ? TEXTO[b.consent] : ""}>autorização até {data(b.consentimento)}</span></>}
+                    {b.status !== "UPDATED" ? ` · ${b.status}` : ""}</span>
                 </li>
               ))}
             </ul>
@@ -73,6 +88,7 @@ export function SaudeDados({ saude, referencia }: { saude: Saude; referencia?: s
               {" "}{saude.sombra.campos?.toLocaleString("pt-BR")} campos, {saude.sombra.diferencas} diferença(s).</p>
           )}
           {atrasados.length > 0 && <p className="mt-2 text-alerta">Banco atrasado: atualize a conexão em meu.pluggy.ai e rode o sync de novo.</p>}
+          {vencendo.length > 0 && <p className="mt-2 text-alerta">A autorização do Meu Pluggy vale 1 ano: renove em meu.pluggy.ai antes de vencer (o id da conexão pode mudar; avise para ajustar o config).</p>}
         </div>
       )}
     </section>
