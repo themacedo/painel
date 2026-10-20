@@ -2,7 +2,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("fin", {
-  carregar: () => ipcRenderer.invoke("painel:carregar"),
+  carregar: (forcar?: boolean) => ipcRenderer.invoke("painel:carregar", forcar),
   entrar: () => ipcRenderer.invoke("auth:entrar"),
   sair: () => ipcRenderer.invoke("auth:sair"),
   aoAtualizar: (cb: (r: unknown) => void) => {

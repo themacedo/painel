@@ -10,7 +10,8 @@
     "build": "pnpm build:main && pnpm build:renderer",
     "dev": "pnpm build && electron .",
     "typecheck": "tsc --noEmit -p .",
-    "test": "vitest run --root ."
+    "test": "vitest run --root .",
+    "dmg": "pnpm build && electron-builder --mac dmg --publish never"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
@@ -19,17 +20,51 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
     "electron": "43.7.7",
+    "electron-builder": "26.15.3",
     "esbuild": "0.28.2",
+    "lucide-react": "0.544.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "recharts": "2.15.4",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
     "vite": "8.3.2",
     "vitest": "3.2.4"
   },
-  "dependencies": {
-    "lucide-react": "0.544.0",
-    "react": "19.1.10",
-    "react-dom": "19.1.10",
-    "recharts": "2.15.4"
+  "packageManager": "pnpm@9.15.4",
+  "build": {
+    "appId": "br.themacedo.painel",
+    "productName": "Painel",
+    "copyright": "Matheus Macedo",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.finance",
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "identity": null,
+      "extendInfo": {
+        "LSUIElement": false,
+        "NSUserNotificationAlertStyle": "alert"
+      }
+    },
+    "dmg": {
+      "title": "Painel",
+      "artifactName": "Painel-${version}.dmg"
+    }
   },
-  "packageManager": "pnpm@9.15.4"
+  "author": "Matheus Macedo"
 }

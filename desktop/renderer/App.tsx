@@ -24,7 +24,7 @@ type Resultado =
 
 declare global {
   interface Window {
-    fin: { carregar(): Promise<Resultado>; entrar(): Promise<Resultado>; sair(): Promise<Resultado>; aoAtualizar(cb: (r: Resultado) => void): () => void };
+    fin: { carregar(forcar?: boolean): Promise<Resultado>; entrar(): Promise<Resultado>; sair(): Promise<Resultado>; aoAtualizar(cb: (r: Resultado) => void): () => void };
   }
 }
 
@@ -85,7 +85,7 @@ export function App() {
       <Centro>
         <h1 className="text-xl font-semibold">Não consegui carregar</h1>
         <p className="mt-2 text-sm text-texto-2">{r.mensagem}</p>
-        <button type="button" onClick={() => fazer(() => window.fin.carregar())} className="mt-6 w-full rounded-xl border border-borda px-4 py-3 text-sm">
+        <button type="button" onClick={() => fazer(() => window.fin.carregar(true))} className="mt-6 w-full rounded-xl border border-borda px-4 py-3 text-sm">
           Tentar de novo
         </button>
       </Centro>
@@ -107,7 +107,7 @@ export function App() {
         </nav>
         <span className="hidden text-xs text-texto-2 md:inline">dados de {hora(p.atualizadoEm)} · lido às {hora(r.em).slice(-5)}</span>
         <div className="ml-auto flex items-center gap-1">
-          <button type="button" title="Atualizar" aria-label="Atualizar" disabled={ocupado} onClick={() => fazer(() => window.fin.carregar())}
+          <button type="button" title="Atualizar" aria-label="Atualizar" disabled={ocupado} onClick={() => fazer(() => window.fin.carregar(true))}
             className="grid size-8 place-items-center rounded-lg text-texto-2 hover:bg-primaria-suave hover:text-texto">
             <RefreshCw size={15} className={ocupado ? "animate-spin" : ""} />
           </button>
