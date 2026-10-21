@@ -3,6 +3,9 @@
 @source "../../src";
 @source ".";
 
+/* no site o next/font define estas variáveis; no app, as fontes vêm do @fontsource */
+:root { --font-inter: "Inter Tight"; --font-mono-num: "IBM Plex Mono"; }
+
 /* área de arrastar a janela (a barra de título é escondida no macOS) */
 .arrastar { -webkit-app-region: drag; }
-.arrastar button { -webkit-app-region: no-drag; }
+.arrastar button, .arrastar a, .arrastar select { -webkit-app-region: no-drag; }

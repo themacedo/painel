@@ -14,6 +14,8 @@
     "dmg": "pnpm build && electron-builder --mac dmg --publish never"
   },
   "devDependencies": {
+    "@fontsource/ibm-plex-mono": "5.2.6",
+    "@fontsource/inter-tight": "5.2.6",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "24.7.2",
     "@types/react": "19.3.0",

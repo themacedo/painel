@@ -6,6 +6,7 @@ import { Desempenho } from "@/telas/Desempenho";
 import { Financas } from "@/telas/Financas";
 import { Plano } from "@/telas/Plano";
 import { Revisar } from "@/telas/Revisar";
+import { Casca } from "@/components/Casca";
 import { VisaoGeral } from "@/telas/VisaoGeral";
 
 // a tela Revisar fala com a API pelo processo principal (o token fica lá, não na tela)
@@ -104,36 +105,27 @@ export function App() {
   }
 
   const p = r.painel;
-  return (
-    <div className="min-h-dvh bg-fundo">
-      <header className="arrastar sticky top-0 z-40 flex items-center gap-3 border-b border-borda bg-fundo/90 py-2.5 pl-20 pr-4 backdrop-blur">
-        <span className="grid size-7 place-items-center rounded-lg bg-texto text-sm font-bold text-fundo">P</span>
-        <nav className="flex min-w-0 gap-0.5 overflow-x-auto rounded-xl border border-borda bg-superficie p-1" role="tablist">
-          {ABAS.map((x) => (
-            <button key={x.id} type="button" role="tab" aria-selected={aba === x.id} onClick={() => irPara(x.id)}
-              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] ${aba === x.id ? "bg-primaria-suave font-semibold text-primaria" : "text-texto-2 hover:text-texto"}`}>
-              {x.nome}
-              {x.id === "revisar" && !!p.saude?.pendentes && <span className="num rounded-full bg-alerta-suave px-1.5 text-[11px] font-medium text-alerta">{p.saude.pendentes}</span>}
-            </button>
-          ))}
-        </nav>
-        <span className="hidden text-xs text-texto-2 md:inline">dados de {hora(p.atualizadoEm)} · lido às {hora(r.em).slice(-5)}</span>
-        <div className="ml-auto flex items-center gap-1">
-          <button type="button" title="Atualizar" aria-label="Atualizar" disabled={ocupado} onClick={() => fazer(() => window.fin.carregar(true))}
-            className="grid size-8 place-items-center rounded-lg text-texto-2 hover:bg-primaria-suave hover:text-texto">
-            <RefreshCw size={15} className={ocupado ? "animate-spin" : ""} />
-          </button>
-          <button type="button" title="Sair" aria-label="Sair" onClick={() => fazer(() => window.fin.sair())}
-            className="grid size-8 place-items-center rounded-lg text-texto-2 hover:bg-primaria-suave hover:text-texto">
-            <LogOut size={15} />
-          </button>
-        </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-        <h1 className="mb-5 text-[28px] font-semibold tracking-tight">{ABAS.find((x) => x.id === aba)!.nome}</h1>
-        {aba === "visao" ? <VisaoGeral p={p} modo="privado" mostraHorario aoRevisar={() => irPara("revisar")} />
-          : ABAS.filter((x) => x.id === aba).map(({ id, Tela }) => <Tela key={id} p={p} modo="privado" mostraHorario />)}
-      </main>
+  const botao = "grid size-9 place-items-center rounded-xl border border-borda text-texto-2 hover:text-texto";
+  const acoes = (
+    <div className="flex items-center gap-1.5">
+      <button type="button" title="Atualizar" aria-label="Atualizar" disabled={ocupado} onClick={() => fazer(() => window.fin.carregar(true))} className={botao}>
+        <RefreshCw size={15} className={ocupado ? "animate-spin" : ""} />
+      </button>
+      <button type="button" title="Sair" aria-label="Sair" onClick={() => fazer(() => window.fin.sair())} className={botao}>
+        <LogOut size={15} />
+      </button>
     </div>
+  );
+  // a mesma moldura do site (Casca): lateral em janela larga, abas embaixo em janela estreita
+  return (
+    <Casca telas={ABAS.map((x) => x.id)} ativa={aba} arrastar pendentes={p.saude?.pendentes}
+      titulo={ABAS.find((x) => x.id === aba)!.nome}
+      aba={(t, props) => <button type="button" onClick={() => irPara(t.id)} {...props} />}
+      linha={<>Olá, {p.dono.split(" ")[0]} · dados de {hora(p.atualizadoEm)} · lido às {hora(r.em).slice(-5)}</>}
+      rodape={<div className="flex items-center justify-between gap-2 px-2.5">{acoes}<span className="text-xs text-texto-2">App do Mac</span></div>}
+      topoMovel={acoes}>
+      {aba === "visao" ? <VisaoGeral p={p} modo="privado" mostraHorario aoRevisar={() => irPara("revisar")} />
+        : ABAS.filter((x) => x.id === aba).map(({ id, Tela }) => <Tela key={id} p={p} modo="privado" mostraHorario />)}
+    </Casca>
   );
 }

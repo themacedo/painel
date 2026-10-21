@@ -44,6 +44,8 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
   const lista = periodos[modo];
   const p = lista.find((x) => x.chave === chave) ?? lista[0];
 
+  // resumo aberto por toque ou clique (no celular não existe "passar o mouse"); o mouse continua abrindo por cima
+  const [aberta, setAberta] = useState<string | null>(null);
   const trocarModo = (m: Modo) => { setModo(m); setChave(periodos[m][0]?.chave ?? ""); };
 
   if (!p) return <p className="text-sm text-texto-2">Sem dados para este período.</p>;
@@ -153,14 +155,16 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
                 ? <span className="flex items-center gap-1.5"><i className="size-2.5 rounded-sm bg-barra" />{comparacao.toLowerCase()}</span>
                 : <span>sem comparação: {semBase}</span>}
             </div>}>
-            <p className="-mt-1 mb-3 text-xs text-texto-2">Passe o mouse ou toque numa categoria para ver o resumo.</p>
+            <p className="-mt-1 mb-3 text-xs text-texto-2">Passe o mouse, toque ou clique numa categoria para ver o resumo.</p>
             {!cats.length && <p className="text-sm text-texto-2">Nenhum gasto no período.</p>}
             <ul className="flex flex-col gap-2">
               {cats.map((c, idx) => {
                 const creditos = (c.bruto ?? c.atual) - c.atual;
                 return (
-                  <li key={p.chave + c.nome} tabIndex={0} aria-describedby={`cat-${idx}`}
-                    className="group relative -mx-2 rounded-xl px-2 py-1.5 outline-none hover:bg-superficie-2 focus-visible:bg-superficie-2 focus-visible:ring-2 focus-visible:ring-primaria">
+                  <li key={p.chave + c.nome} tabIndex={0} aria-describedby={`cat-${idx}`} role="button" aria-expanded={aberta === c.nome}
+                    onClick={() => setAberta((x) => (x === c.nome ? null : c.nome))}
+                    onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setAberta((x) => (x === c.nome ? null : c.nome)); } if (ev.key === "Escape") setAberta(null); }}
+                    className="group relative cursor-pointer -mx-2 rounded-xl px-2 py-1.5 outline-none hover:bg-superficie-2 focus-visible:bg-superficie-2 focus-visible:ring-2 focus-visible:ring-primaria">
                     <div className="mb-1.5 flex items-baseline justify-between gap-2 text-sm">
                       <span>{c.nome}</span>
                       <span className="flex items-baseline gap-2">
@@ -173,7 +177,7 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
                       {comparavel && <div className="encher h-2 rounded-full bg-barra" style={{ width: `${(c.anterior / maxCat) * 100}%` }} />}
                     </div>
                     <div id={`cat-${idx}`} role="tooltip"
-                      className="pointer-events-none absolute left-2 right-2 top-full z-20 mt-1 hidden rounded-xl border border-borda bg-superficie p-3 text-xs shadow-lg group-hover:block group-focus:block sm:left-auto sm:w-72">
+                      className={`pointer-events-none absolute left-2 right-2 top-full z-40 mt-1 rounded-xl border border-borda bg-superficie p-3 text-xs shadow-lg sm:left-auto sm:w-72 ${aberta === c.nome ? "block" : "hidden group-hover:block"}`}>
                       <div className="mb-2 flex items-baseline justify-between">
                         <span className="font-semibold">{c.nome}</span>
                         <span className="num font-semibold">{reais(c.atual)}</span>

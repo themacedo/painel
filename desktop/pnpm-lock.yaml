@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@fontsource/ibm-plex-mono':
+        specifier: 5.2.6
+        version: 5.2.6
+      '@fontsource/inter-tight':
+        specifier: 5.2.6
+        version: 5.2.6
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.3.2(@types/node@24.7.2)(esbuild@0.28.2)(jiti@2.7.0))
@@ -262,6 +268,12 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/ibm-plex-mono@5.2.6':
+    resolution: {integrity: sha512-LTZJNTcpoT19fmwERZNMDI+ljHueuyhF2Qn+bICJ4Y4hxBLAAoJ2MRsGnyp0QNutW6t/25eyZpvaUK1LDrCo7Q==}
+
+  '@fontsource/inter-tight@5.2.6':
+    resolution: {integrity: sha512-4rsygbvEQIbDYs+uMgMToxIb6PGNEuvAeHHc1isM2x7genkwUX+Omona47wFfozF308WRwu3lRSQF3l/BUH/kg==}
 
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
@@ -2368,6 +2380,10 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
+
+  '@fontsource/ibm-plex-mono@5.2.6': {}
+
+  '@fontsource/inter-tight@5.2.6': {}
 
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
