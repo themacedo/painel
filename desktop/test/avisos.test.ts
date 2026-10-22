@@ -13,9 +13,9 @@ const base = (o: Record<string, any> = {}) => ({
 const chaves = (xs: { chave: string }[]) => xs.map((x) => x.chave);
 
 describe("quando o app avisa", () => {
-  it("sync novo: avisa uma vez com novos e pendentes; com tudo em dia, nada mais", () => {
+  it("sync novo: avisa uma vez, sem número nem valor; com tudo em dia, nada mais", () => {
     const a = decidirAvisos(base(), AGORA, new Set());
-    expect(a).toEqual([{ chave: "sync:2026-10-20T22:05:00Z", titulo: "Sync do dia", texto: "2 lançamentos novos · 29 para revisar" }]);
+    expect(a).toEqual([{ chave: "sync:2026-10-20T22:05:00Z", titulo: "Sync concluído", texto: "Toque para ver" }]);
     expect(decidirAvisos(base(), AGORA, new Set(chaves(a)))).toEqual([]); // reabrir o app não repete
   });
 

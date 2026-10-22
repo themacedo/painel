@@ -30,7 +30,8 @@ function avisar(p: Record<string, any>) {
   const novos = decidirAvisos(p, Date.now(), new Set(ja));
   for (const a of novos) {
     const n = new Notification({ title: a.titulo, body: a.texto, silent: false });
-    n.on("click", () => { janela?.show(); janela?.focus(); });
+    // o aviso de sync abre a tela Movimentos (o que entrou, saiu e espera revisão)
+    n.on("click", () => { janela?.show(); janela?.focus(); if (a.chave.startsWith("sync:")) janela?.webContents.send("ir:aba", "movimentos"); });
     n.show();
   }
   if (novos.length) gravarJson("avisos.json", [...ja, ...novos.map((a) => a.chave)].slice(-300));
@@ -163,6 +164,8 @@ app.whenReady().then(() => {
   ipcMain.handle("revisar:pendentes", () => api("/pendentes"));
   ipcMain.handle("revisar:enviar", (_e, revisoes: unknown[]) =>
     api("/revisoes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ revisoes }) }));
+  ipcMain.handle("avisos:indice", () => api("/avisos"));
+  ipcMain.handle("avisos:ler", (_e, id: unknown) => (/^\d{8,14}$/.test(String(id)) ? api(`/avisos/${id}`) : { erro: "aviso inválido" }));
   ipcMain.handle("auth:sair", () => { sair(); ultimo = { estado: "sem-login" }; bandeja?.setTitle(""); return ultimo; });
   criarJanela();
   criarBandeja();

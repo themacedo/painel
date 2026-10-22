@@ -148,3 +148,12 @@ export type Pendente = { id: number; data: string; valor: number; conta: string;
 export type Pendentes = { geradoEm: string; itens: Pendente[]; categorias: { nome: string; natureza: string }[]; essencial: string[] };
 export type RevisaoEnvio = { id: number; categoria: string; essencial: string | null };
 export type FonteRevisar = { carregar(): Promise<Pendentes>; enviar(revisoes: RevisaoEnvio[]): Promise<number> };
+
+// Avisos de sync (tela Movimentos): o que entrou e saiu em cada sync e o que está para revisar. Valores em centavos.
+export type ItemAviso = { id: number; data: string; conta: string; sentido: "entrou" | "saiu"; valor: number; descricao: string;
+  meio: string; categoria: string | null; revisar: boolean };
+export type Aviso = { id: string; em: string; origem: "mac" | "nuvem"; sync: string; novos: ItemAviso[];
+  totais: { entrou: number; saiu: number; lancamentos: number }; revisar: ItemAviso[]; alertas: string[] };
+export type ResumoAviso = { id: string; em: string; origem: "mac" | "nuvem"; sync: string; alertas: string[]; lancamentos: number;
+  entrou: number; saiu: number; revisar: number };
+export type FonteAvisos = { indice(): Promise<ResumoAviso[]>; aviso(id: string): Promise<Aviso> };

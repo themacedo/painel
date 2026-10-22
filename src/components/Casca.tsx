@@ -4,7 +4,7 @@ import { Activity, CalendarDays, House, ListChecks, Wallet } from "lucide-react"
 // A moldura das telas, igual no site, no celular e no app do Mac: lateral (telas largas), barra de abas fixa embaixo
 // (telas estreitas) e o cabeçalho. Sem nada de Next: quem usa diz como cada aba vira link (site) ou botão (app).
 
-export type Tela = "visao" | "financas" | "desempenho" | "plano" | "revisar";
+export type Tela = "visao" | "financas" | "desempenho" | "plano" | "revisar" | "movimentos"; // movimentos: sem aba, pelo sino
 
 export const TELAS: { id: Tela; nome: string; href: string; icone: typeof House }[] = [
   { id: "visao", nome: "Hoje", href: "/", icone: House },

@@ -7,6 +7,13 @@ contextBridge.exposeInMainWorld("fin", {
   sair: () => ipcRenderer.invoke("auth:sair"),
   pendentes: () => ipcRenderer.invoke("revisar:pendentes"),
   revisar: (revisoes: unknown[]) => ipcRenderer.invoke("revisar:enviar", revisoes),
+  avisos: () => ipcRenderer.invoke("avisos:indice"),
+  aviso: (id: string) => ipcRenderer.invoke("avisos:ler", id),
+  aoIrPara: (cb: (aba: string) => void) => {
+    const f = (_: unknown, aba: string) => cb(aba);
+    ipcRenderer.on("ir:aba", f);
+    return () => ipcRenderer.removeListener("ir:aba", f);
+  },
   aoAtualizar: (cb: (r: unknown) => void) => {
     const f = (_: unknown, r: unknown) => cb(r);
     ipcRenderer.on("painel:atualizado", f);

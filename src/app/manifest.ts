@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
-// Instalar na tela inicial do celular (PWA): abre em tela cheia, como um app. Sem service worker de propósito:
-// nada dos dados fica guardado no aparelho para uso offline.
+// Instalar na tela inicial do celular (PWA): abre em tela cheia, como um app. O service worker (public/sw.js) só
+// recebe o push dos avisos de sync: nada dos dados fica guardado no aparelho para uso offline.
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Painel pessoal",

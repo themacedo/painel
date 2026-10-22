@@ -4,8 +4,8 @@ import { NextResponse, type NextRequest } from "next/server";
 // Modo privado: tudo pede login. Com o Google configurado (AUTH_GOOGLE_ID), uma sessão de um e-mail permitido;
 // sem ele, a senha antiga (HTTP Basic com PAINEL_SENHA), para o site não abrir enquanto o Google não está pronto.
 // Sem nenhum dos dois, nega. Ficam livres só a tela de login, as rotas do next-auth e o que o celular pede para
-// instalar o app (manifesto e ícones, sem dado nenhum).
-const LIVRES = ["/entrar", "/privacidade", "/api/auth/", "/manifest.webmanifest", "/icones/"];
+// instalar o app (manifesto e ícones, sem dado nenhum) e o service worker do push (só mostra o aviso, sem dado).
+const LIVRES = ["/entrar", "/privacidade", "/api/auth/", "/manifest.webmanifest", "/icones/", "/sw.js"];
 
 export async function middleware(req: NextRequest) {
   if (process.env.PAINEL_MODO !== "privado") return NextResponse.next();

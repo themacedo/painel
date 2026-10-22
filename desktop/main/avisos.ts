@@ -12,13 +12,12 @@ export function decidirAvisos(p: P, agora: number, jaAvisados: Set<string>): Avi
   const out: Aviso[] = [];
   const s = p["saude"] ?? {};
 
-  // 1) um sync novo: o que entrou e o que espera revisão
+  // 1) um sync novo
   const sync = s["sync"];
   if (sync?.em) {
-    const novos = Number(sync.novos ?? 0), pend = Number(s["pendentes"] ?? 0);
-    out.push({ chave: `sync:${sync.em}`, titulo: sync.status === "error" ? "O sync falhou" : "Sync do dia",
-      texto: sync.status === "error" ? "Os dados não foram atualizados. Abra o Painel para ver."
-        : `${novos ? `${novos} lançamento${novos > 1 ? "s" : ""} novo${novos > 1 ? "s" : ""}` : "Nada novo"} · ${pend} para revisar` });
+    // como no celular: só "Sync concluído"; o que entrou, saiu e espera revisão fica na tela Movimentos (o clique abre)
+    out.push({ chave: `sync:${sync.em}`, titulo: sync.status === "error" ? "O sync falhou" : "Sync concluído",
+      texto: sync.status === "error" ? "Os dados não foram atualizados. Abra o Painel para ver." : "Toque para ver" });
   }
 
   // 2) banco parado no Pluggy (mais de 26 h), uma vez por banco por dia

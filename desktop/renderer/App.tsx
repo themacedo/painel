@@ -1,10 +1,11 @@
 // O app: tela de login, carregando, erro, ou a tela Hoje (a mesma tela do site) com os dados da API.
-import { LogOut, RefreshCw } from "lucide-react";
+import { Bell, LogOut, RefreshCw } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import type { FonteRevisar, Painel, Pendentes, RevisaoEnvio } from "@/lib/tipos";
+import type { Aviso, FonteAvisos, FonteRevisar, Painel, Pendentes, ResumoAviso, RevisaoEnvio } from "@/lib/tipos";
 import { Desempenho } from "@/telas/Desempenho";
 import { Financas } from "@/telas/Financas";
 import { Plano } from "@/telas/Plano";
+import { Movimentos } from "@/telas/Movimentos";
 import { Revisar } from "@/telas/Revisar";
 import { Casca } from "@/components/Casca";
 import { VisaoGeral } from "@/telas/VisaoGeral";
@@ -16,6 +17,10 @@ const fonteRevisar: FonteRevisar = {
   enviar: async (revisoes) => semErro(await window.fin.revisar(revisoes)).enviadas,
 };
 const TelaRevisar = () => <Revisar fonte={fonteRevisar} />;
+const fonteAvisos: FonteAvisos = {
+  indice: async () => semErro(await window.fin.avisos()),
+  aviso: async (id) => semErro(await window.fin.aviso(id)),
+};
 
 const ABAS = [
   { id: "visao", nome: "Hoje", Tela: VisaoGeral },
@@ -23,6 +28,7 @@ const ABAS = [
   { id: "financas", nome: "Finanças", Tela: Financas },
   { id: "desempenho", nome: "Desempenho", Tela: Desempenho },
   { id: "revisar", nome: "Revisar", Tela: TelaRevisar },
+  { id: "movimentos", nome: "Movimentos", Tela: () => null }, // sem aba: abre pelo sino e pelo clique na notificação (desenhada à parte)
 ] as const;
 type Aba = (typeof ABAS)[number]["id"];
 const abaSalva = (): Aba => {
@@ -36,7 +42,8 @@ type Resultado =
 declare global {
   interface Window {
     fin: { carregar(forcar?: boolean): Promise<Resultado>; entrar(): Promise<Resultado>; sair(): Promise<Resultado>; aoAtualizar(cb: (r: Resultado) => void): () => void;
-      pendentes(): Promise<Pendentes | { erro: string }>; revisar(revisoes: RevisaoEnvio[]): Promise<{ enviadas: number } | { erro: string }> };
+      pendentes(): Promise<Pendentes | { erro: string }>; revisar(revisoes: RevisaoEnvio[]): Promise<{ enviadas: number } | { erro: string }>;
+      avisos(): Promise<ResumoAviso[] | { erro: string }>; aviso(id: string): Promise<Aviso | { erro: string }>; aoIrPara(cb: (aba: string) => void): () => void };
   }
 }
 
@@ -66,9 +73,11 @@ export function App() {
   useEffect(() => {
     fazer(() => window.fin.carregar());
     const parar = window.fin.aoAtualizar(setR);
+    // clique na notificação do sync: abre a tela Movimentos
+    const pararIr = window.fin.aoIrPara((a) => { if (ABAS.some((x) => x.id === a)) irPara(a as Aba); });
     const aoFocar = () => window.fin.carregar().then(setR);
     window.addEventListener("focus", aoFocar);
-    return () => { parar(); window.removeEventListener("focus", aoFocar); };
+    return () => { parar(); pararIr(); window.removeEventListener("focus", aoFocar); };
   }, [fazer]);
 
   if (!r) return <Centro><p className="text-sm text-texto-2">Carregando…</p></Centro>;
@@ -108,6 +117,10 @@ export function App() {
   const botao = "grid size-9 place-items-center rounded-xl border border-borda text-texto-2 hover:text-texto";
   const acoes = (
     <div className="flex items-center gap-1.5">
+      <button type="button" title="Movimentos" aria-label="Movimentos" onClick={() => irPara("movimentos")}
+        className={aba === "movimentos" ? `${botao} bg-primaria-suave text-primaria` : botao}>
+        <Bell size={15} />
+      </button>
       <button type="button" title="Atualizar" aria-label="Atualizar" disabled={ocupado} onClick={() => fazer(() => window.fin.carregar(true))} className={botao}>
         <RefreshCw size={15} className={ocupado ? "animate-spin" : ""} />
       </button>
@@ -118,13 +131,15 @@ export function App() {
   );
   // a mesma moldura do site (Casca): lateral em janela larga, abas embaixo em janela estreita
   return (
-    <Casca telas={ABAS.map((x) => x.id)} ativa={aba} arrastar pendentes={p.saude?.pendentes}
+    <Casca telas={ABAS.filter((x) => x.id !== "movimentos").map((x) => x.id)} ativa={aba} arrastar pendentes={p.saude?.pendentes}
       titulo={ABAS.find((x) => x.id === aba)!.nome}
       aba={(t, props) => <button type="button" onClick={() => irPara(t.id)} {...props} />}
       linha={<>Olá, {p.dono.split(" ")[0]} · dados de {hora(p.atualizadoEm)} · lido às {hora(r.em).slice(-5)}</>}
       rodape={<div className="flex items-center justify-between gap-2 px-2.5">{acoes}<span className="text-xs text-texto-2">App do Mac</span></div>}
       topoMovel={acoes}>
       {aba === "visao" ? <VisaoGeral p={p} modo="privado" mostraHorario aoRevisar={() => irPara("revisar")} />
+        : aba === "movimentos" ? <Movimentos fonte={fonteAvisos}
+          aRevisar={<button type="button" onClick={() => irPara("revisar")} className="text-sm font-medium text-primaria">Ir para Revisar</button>} />
         : ABAS.filter((x) => x.id === aba).map(({ id, Tela }) => <Tela key={id} p={p} modo="privado" mostraHorario />)}
     </Casca>
   );
