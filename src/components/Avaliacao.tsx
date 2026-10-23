@@ -170,14 +170,37 @@ function Mes({ m, anterior, nomes, semKpis }: { m: NotaMensal; anterior?: NotaMe
   );
 }
 
-// Avaliação de coach: aba Semana (revisão de sexta) e aba Mês (ciclo do dia 16 ao 15).
+// O ciclo seguinte ao último mês fechado (dia 16 ao 15): a média das semanas revisadas desde então, até o fechamento.
+// Só as dimensões da semana mais recente entram; a avaliação completa do ciclo continua sendo a mensal.
+export function parcialDoCiclo(semanais: NotaSemanal[], ultimoMes?: NotaMensal): (NotaMensal & { semanas: number }) | null {
+  if (!ultimoMes) return null;
+  const semanas = semanais.filter((s) => s.inicio > ultimoMes.fim);
+  if (!semanas.length) return null;
+  const [a, m] = ultimoMes.fim.split("-").map(Number);
+  const inicio = new Date(Date.UTC(a, m - 1, 16)).toISOString().slice(0, 10);
+  const fim = new Date(Date.UTC(a, m, 15)).toISOString().slice(0, 10);
+  const media = (xs: number[]) => Math.round((xs.reduce((t, x) => t + x, 0) / xs.length) * 10) / 10;
+  const areas = Object.fromEntries(Object.keys(semanas.at(-1)!.areas).map((k) =>
+    [k, media(semanas.map((s) => s.areas[k]).filter((v): v is number => v != null))]));
+  const n = semanas.length;
+  return { inicio, fim, semanas: n, geral: media(semanas.map((s) => s.geral)), areas,
+    destaque: `Parcial: média de ${n} semana${n > 1 ? "s" : ""} revisada${n > 1 ? "s" : ""} no ciclo. O fechamento completo, com KPIs e lentes, é em ${diaMes(fim)}.` };
+}
+
+type Aba = "semana" | "ciclo" | "mes";
+const ROTULO: Record<Aba, string> = { semana: "Semana", ciclo: "Ciclo atual", mes: "Mês" };
+
+// Avaliação de coach: aba Semana (revisão de sexta), Ciclo atual (parcial das semanas) e Mês (ciclo fechado, do dia 16 ao 15).
 export function Avaliacao({ semanais, mensais, nomes, semKpis }: { semanais: NotaSemanal[]; mensais: NotaMensal[]; nomes: Record<string, string>; semKpis?: boolean }) {
-  const [aba, setAba] = useState<"semana" | "mes">(mensais.length ? "mes" : "semana");
+  const [aba, setAba] = useState<Aba>(mensais.length ? "mes" : "semana");
   const sem = semanais.at(-1), semAnt = semanais.at(-2);
   const mes = mensais.at(-1), mesAnt = mensais.at(-2);
-  const atual = aba === "mes" ? mes : sem;
+  const parcial = parcialDoCiclo(semanais, mes);
+  const abas: Aba[] = parcial ? ["semana", "ciclo", "mes"] : ["semana", "mes"];
+  const atual = aba === "mes" ? mes : aba === "ciclo" ? parcial : sem;
   const titulo = aba === "mes"
     ? (mes ? `Avaliação do mês · ${diaMes(mes.inicio)} a ${diaMes(mes.fim)}` : "Avaliação do mês")
+    : aba === "ciclo" && parcial ? `Ciclo atual (parcial) · ${diaMes(parcial.inicio)} a ${diaMes(parcial.fim)}`
     : (sem ? `Avaliação da semana de ${diaMes(sem.inicio)}` : "Avaliação da semana");
   return (
     <section className="entrar rounded-2xl border border-borda bg-superficie p-4 sm:p-6">
@@ -186,10 +209,10 @@ export function Avaliacao({ semanais, mensais, nomes, semKpis }: { semanais: Not
         <div className="flex items-center gap-3">
           {atual && <p className="text-sm"><b className="num text-xl font-medium"><Contador valor={atual.geral} casas={1} /></b><span className="text-texto-2"> / 10 geral</span></p>}
           <div className="flex rounded-xl border border-borda p-1 text-[13px]" role="tablist">
-            {(["semana", "mes"] as const).map((a) => (
+            {abas.map((a) => (
               <button key={a} type="button" role="tab" aria-selected={aba === a} onClick={() => setAba(a)}
                 className={`min-h-8 rounded-lg px-3 ${aba === a ? "bg-texto font-semibold text-fundo" : "text-texto-2"}`}>
-                {a === "semana" ? "Semana" : "Mês"}
+                {ROTULO[a]}
               </button>
             ))}
           </div>
@@ -202,6 +225,7 @@ export function Avaliacao({ semanais, mensais, nomes, semKpis }: { semanais: Not
           {semanais.length < 2 && <p className="mt-4 text-xs text-texto-2">A comparação com a semana anterior aparece a partir da próxima revisão.</p>}
         </>
       ) : <p className="text-sm text-texto-2">Ainda sem avaliação registrada.</p>)}
+      {aba === "ciclo" && parcial && <Mes m={parcial} anterior={mes} nomes={nomes} semKpis />}
       {aba === "mes" && (mes ? <Mes m={mes} anterior={mesAnt} nomes={nomes} semKpis={semKpis} /> : <p className="text-sm text-texto-2">Ainda sem avaliação mensal registrada.</p>)}
     </section>
   );
