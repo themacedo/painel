@@ -81,6 +81,7 @@ export function Movimentos({ fonte, inicial, aRevisar, extra }: Props) {
     return () => { vivo = false; };
   }, [fonte, escolhido]);
 
+  const externos = aviso?.novos.filter((i) => !i.interno) ?? [], internos = aviso?.novos.filter((i) => i.interno) ?? [];
   return (
     <div className="flex flex-col gap-4 entrar">
       {extra}
@@ -105,8 +106,8 @@ export function Movimentos({ fonte, inicial, aRevisar, extra }: Props) {
       {aviso && (
         <>
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <Kpi titulo="Entrou" valor={reais(aviso.totais.entrou)} detalhe={`${aviso.novos.filter((i) => i.sentido === "entrou").length} lançamento(s)`} />
-            <Kpi titulo="Saiu" valor={reais(aviso.totais.saiu)} detalhe={`${aviso.novos.filter((i) => i.sentido === "saiu").length} lançamento(s)`} />
+            <Kpi titulo="Entrou" valor={reais(aviso.totais.entrou)} detalhe={`${externos.filter((i) => i.sentido === "entrou").length} lançamento(s)`} />
+            <Kpi titulo="Saiu" valor={reais(aviso.totais.saiu)} detalhe={`${externos.filter((i) => i.sentido === "saiu").length} lançamento(s)`} />
             <Kpi titulo="Lançamentos novos" valor={aviso.totais.lancamentos} detalhe={`sync de ${quando(aviso.em)}`} />
             <Kpi titulo="Para revisar" valor={aviso.revisar.length} detalhe={aviso.revisar.length ? "abra a tela Revisar" : "tudo em dia"}
               destaque={aviso.revisar.length ? "alerta" : undefined} />
@@ -123,8 +124,15 @@ export function Movimentos({ fonte, inicial, aRevisar, extra }: Props) {
           )}
 
           <Cartao titulo="O que entrou e saiu" extra={<span className="text-xs text-texto-2">{aviso.origem === "mac" ? "pelo Mac" : "pela nuvem"}</span>}>
-            {aviso.novos.length ? <PorDia itens={aviso.novos} /> : <p className="text-sm text-texto-2">Nenhum lançamento novo neste sync.</p>}
+            {externos.length ? <PorDia itens={externos} />
+              : <p className="text-sm text-texto-2">{internos.length ? "Só movimentação entre suas contas neste sync." : "Nenhum lançamento novo neste sync."}</p>}
           </Cartao>
+
+          {internos.length > 0 && (
+            <Cartao titulo="Entre suas contas" extra={<span className="text-xs text-texto-2">transferências, fatura paga e aplicações · fora dos totais</span>}>
+              <PorDia itens={internos} />
+            </Cartao>
+          )}
 
           <Cartao titulo="Para revisar" extra={aviso.revisar.length > 0 ? aRevisar : undefined}>
             {aviso.revisar.length ? <PorDia itens={aviso.revisar} /> : <p className="text-sm text-texto-2">Nada para revisar.</p>}

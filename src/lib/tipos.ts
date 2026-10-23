@@ -151,7 +151,7 @@ export type FonteRevisar = { carregar(): Promise<Pendentes>; enviar(revisoes: Re
 
 // Avisos de sync (tela Movimentos): o que entrou e saiu em cada sync e o que está para revisar. Valores em centavos.
 export type ItemAviso = { id: number; data: string; conta: string; sentido: "entrou" | "saiu"; valor: number; descricao: string;
-  meio: string; categoria: string | null; revisar: boolean };
+  meio: string; categoria: string | null; revisar: boolean; interno?: boolean }; // interno: só mudou de conta (fora dos totais)
 export type Aviso = { id: string; em: string; origem: "mac" | "nuvem"; sync: string; novos: ItemAviso[];
   totais: { entrou: number; saiu: number; lancamentos: number }; revisar: ItemAviso[]; alertas: string[] };
 export type ResumoAviso = { id: string; em: string; origem: "mac" | "nuvem"; sync: string; alertas: string[]; lancamentos: number;
