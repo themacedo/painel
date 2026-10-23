@@ -144,10 +144,8 @@ export function FinancasPeriodo({ d, empresas: e, plano = [] }: { d: Detalhe; em
           detalhe={livre ? <>Livre de parcelas a partir de {mesCurto(livre)}</> : <>Parcelas em todos os 12 meses</>} />
       </div>
 
-      {modo === "mes" && p.emCurso && d.faturaAberta && p.posicao && (
-        <FechamentoMes p={p} fatura={d.faturaAberta} plano={plano} />
-      )}
-      <Fechamento p={p} modo={modo} entrou={entrou} />
+      <Fechamento p={p} modo={modo} entrou={entrou}
+        competencia={modo === "mes" && p.emCurso && p.posicao && d.faturaAberta ? { fatura: d.faturaAberta, plano } : null} />
 
       <div className="grid grid-cols-1 gap-3.5 xl:grid-cols-3">
         <div className="xl:col-span-2">
@@ -260,7 +258,9 @@ export function FinancasPeriodo({ d, empresas: e, plano = [] }: { d: Detalhe; em
 const porModo: Record<Modo, string> = { semana: "semana a semana", mes: "mês a mês", ano: "ano a ano" };
 const unidade: Record<Modo, string> = { semana: "semana", mes: "mês", ano: "ano" };
 
-function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: number }) {
+type Competencia = { fatura: NonNullable<Detalhe["faturaAberta"]>; plano: Painel["financas"]["plano"] };
+
+function Fechamento({ p, modo, entrou, competencia }: { p: Periodo; modo: Modo; entrou: number; competencia: Competencia | null }) {
   const r = p.resumo, en = p.entradas, c = p.cobertura;
   const resultado = entrou - r.despesas - en.custosPj;
   const negativo = resultado < 0;
@@ -283,8 +283,14 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
   const variacao = p.posicao ? p.posicao.fim.posicao - p.posicao.inicio.posicao : null;
   return (
     <Cartao titulo={`Como ${nome} fechou${p.emCurso ? " até agora" : ""}`}>
-      {p.posicao && <PosicaoReal ini={p.posicao.inicio} fim={p.posicao.fim} emCurso={p.emCurso} />}
-      {p.posicao && <Cascata ini={p.posicao.inicio.posicao} entrou={entrou} gastou={r.despesas} custosPj={en.custosPj} fim={p.posicao.fim.posicao} />}
+      {/* mês em curso: só o que é deste mês (contas no último dia − fatura em aberto); a posição total, com as
+          próximas faturas, fica para os períodos fechados */}
+      {competencia ? <CompetenciaMes p={p} {...competencia} /> : p.posicao && (
+        <>
+          <PosicaoReal ini={p.posicao.inicio} fim={p.posicao.fim} emCurso={p.emCurso} />
+          <Cascata ini={p.posicao.inicio.posicao} entrou={entrou} gastou={r.despesas} custosPj={en.custosPj} fim={p.posicao.fim.posicao} />
+        </>
+      )}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <dl className="flex flex-col gap-2 text-sm">
           <div className="flex justify-between"><dt className="text-texto-2">Entrou</dt><dd className="text-ok">{reais(entrou)}</dd></div>
@@ -294,7 +300,7 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
             <dt className="font-medium">Resultado</dt>
             <dd className={`font-semibold ${negativo ? "text-perigo" : "text-ok"}`}>{negativo ? "− " : ""}{reais(Math.abs(resultado))}</dd>
           </div>
-          {ajustes.length > 0 && (
+          {!competencia && ajustes.length > 0 && (
             <>
               <p className="pt-1 text-xs text-texto-2">Fora do resultado (não é receita nem gasto, mas mexe na posição):</p>
               {ajustes.map((l) => (
@@ -305,7 +311,7 @@ function Fechamento({ p, modo, entrou }: { p: Periodo; modo: Modo; entrou: numbe
               ))}
             </>
           )}
-          {variacao !== null && (
+          {!competencia && variacao !== null && (
             <div className="flex justify-between border-t border-borda pt-2 text-base">
               <dt className="font-medium">Variação da posição real</dt>
               <dd className={`font-semibold ${variacao < 0 ? "text-perigo" : "text-ok"}`}>{variacao < 0 ? "− " : "+ "}{reais(Math.abs(variacao))}</dd>
@@ -352,8 +358,7 @@ export function composicao(x: Posicao) {
 // depois do fechamento não são deste mês: aparecem só como aviso. Pagamento de cartão previsto no plano não entra
 // como saída (ele já reduz a fatura em aberto quando acontece).
 const DO_CARTAO = /cart[aã]o|fatura/i;
-function FechamentoMes({ p, fatura, plano }: { p: Periodo; fatura: NonNullable<Detalhe["faturaAberta"]>;
-  plano: Painel["financas"]["plano"] }) {
+function CompetenciaMes({ p, fatura, plano }: { p: Periodo } & Competencia) {
   const fim = p.posicao!.fim, invest = fim.investimentos ?? 0;
   const previstos = plano.filter((i) => i.status !== "feito" && i.data >= p.inicio && i.data <= p.fim && !DO_CARTAO.test(i.descricao))
     .sort((a, b) => (a.data < b.data ? -1 : 1));
@@ -369,9 +374,9 @@ function FechamentoMes({ p, fatura, plano }: { p: Periodo; fatura: NonNullable<D
     </div>
   );
   return (
-    <Cartao titulo={`Fechamento de ${p.rotulo} (competência)`}>
-      <div className="mb-4 border-b border-borda pb-4">
-        <p className="text-xs text-texto-2">No último dia do mês, contando só o que é deste mês</p>
+    <div className="mb-4 flex flex-col gap-4 border-b border-borda pb-4">
+      <div>
+        <p className="text-xs text-texto-2">Fechamento de {p.rotulo} no último dia do mês, contando só o que é deste mês</p>
         <p className={`num text-3xl font-medium ${fechamento < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fechamento)}</p>
       </div>
       <div className="grid grid-cols-1 gap-6 text-sm lg:grid-cols-2">
@@ -397,7 +402,7 @@ function FechamentoMes({ p, fatura, plano }: { p: Periodo; fatura: NonNullable<D
           Fora deste mês: {reais(proximas)} já estão nas próximas faturas (parcelas seguintes e compras depois do fechamento).
         </p>
       )}
-    </Cartao>
+    </div>
   );
 }
 
