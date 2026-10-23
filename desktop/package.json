@@ -38,6 +38,7 @@
     "appId": "br.themacedo.painel",
     "productName": "Painel",
     "copyright": "themacedo",
+    "afterPack": "./build/assinar-adhoc.cjs",
     "directories": {
       "output": "release",
       "buildResources": "build"

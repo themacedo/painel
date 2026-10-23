@@ -34,7 +34,7 @@ export type Painel = {
     semanas: { rotulo: string; commitsClt: number; commitsPj: number; entregasPj: number; prsClt: number }[];
     historico: Semana[];
     marcos: { data: string; rotulo: string }[];
-    notas: { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string }[];
+    notas: NotaSemanal[];
     horas?: HorasSemana[];
     notasMensais?: NotaMensal[];
     atual: { nota: number | null; foraDoExpedientePct: number; destaque: string };
@@ -49,7 +49,10 @@ export type Saude = {
   sombra: { hoje: string | null; sync: string | null; campos: number | null; diferencas: number | null } | null;
 };
 
-export type NotaSemanal = { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string };
+// Coach da semana: a conversa entre os dois modelos sobre a semana e as ações que saem dela.
+export type FalaCoach = { autor: string; texto: string };
+export type CoachSemana = { conversa: FalaCoach[]; veredito?: string; acoes?: string[]; modelos?: string[]; em?: string };
+export type NotaSemanal = { inicio: string; geral: number; areas: Record<string, number>; destaque: string; acao?: string; coach?: CoachSemana };
 
 // Revisão mensal de coach (ciclo do dia 16 ao 15). grupo dos KPIs: "CLT", "PJ" ou "Geral" (o nome vem de empresas).
 export type KpiMensal = { grupo: string; nome: string; antes: number | null; depois: number; unidade?: string; melhorSobe?: boolean };

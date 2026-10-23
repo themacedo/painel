@@ -3,6 +3,7 @@ import { Avaliacao } from "@/components/Avaliacao";
 import { Secao } from "@/components/Cartao";
 import { HistoricoCommits, HorasPorSemana, Linhas } from "@/components/GraficosDesempenho";
 import { Marca } from "@/components/Marca";
+import { CoachSemana } from "@/components/CoachSemana";
 import { Contador } from "@/components/Contador";
 import { Variacao } from "@/components/Variacao";
 import { corClt, corPj } from "@/lib/empresas";
@@ -152,6 +153,8 @@ export function Desempenho({ p, modo, mostraHorario }: { p: Painel; modo: string
       ) : null}
 
       <Avaliacao semanais={notas} mensais={p.desempenho.notasMensais ?? []} nomes={{ CLT: e.clt.nome, PJ: e.pj.nome, Geral: "Geral" }} semKpis={!!gruposKpi.length} />
+
+      {ultima?.coach?.conversa?.length ? <CoachSemana inicio={ultima.inicio} coach={ultima.coach} /> : null}
 
       <Secao titulo="Últimas 4 semanas" resumo="média móvel de cada frente, com a variação">
         <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-2">
