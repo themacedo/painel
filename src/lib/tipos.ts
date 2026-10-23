@@ -100,7 +100,8 @@ export type Detalhe = {
   // dinheiro nas contas − tudo o que se deve no cartão, no fim de cada semana, mês e ano (o último ponto é hoje)
   cicloCartao?: CicloCartao | null;
   // a última fatura fechada e o que está em aberto nela (o fechamento do mês por competência)
-  faturaAberta?: { fechamento: string; vencimento: string; total: number; pago: number; aberto: number } | null;
+  faturaAberta?: { fechamento: string; vencimento: string; total: number; pago: number; aberto: number;
+    rotativo?: number; encargos?: number; compras?: number } | null; // rotativo e encargos: o que a fatura trouxe de antes
   inicioDados?: string; // primeiro dia com dados (o Open Finance traz ~12 meses)
   posicaoSerie?: Record<"semana" | "mes" | "ano", PontoPosicao[]>;
 };

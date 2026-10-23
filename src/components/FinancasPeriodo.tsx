@@ -365,6 +365,7 @@ function CompetenciaMes({ p, fatura, plano }: { p: Periodo } & Competencia) {
   const contas = fim.contas + previstos.reduce((t, i) => t + (i.entra ?? 0) - (i.sai ?? 0), 0) + invest;
   const fechamento = contas - fatura.aberto;
   const proximas = Math.max(0, fim.cartao - fatura.aberto);
+  const deAntes = (fatura.rotativo ?? 0) + (fatura.encargos ?? 0);
   const sinal = (v: number) => `${v < 0 ? "− " : ""}${reais(Math.abs(v))}`;
   const dm = (iso: string) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
   const Linha = ({ nome, valor, forte = false }: { nome: string; valor: number; forte?: boolean }) => (
@@ -389,7 +390,12 @@ function CompetenciaMes({ p, fatura, plano }: { p: Periodo } & Competencia) {
         </dl>
         <dl className="flex flex-col gap-2">
           <p className="text-xs font-medium uppercase tracking-wide text-texto-2">2. Fatura fechada em {dm(fatura.fechamento)} (vence {dm(fatura.vencimento)})</p>
-          <Linha nome="Total da fatura" valor={fatura.total} />
+          {deAntes > 0.5 && <>
+            <Linha nome="Veio de antes: saldo em rotativo" valor={fatura.rotativo ?? 0} />
+            <Linha nome="Veio de antes: juros, IOF e encerramento" valor={fatura.encargos ?? 0} />
+            <Linha nome="Compras do ciclo" valor={fatura.compras ?? 0} />
+          </>}
+          <Linha nome="Total da fatura" valor={fatura.total} forte={deAntes > 0.5} />
           <Linha nome="Já pago depois do fechamento" valor={-fatura.pago} />
           <Linha nome="Fica em aberto" valor={fatura.aberto} forte />
           <div className="mt-2 flex justify-between gap-3 border-t border-borda pt-2 text-base font-semibold">
@@ -397,6 +403,12 @@ function CompetenciaMes({ p, fatura, plano }: { p: Periodo } & Competencia) {
           </div>
         </dl>
       </div>
+      {deAntes > 0.5 && (
+        <p className="rounded-xl bg-alerta-suave px-3 py-2 text-sm text-alerta">
+          O negativo vem de antes: a fatura de {p.rotulo} trouxe {reais(deAntes)} de dívida anterior (rotativo, juros e IOF).
+          {fatura.pago > 0.5 ? ` Em ${p.rotulo} você pagou ${reais(fatura.pago)} da fatura` : " Nada foi pago ainda"} e sobram {reais(fatura.aberto)}.
+        </p>
+      )}
       {proximas > 0.5 && (
         <p className="mt-4 text-xs text-texto-2">
           Fora deste mês: {reais(proximas)} já estão nas próximas faturas (parcelas seguintes e compras depois do fechamento).
