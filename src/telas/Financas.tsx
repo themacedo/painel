@@ -8,7 +8,7 @@ export function Financas({ p, modo, mostraHorario }: { p: Painel; modo: string; 
   const d = p.financas.detalhe;
   return (
     <>
-      {d ? <FinancasPeriodo d={d} empresas={p.empresas} />
+      {d ? <FinancasPeriodo d={d} empresas={p.empresas} plano={p.financas.plano} />
          : <p className="text-sm text-texto-2">Ainda sem detalhamento: o próximo sync gera estes dados.</p>}
     </>
   );

@@ -37,7 +37,7 @@ function titulo(modo: Modo, p: Periodo) {
 const anterior: Record<Modo, string> = { semana: "Semana anterior", mes: "Mês anterior", ano: "Ano anterior" };
 const doPeriodo: Record<Modo, string> = { semana: "da semana", mes: "do mês", ano: "do ano" };
 
-export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Painel["empresas"] }) {
+export function FinancasPeriodo({ d, empresas: e, plano = [] }: { d: Detalhe; empresas: Painel["empresas"]; plano?: Painel["financas"]["plano"] }) {
   const periodos = useMemo(() => d.periodos ?? { semana: [], mes: [periodoDoMes(d)], ano: [] }, [d]);
   const [modo, setModo] = useState<Modo>("mes");
   const [chave, setChave] = useState<string>(periodos.mes[0]?.chave ?? "");
@@ -144,6 +144,9 @@ export function FinancasPeriodo({ d, empresas: e }: { d: Detalhe; empresas: Pain
           detalhe={livre ? <>Livre de parcelas a partir de {mesCurto(livre)}</> : <>Parcelas em todos os 12 meses</>} />
       </div>
 
+      {modo === "mes" && p.emCurso && d.faturaAberta && p.posicao && (
+        <FechamentoMes p={p} fatura={d.faturaAberta} plano={plano} />
+      )}
       <Fechamento p={p} modo={modo} entrou={entrou} />
 
       <div className="grid grid-cols-1 gap-3.5 xl:grid-cols-3">
@@ -344,13 +347,67 @@ export function composicao(x: Posicao) {
 }
 
 // O que você tem menos o que deve (cartão e empréstimos): o acumulado. O resultado do período é o quanto isso mudou.
+// O fechamento do mês em curso por competência: o dinheiro nas contas no último dia (saldo de hoje mais o que o
+// plano ainda prevê no mês) menos o que fica em aberto da fatura fechada. Parcelas das próximas faturas e compras
+// depois do fechamento não são deste mês: aparecem só como aviso. Pagamento de cartão previsto no plano não entra
+// como saída (ele já reduz a fatura em aberto quando acontece).
+const DO_CARTAO = /cart[aã]o|fatura/i;
+function FechamentoMes({ p, fatura, plano }: { p: Periodo; fatura: NonNullable<Detalhe["faturaAberta"]>;
+  plano: Painel["financas"]["plano"] }) {
+  const fim = p.posicao!.fim, invest = fim.investimentos ?? 0;
+  const previstos = plano.filter((i) => i.status !== "feito" && i.data >= p.inicio && i.data <= p.fim && !DO_CARTAO.test(i.descricao))
+    .sort((a, b) => (a.data < b.data ? -1 : 1));
+  const contas = fim.contas + previstos.reduce((t, i) => t + (i.entra ?? 0) - (i.sai ?? 0), 0) + invest;
+  const fechamento = contas - fatura.aberto;
+  const proximas = Math.max(0, fim.cartao - fatura.aberto);
+  const sinal = (v: number) => `${v < 0 ? "− " : ""}${reais(Math.abs(v))}`;
+  const dm = (iso: string) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
+  const Linha = ({ nome, valor, forte = false }: { nome: string; valor: number; forte?: boolean }) => (
+    <div className={`flex justify-between gap-3 ${forte ? "border-t border-borda pt-2 font-medium" : ""}`}>
+      <dt className={forte ? "" : "text-texto-2"}>{nome}</dt>
+      <dd className={`num ${forte && valor < 0 ? "text-perigo" : ""}`}>{sinal(valor)}</dd>
+    </div>
+  );
+  return (
+    <Cartao titulo={`Fechamento de ${p.rotulo} (competência)`}>
+      <div className="mb-4 border-b border-borda pb-4">
+        <p className="text-xs text-texto-2">No último dia do mês, contando só o que é deste mês</p>
+        <p className={`num text-3xl font-medium ${fechamento < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fechamento)}</p>
+      </div>
+      <div className="grid grid-cols-1 gap-6 text-sm lg:grid-cols-2">
+        <dl className="flex flex-col gap-2">
+          <p className="text-xs font-medium uppercase tracking-wide text-texto-2">1. Dinheiro nas contas em {dm(p.fim)}</p>
+          <Linha nome="Saldo hoje (todas as contas)" valor={fim.contas} />
+          {previstos.map((i) => <Linha key={i.data + i.descricao} nome={`${dm(i.data)} · ${i.descricao}`} valor={(i.entra ?? 0) - (i.sai ?? 0)} />)}
+          {invest > 0.5 && <Linha nome="Investimentos" valor={invest} />}
+          <Linha nome="Fica nas contas" valor={contas} forte />
+        </dl>
+        <dl className="flex flex-col gap-2">
+          <p className="text-xs font-medium uppercase tracking-wide text-texto-2">2. Fatura fechada em {dm(fatura.fechamento)} (vence {dm(fatura.vencimento)})</p>
+          <Linha nome="Total da fatura" valor={fatura.total} />
+          <Linha nome="Já pago depois do fechamento" valor={-fatura.pago} />
+          <Linha nome="Fica em aberto" valor={fatura.aberto} forte />
+          <div className="mt-2 flex justify-between gap-3 border-t border-borda pt-2 text-base font-semibold">
+            <dt>Fechamento</dt><dd className={`num ${fechamento < 0 ? "text-perigo" : "text-ok"}`}>{sinal(fechamento)}</dd>
+          </div>
+        </dl>
+      </div>
+      {proximas > 0.5 && (
+        <p className="mt-4 text-xs text-texto-2">
+          Fora deste mês: {reais(proximas)} já estão nas próximas faturas (parcelas seguintes e compras depois do fechamento).
+        </p>
+      )}
+    </Cartao>
+  );
+}
+
 function PosicaoReal({ ini, fim, emCurso }: { ini: Posicao; fim: Posicao; emCurso: boolean }) {
   const delta = fim.posicao - ini.posicao;
   const sinal = (v: number) => `${v < 0 ? "− " : ""}${reais(Math.abs(v))}`;
   return (
     <div className="mb-4 flex flex-col gap-3 border-b border-borda pb-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p className="text-xs text-texto-2">Posição real {emCurso ? "hoje" : "no fim do período"}</p>
+        <p className="text-xs text-texto-2">Posição real {emCurso ? "hoje" : "no fim do período"} · tudo o que você deve, próximas faturas incluídas</p>
         <p className={`num text-3xl font-medium ${fim.posicao < 0 ? "text-perigo" : ""}`}>{sinal(fim.posicao)}</p>
         <p className="text-xs text-texto-2">{composicao(fim)}</p>
       </div>
