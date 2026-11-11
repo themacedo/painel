@@ -1,5 +1,6 @@
 import "server-only";
 import { getToken } from "next-auth/jwt";
+import { cookies, headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { emailPermitido } from "./auth";
 
@@ -31,4 +32,20 @@ export async function repassar(req: NextRequest, caminho: string, init: RequestI
     headers: { ...(init.headers ?? {}), Authorization: `Bearer ${token}` } });
   return new Response(await r.text(), { status: r.status,
     headers: { "Content-Type": r.headers.get("content-type") ?? "application/json", "Cache-Control": "no-store, private" } });
+}
+
+/** O painel.json da API (o que o principal publicou: o Mac até a virada, depois a nuvem), para as páginas. Elas não
+ * têm o NextRequest: o login vem dos cookies do pedido. null sem API, sem login ou com a API fora do ar. */
+export async function painelDaApi(): Promise<unknown | null> {
+  if (process.env.PAINEL_MODO !== "privado" || !API) return null;
+  const token = await idToken({ cookies: await cookies(), headers: await headers() } as unknown as NextRequest);
+  if (!token) return null;
+  try {
+    const r = await fetch(`${API}/painel`, { cache: "no-store", headers: { Authorization: `Bearer ${token}` } });
+    if (r.ok) return await r.json();
+    console.error(`painel da API: HTTP ${r.status}`);
+  } catch (e) {
+    console.error(`painel da API: ${(e as Error).name}`);
+  }
+  return null;
 }
